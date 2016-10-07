@@ -15,11 +15,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GBJAM2016.c" />
+    <ClCompile Include="src\SpritePrincess.c" />
     <ClCompile Include="src\StateGame.c" />
     <ClCompile Include="src\StateMenu.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h" />
+    <ClInclude Include="include\SpritePrincess.h" />
     <ClInclude Include="include\StateGame.h" />
     <ClInclude Include="include\StateMenu.h" />
   </ItemGroup>

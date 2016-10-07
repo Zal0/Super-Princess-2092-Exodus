@@ -3,7 +3,7 @@
 #include "StateMenu.h"
 #include "StateGame.h"
 
-//#include "SpritePrincess.h"
+#include "SpritePrincess.h"
 
 UINT8 next_state = STATE_MENU;// STATE_GAME
 
@@ -20,7 +20,7 @@ void InitStates() {
 }
 
 void InitSprites() {
-	//INIT_SPRITE(SPRITE_PRINCESS);
+	INIT_SPRITE(SPRITE_PRINCESS);
 	//INIT_SPRITE(SPRITE_ZURRAPA);
 	//INIT_SPRITE(SPRITE_DEAD_PARTICLE);
 	//INIT_SPRITE(SPRITE_AXE);
