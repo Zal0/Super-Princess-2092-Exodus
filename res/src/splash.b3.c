@@ -1,6 +1,6 @@
 /*
 
- SPLASH.B2.C
+ SPLASH.B3.C
 
  Map Source File.
 
@@ -62,4 +62,4 @@ const unsigned  char splashmap[] =
   0x59,0x59,0x59,0x59,0x59,0x59,0x59,0x59,0x59,0x57
 };
 
-/* End of SPLASH.B2.C */
+/* End of SPLASH.B3.C */

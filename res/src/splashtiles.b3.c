@@ -1,6 +1,6 @@
 /*
 
- SPLASHTILES.B2.C
+ SPLASHTILES.B3.C
 
  Tile Source File.
 
@@ -235,4 +235,4 @@ const unsigned  char splashtiles[] =
   0x1C,0x22,0x08,0x14,0x00,0x08,0x00,0x00
 };
 
-/* End of SPLASHTILES.B2.C */
+/* End of SPLASHTILES.B3.C */
