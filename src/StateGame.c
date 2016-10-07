@@ -13,7 +13,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_1.h"
 #include "../res/src/stage1_bg.h"
 
-#include "../res/src/sprite_test.h"
+#include "../res/src/princess.h"
 
 const UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0};
 UINT8 princess_idx;
@@ -54,7 +54,7 @@ void Start_STATE_GAME() {
 	/*game_over_particle = 0;
 	*/
 	SPRITES_8x16;
-	princess_idx = LoadSprite(2 * 4, SpriteTest, 3);
+	princess_idx = LoadSprite(7 * 4, spriteprincess, 3);
 	/*zurrapa_idx = LoadSprite(2 * 4, zurrapa);
 	particles_idx = LoadSprite(6 * 4, particles);
 	aznar_idx = LoadSprite(5 * 4, aznar);
