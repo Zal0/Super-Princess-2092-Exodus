@@ -7,7 +7,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "Sprite.h"
 #include "Keys.h"
 #include "SpriteManager.h"
-#include "SpritePrincess.h"
+/*#include "SpritePrincess.h"
 #include "SpriteAznar.h"
 
 #include "resources/map.h"
@@ -38,10 +38,10 @@ UINT16 reset_y;
 
 UINT8 level;
 
-struct Sprite* game_over_particle;
+struct Sprite* game_over_particle;*/
 
 void Start_STATE_GAME() {
-	struct Sprite* princess_sprite;
+	/*struct Sprite* princess_sprite;
 
 	game_over_particle = 0;
 
@@ -68,14 +68,14 @@ void Start_STATE_GAME() {
 	}
 	SHOW_BKG;
 
-	PlayMusic(level_mod_Data, 3, 1);
+	PlayMusic(level_mod_Data, 3, 1);*/
 }
 
 void Update_STATE_GAME() {
-	SpriteManagerUpdate();
+	/*SpriteManagerUpdate();
 
 	if(game_over_particle && game_over_particle->current_frame == 5) {
 		SetState(STATE_GAME);
-	}
+	}*/
 }
 
