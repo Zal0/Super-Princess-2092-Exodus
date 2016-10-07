@@ -23,6 +23,9 @@
     <ClCompile Include="src\StateMenu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SpritePrincess.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h">
@@ -32,6 +35,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\StateMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpritePrincess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

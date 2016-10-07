@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gbjam2016", "gbjam2016.vcxproj", "{3A189EC5-0FCC-42F7-8448-C114413BF868}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D} = {A820F4AF-3BAD-4781-86FB-C055E213A91D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "..\gameboy\common\common.vcxproj", "{A820F4AF-3BAD-4781-86FB-C055E213A91D}"
 EndProject
