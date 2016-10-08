@@ -1,6 +1,6 @@
 /*
 
- SRC/PRINCESS.H
+ SRC/MOBILEPLATFORM.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 16
+  Tiles                : 0 to 1
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define spriteprincessBank 0
+#define mobileplatformBank 0
 /* Start of tile array. */
-extern unsigned char spriteprincess[];
+extern unsigned char mobileplatform[];
 
-/* End of SRC/PRINCESS.H */
+/* End of SRC/MOBILEPLATFORM.H */
