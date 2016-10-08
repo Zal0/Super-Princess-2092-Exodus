@@ -12,6 +12,7 @@ typedef enum {
 
 typedef enum {
 	SPRITE_PRINCESS,
+	SPRITE_BULLET,
 
 	N_SPRITE_TYPES
 } SPRITE_TYPE;
