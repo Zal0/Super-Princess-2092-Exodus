@@ -12,7 +12,7 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 
 #include "../res/src/princess.h"
 
-#define DEBUG_CONTROLS
+//#define DEBUG_CONTROLS
 
 //Princes anims
 const UINT8 anim_walk[]       = {4, 3, 4, 5, 4};
