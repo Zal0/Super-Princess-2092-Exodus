@@ -12,7 +12,7 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 
 #include "../res/src/princess.h"
 
-//#define DEBUG_CONTROLS
+#define DEBUG_CONTROLS
 
 //Princes anims
 const UINT8 anim_walk[]       = {4, 3, 4, 5, 4};
@@ -28,19 +28,12 @@ typedef enum  {
 	PRINCESS_STATE_NORMAL,
 	PRINCESS_STATE_JUMPING,
 	PRINCESS_STATE_LADDER
-	//PRINCESS_STATE_FIRE
 }PRINCESS_STATE;
 PRINCESS_STATE princes_state;
 INT16 princess_accel_y;
 
-//struct Sprite* axe_sprite;
-
 extern UINT8 princess_idx;
 //extern struct Sprite* game_over_particle;
-
-//extern UINT16 reset_x;
-//extern UINT16 reset_y;
-//extern UINT8 level;
 
 INT8 shoot_cooldown = 0;
 
@@ -57,8 +50,6 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	scroll_target = sprite;
 
 	princes_state = PRINCESS_STATE_NORMAL;
-
-	//axe_sprite = 0;
 }
 
 void Die(struct Sprite* sprite, UINT8 idx) {
@@ -72,18 +63,12 @@ void Die(struct Sprite* sprite, UINT8 idx) {
 
 UINT8 tile_collision;
 void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
-	/*if(tile_collision == 33u) {
-		Die(sprite, idx);
-	} else if(tile_collision == 53u) {
-		if(level == 1) {
-			SetState(STATE_WIN);
-		} else {
-			level ++;
-			reset_x = 32;
-			reset_y = 112;
-			SetState(STATE_GAME);
-		}
-	}*/
+	switch(tile_collision) {
+		case 14u:
+		case 15u:
+			Die(sprite, idx);
+			break;
+	}
 }
 
 void MovePrincess(struct Sprite* sprite, UINT8 idx) {
@@ -205,16 +190,6 @@ void Update_SPRITE_PRINCESS() {
 			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
 			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
 			break;
-
-		/*case PRINCESS_STATE_FIRE:
-			if(sprite_manager_current_sprite->current_frame == 1) {
-				princes_state = PRINCESS_STATE_NORMAL;
-				SpriteManagerRemoveSprite(axe_sprite);
-			} else {
-				MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
-				UpdateAxePos(sprite_manager_current_sprite);
-			}
-			break;*/
 	}
 
 #ifndef DEBUG_CONTROLS
@@ -252,11 +227,7 @@ void Update_SPRITE_PRINCESS() {
 	if(shoot_cooldown) {
 		shoot_cooldown -= 1u;
 	} else {
-		if(KEY_TICKED(J_B)/* && princes_state != PRINCESS_STATE_FIRE*/) {
-			//SetSpriteAnim(sprite_manager_current_sprite, anim_fire, 15u);
-			//princes_state = PRINCESS_STATE_FIRE;
-
-			//struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET);
+		if(KEY_TICKED(J_B)) {
 			Shoot(sprite_manager_current_sprite);
 		}
 	}
