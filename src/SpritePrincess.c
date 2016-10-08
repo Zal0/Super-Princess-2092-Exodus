@@ -19,8 +19,10 @@ const UINT8 anim_walk[]       = {4, 3, 4, 5, 4};
 const UINT8 anim_idle[]       = {2, 1, 2};
 const UINT8 anim_idle_shoot[] = {1, 0};
 const UINT8 anim_jump[]       = {1, 3};
-const UINT8 anim_ladder_idle[]   = {1, 9};
-const UINT8 anim_ladder_moving[] = {2, 9, 10};
+const UINT8 anim_ladder_idle_cooldown[]   = {1, 9};
+const UINT8 anim_ladder_moving_cooldown[] = {2, 9, 10};
+const UINT8 anim_ladder_idle[]   = {1, 7};
+const UINT8 anim_ladder_moving[] = {2, 7, 8};
 
 typedef enum  {
 	PRINCESS_STATE_NORMAL,
@@ -99,7 +101,7 @@ void MovePrincess(struct Sprite* sprite, UINT8 idx) {
 		UINT8 tile = GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite ->y + 15u) >> 3);
 		if(tile == 23u )
 		{
-			//sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
+			sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
 			princess_accel_y = 0;
 			princes_state = PRINCESS_STATE_LADDER;
 		}
@@ -108,7 +110,7 @@ void MovePrincess(struct Sprite* sprite, UINT8 idx) {
 		UINT8 tile = GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite ->y + 16u) >> 3);
 		if(tile == 23u )
 		{
-			//sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
+			sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
 			princess_accel_y = 0;
 			princes_state = PRINCESS_STATE_LADDER;
 		}
@@ -170,13 +172,13 @@ void Update_SPRITE_PRINCESS() {
 
 		case PRINCESS_STATE_LADDER:
 			if(KEY_PRESSED(J_UP)) {
-				SetSpriteAnim(sprite_manager_current_sprite, anim_ladder_moving, 12u);
+				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
 				sprite_manager_current_sprite->y -= 1 << delta_time;
 			} else if(KEY_PRESSED(J_DOWN)) {
-				SetSpriteAnim(sprite_manager_current_sprite, anim_ladder_moving, 12u);
+				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
 				sprite_manager_current_sprite->y += 1 << delta_time;
 			} else {
-				SetSpriteAnim(sprite_manager_current_sprite, anim_ladder_idle, 12u);
+				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_idle_cooldown : anim_ladder_idle, 12u);
 			}
 			if(KEY_PRESSED(J_RIGHT)) {
 				sprite_manager_current_sprite->flags = 0u;
