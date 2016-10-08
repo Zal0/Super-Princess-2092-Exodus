@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClCompile Include="src\GBJAM2016.c" />
     <ClCompile Include="src\SpriteBullet.c" />
+    <ClCompile Include="src\SpriteMushroom.c" />
     <ClCompile Include="src\SpritePrincess.c" />
     <ClCompile Include="src\StateGame.c" />
     <ClCompile Include="src\StateMenu.c" />
@@ -23,6 +24,7 @@
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h" />
     <ClInclude Include="include\SpriteBullet.h" />
+    <ClInclude Include="include\SpriteMushroom.h" />
     <ClInclude Include="include\SpritePrincess.h" />
     <ClInclude Include="include\StateGame.h" />
     <ClInclude Include="include\StateMenu.h" />

@@ -5,6 +5,7 @@
 
 #include "SpritePrincess.h"
 #include "SpriteBullet.h"
+#include "SpriteMushroom.h"
 
 UINT8 next_state = STATE_MENU;// STATE_GAME
 
@@ -19,15 +20,14 @@ void InitStates() {
 void InitSprites() {
 	INIT_SPRITE(SPRITE_PRINCESS);
 	INIT_SPRITE(SPRITE_BULLET);
+	INIT_SPRITE(SPRITE_MUSHROOM);
 }
 
 UINT8 GetTileReplacement(UINT8 t) {
-	/*if(current_state == STATE_GAME) {
+	if(current_state == STATE_GAME) {
 		switch(t) {
-				case 54: return SPRITE_ZURRAPA;
-				case 55: return SPRITE_AZNAR;
-				case 60: return SPRITE_FLAG;
+				case 27: return SPRITE_MUSHROOM;
 		}
-	}*/
+	}
 	return 255u;
 }

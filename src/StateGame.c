@@ -14,10 +14,14 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_bg.h"
 
 #include "../res/src/princess.h"
+#include "../res/src/mushroom.h"
+
+#include "SpriteMushroom.h"
 
 const UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
 UINT8 princess_idx;
+UINT8 mushroom_idx;
 
 /*#include "SpritePrincess.h"
 #include "SpriteAznar.h"
@@ -56,11 +60,14 @@ void Start_STATE_GAME() {
 	*/
 	SPRITES_8x16;
 	princess_idx = LoadSprite(11 * 4, spriteprincess, 3);
+	mushroom_idx = LoadSprite(2 * 4, mushroom, 3);
 	/*zurrapa_idx = LoadSprite(2 * 4, zurrapa);
 	particles_idx = LoadSprite(6 * 4, particles);
 	aznar_idx = LoadSprite(5 * 4, aznar);
 	flag_idx = LoadSprite(2 * 4, flag);*/
 	SHOW_SPRITES;
+
+	MushroomResetCustomData();
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
 	princess_sprite->x = 32;
