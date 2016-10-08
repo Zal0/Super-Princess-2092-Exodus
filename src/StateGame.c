@@ -18,7 +18,7 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "SpriteMushroom.h"
 
-const UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0};
+const UINT8 collision_tiles[] = {35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
 UINT8 princess_idx;
 UINT8 mushroom_idx;

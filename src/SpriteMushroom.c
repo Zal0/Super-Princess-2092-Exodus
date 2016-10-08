@@ -30,14 +30,14 @@ void Start_SPRITE_MUSHROOM(struct Sprite* sprite) {
 
 	sprite->custom_data_idx = StackPop(mushroomCustomDataStack);
 	data = &mushroomCustomData[sprite->custom_data_idx];
-	data->time_out = 1u;
+	data->time_out = 200u;
 }
 
 UINT16 dist(UINT16 v0, UINT16 v1) {
-	if(v0 > v1)
-		return v0 - v1;
-	else
+	if((v0 - v1) & 0xF000)
 		return v1 - v0;
+	else
+		return v0 - v1;
 }
 
 extern struct Sprite* sprite_princess;
