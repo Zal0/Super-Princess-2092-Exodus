@@ -15,20 +15,20 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 //#define DEBUG_CONTROLS
 
 //Princes anims
-const UINT8 anim_walk[] = {4, 3, 4, 5, 4};
-const UINT8 anim_idle[] = {2, 1, 2};
-const UINT8 anim_jump[] = {1, 3};
-const UINT8 anim_fire[] = {1, 0};
+const UINT8 anim_walk[]       = {4, 3, 4, 5, 4};
+const UINT8 anim_idle[]       = {2, 1, 2};
+const UINT8 anim_idle_shoot[] = {1, 0};
+const UINT8 anim_jump[]       = {1, 3};
 
 typedef enum  {
 	PRINCESS_STATE_NORMAL,
-	PRINCESS_STATE_JUMPING,
-	PRINCESS_STATE_FIRE
+	PRINCESS_STATE_JUMPING
+	//PRINCESS_STATE_FIRE
 }PRINCESS_STATE;
 PRINCESS_STATE princes_state;
 INT16 princess_accel_y;
 
-struct Sprite* axe_sprite;
+//struct Sprite* axe_sprite;
 
 extern UINT8 princess_idx;
 //extern struct Sprite* game_over_particle;
@@ -36,6 +36,8 @@ extern UINT8 princess_idx;
 //extern UINT16 reset_x;
 //extern UINT16 reset_y;
 //extern UINT8 level;
+
+INT8 shoot_cooldown = 0;
 
 void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
@@ -51,7 +53,7 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 
 	princes_state = PRINCESS_STATE_NORMAL;
 
-	axe_sprite = 0;
+	//axe_sprite = 0;
 }
 
 void Die(struct Sprite* sprite, UINT8 idx) {
@@ -101,13 +103,16 @@ void MovePrincess(struct Sprite* sprite, UINT8 idx) {
 #endif
 }
 
-void UpdateAxePos(struct Sprite* sprite) {
-	axe_sprite->flags = sprite->flags;
+void Shoot(struct Sprite* sprite) {
+	struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET);
+
+	bullet_sprite->flags = sprite->flags;
 	if(sprite->flags & OAM_VERTICAL_FLAG) 
-		axe_sprite->x = sprite->x - 16u;
+		bullet_sprite->x = sprite->x - 8u;
 	else
-		axe_sprite->x = sprite->x + 16u; 
-	axe_sprite->y = sprite->y;
+		bullet_sprite->x = sprite->x + 8u; 
+	bullet_sprite->y = sprite->y + 1u;
+	shoot_cooldown = 10;
 }
 
 void Update_SPRITE_PRINCESS() {
@@ -122,7 +127,11 @@ void Update_SPRITE_PRINCESS() {
 			if(KEY_PRESSED(J_RIGHT) || KEY_PRESSED(J_LEFT) ) {
 				SetSpriteAnim(sprite_manager_current_sprite, anim_walk, 33u);
 			} else {
-				SetSpriteAnim(sprite_manager_current_sprite, anim_idle, 3u);
+				if(shoot_cooldown) {
+					SetSpriteAnim(sprite_manager_current_sprite, anim_idle_shoot, 3u);
+				} else {
+					SetSpriteAnim(sprite_manager_current_sprite, anim_idle, 3u);
+				}
 			}
 
 			//Check jumping
@@ -142,7 +151,7 @@ void Update_SPRITE_PRINCESS() {
 			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
 			break;
 
-		case PRINCESS_STATE_FIRE:
+		/*case PRINCESS_STATE_FIRE:
 			if(sprite_manager_current_sprite->current_frame == 1) {
 				princes_state = PRINCESS_STATE_NORMAL;
 				SpriteManagerRemoveSprite(axe_sprite);
@@ -150,7 +159,7 @@ void Update_SPRITE_PRINCESS() {
 				MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
 				UpdateAxePos(sprite_manager_current_sprite);
 			}
-			break;
+			break;*/
 	}
 
 #ifndef DEBUG_CONTROLS
@@ -183,20 +192,17 @@ void Update_SPRITE_PRINCESS() {
 		}
 	}*/
 
-	/*if(KEY_TICKED(J_B) && princes_state != PRINCESS_STATE_FIRE) {
-		SetSpriteAnim(sprite_manager_current_sprite, anim_fire, 15u);
-		princes_state = PRINCESS_STATE_FIRE;
+	if(shoot_cooldown) {
+		shoot_cooldown -= 1u;
+	} else {
+		if(KEY_TICKED(J_B)/* && princes_state != PRINCESS_STATE_FIRE*/) {
+			//SetSpriteAnim(sprite_manager_current_sprite, anim_fire, 15u);
+			//princes_state = PRINCESS_STATE_FIRE;
 
-		axe_sprite = SpriteManagerAdd(SPRITE_AXE);
-		UpdateAxePos(sprite_manager_current_sprite);
-	}*/
-
-
-	/*if(KEY_TICKED(J_B) ) {
-		sprite_test = SpriteManagerAdd(SPRITE_ZURRAPA);
-		sprite_test->x = sprite_manager_current_sprite->x;
-		sprite_test->y = sprite_manager_current_sprite->y;
-	}*/
+			//struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET);
+			Shoot(sprite_manager_current_sprite);
+		}
+	}
 }
 
 
