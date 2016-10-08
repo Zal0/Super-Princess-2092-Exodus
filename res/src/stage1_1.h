@@ -7,7 +7,7 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 80 x 20
+   Map size      : 80 x 18
    Tile set      : stage1_bg.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
@@ -19,7 +19,7 @@
 */
 
 #define stage1_1Width 80
-#define stage1_1Height 20
+#define stage1_1Height 18
 #define stage1_1Bank 0
 
 extern unsigned char stage1_1[];
