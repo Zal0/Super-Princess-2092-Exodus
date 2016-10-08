@@ -4,6 +4,7 @@ UINT8 bank_SPRITE_MUSHROOM = 2;
 
 #include "SpriteManager.h"
 #include "../res/src/mushroom.h"
+#include "SpriteEnemyBullet.h"
 
 extern UINT8 mushroom_idx;
 const UINT8 mushroom_anim_hide[] = {1, 0};
@@ -44,11 +45,17 @@ extern struct Sprite* sprite_princess;
 
 void Update_SPRITE_MUSHROOM() {
 	struct MushroomCustomData* data = &mushroomCustomData[sprite_manager_current_sprite->custom_data_idx];
+	UINT8 x;
 	
-	
-	if(data->time_out > 200u) {
+	if(data->time_out > 50) {
 		if(sprite_princess && (dist(sprite_princess->x, sprite_manager_current_sprite->x) < 40u)) {
 			data->time_out = 0;
+			x = ((sprite_princess->x - sprite_manager_current_sprite->x) & 0xF000) ? -2 : 2;
+
+			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, 0, -2);
+			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x,  0);
+			
+			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x, -2);
 		}
 	} else {
 		data->time_out += 1;	
