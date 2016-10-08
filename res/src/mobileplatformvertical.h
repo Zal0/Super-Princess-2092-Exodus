@@ -1,6 +1,6 @@
 /*
 
- STAGE1_BG.H
+ SRC/MOBILEPLATFORMVERTICAL.H
 
  Include File.
 
@@ -9,8 +9,8 @@
   Format               : Gameboy 4 color.
   Compression          : None.
   Counter              : None.
-  Tile size            : 8 x 8
-  Tiles                : 0 to 34
+  Tile size            : 16 x 16
+  Tiles                : 0 to 1
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define stage1_bgBank 0
+#define mobileplatformverticBank 0
 /* Start of tile array. */
-extern unsigned char stage1_bg[];
+extern unsigned char mobileplatformvertic[];
 
-/* End of STAGE1_BG.H */
+/* End of SRC/MOBILEPLATFORMVERTICAL.H */
