@@ -68,8 +68,8 @@ void Die(struct Sprite* sprite, UINT8 idx) {
 UINT8 tile_collision;
 void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
 	switch(tile_collision) {
-		case 14u:
-		case 15u:
+		case 33u:
+		case 35u:
 			Die(sprite, idx);
 			break;
 	}
