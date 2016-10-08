@@ -1,6 +1,6 @@
 /*
 
- MUSHROOM.H
+ SRC/MUSHROOM.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 5
+  Tiles                : 0 to 1
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -28,4 +28,4 @@
 /* Start of tile array. */
 extern unsigned char mushroom[];
 
-/* End of MUSHROOM.H */
+/* End of SRC/MUSHROOM.H */
