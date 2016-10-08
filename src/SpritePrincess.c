@@ -19,10 +19,13 @@ const UINT8 anim_walk[]       = {4, 3, 4, 5, 4};
 const UINT8 anim_idle[]       = {2, 1, 2};
 const UINT8 anim_idle_shoot[] = {1, 0};
 const UINT8 anim_jump[]       = {1, 3};
+const UINT8 anim_ladder_idle[]   = {1, 9};
+const UINT8 anim_ladder_moving[] = {2, 9, 10};
 
 typedef enum  {
 	PRINCESS_STATE_NORMAL,
-	PRINCESS_STATE_JUMPING
+	PRINCESS_STATE_JUMPING,
+	PRINCESS_STATE_LADDER
 	//PRINCESS_STATE_FIRE
 }PRINCESS_STATE;
 PRINCESS_STATE princes_state;
@@ -43,7 +46,7 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
 	SetSpriteAnim(sprite, anim_idle, 3u);
 	sprite->coll_x += 4u;
-	sprite->coll_w -= 8u;
+	sprite->coll_w -= 7u;
 	sprite->coll_y += 2u;
 	sprite->coll_h -= 2u;
 
@@ -90,6 +93,25 @@ void MovePrincess(struct Sprite* sprite, UINT8 idx) {
 		tile_collision = TranslateSprite(sprite, -1 << delta_time, 0);
 		sprite->flags = OAM_VERTICAL_FLAG;
 		CheckCollisionTile(sprite, idx);
+	}
+
+	if(KEY_PRESSED(J_UP)) {
+		UINT8 tile = GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite ->y + 15u) >> 3);
+		if(tile == 23u )
+		{
+			//sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
+			princess_accel_y = 0;
+			princes_state = PRINCESS_STATE_LADDER;
+		}
+	}
+	if(KEY_PRESSED(J_DOWN)) {
+		UINT8 tile = GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite ->y + 16u) >> 3);
+		if(tile == 23u )
+		{
+			//sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
+			princess_accel_y = 0;
+			princes_state = PRINCESS_STATE_LADDER;
+		}
 	}
 	
 #ifdef DEBUG_CONTROLS
@@ -146,6 +168,30 @@ void Update_SPRITE_PRINCESS() {
 			}
 			break;
 
+		case PRINCESS_STATE_LADDER:
+			if(KEY_PRESSED(J_UP)) {
+				SetSpriteAnim(sprite_manager_current_sprite, anim_ladder_moving, 12u);
+				sprite_manager_current_sprite->y -= 1 << delta_time;
+			} else if(KEY_PRESSED(J_DOWN)) {
+				SetSpriteAnim(sprite_manager_current_sprite, anim_ladder_moving, 12u);
+				sprite_manager_current_sprite->y += 1 << delta_time;
+			} else {
+				SetSpriteAnim(sprite_manager_current_sprite, anim_ladder_idle, 12u);
+			}
+			if(KEY_PRESSED(J_RIGHT)) {
+				sprite_manager_current_sprite->flags = 0u;
+			} else if(KEY_PRESSED(J_LEFT)) {
+				sprite_manager_current_sprite->flags = OAM_VERTICAL_FLAG;
+			}
+
+			i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 16u) >> 3);
+			if(i != 23u )
+			{
+				TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
+				princes_state = PRINCESS_STATE_NORMAL;
+			}
+			break;
+
 		case PRINCESS_STATE_JUMPING:
 			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
 			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
@@ -163,17 +209,19 @@ void Update_SPRITE_PRINCESS() {
 	}
 
 #ifndef DEBUG_CONTROLS
-	//Simple gravity physics 
-	if(princess_accel_y < 40) {
-		princess_accel_y += 2 << delta_time;
-	}
-	if(tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4) << delta_time)) {
-		princess_accel_y = 0;
-		if(princes_state == PRINCESS_STATE_JUMPING) {
-			princes_state = PRINCESS_STATE_NORMAL;
+	if(princes_state != PRINCESS_STATE_LADDER) {
+		//Simple gravity physics 
+		if(princess_accel_y < 40) {
+			princess_accel_y += 2 << delta_time;
 		}
+		if(tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4) << delta_time)) {
+			princess_accel_y = 0;
+			if(princes_state == PRINCESS_STATE_JUMPING) {
+				princes_state = PRINCESS_STATE_NORMAL;
+			}
 
-		CheckCollisionTile(sprite_manager_current_sprite, sprite_manager_current_index);
+			CheckCollisionTile(sprite_manager_current_sprite, sprite_manager_current_index);
+		}
 	}
 #endif
 
