@@ -37,6 +37,8 @@ extern UINT8 princess_idx;
 
 INT8 shoot_cooldown = 0;
 
+struct Sprite* sprite_princess = 0;
+
 void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
 	SetSpriteAnim(sprite, anim_idle, 3u);
@@ -48,6 +50,8 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	princess_accel_y = 0;
 
 	scroll_target = sprite;
+
+	sprite_princess = sprite;
 
 	princes_state = PRINCESS_STATE_NORMAL;
 }
@@ -234,7 +238,7 @@ void Update_SPRITE_PRINCESS() {
 }
 
 void Destroy_SPRITE_PRINCESS() {
-
+	sprite_princess = 0;
 }
 
 
