@@ -71,7 +71,7 @@ void Start_STATE_GAME() {
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
 	princess_sprite->x = 32;
-	princess_sprite->y = 128;
+	princess_sprite->y = 114;
 	//ScrollFindTile(stage1_1Width, stage1_1Height, stage1_1, 3, 26u, &princess_sprite->x, &princess_sprite->y);
 	scroll_target = princess_sprite;
 
