@@ -186,11 +186,18 @@ void Update_SPRITE_PRINCESS() {
 				sprite_manager_current_sprite->flags = OAM_VERTICAL_FLAG;
 			}
 
+			//Check the end of the ladder
 			i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 16u) >> 3);
 			if(i != 23u )
 			{
 				TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
 				princes_state = PRINCESS_STATE_NORMAL;
+			}
+
+			//Check jumping
+			if(KEY_TICKED(J_A)) {
+				princess_accel_y = -50;
+				princes_state = PRINCESS_STATE_JUMPING;
 			}
 			break;
 
