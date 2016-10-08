@@ -62,11 +62,11 @@ void Start_STATE_GAME() {
 	SHOW_SPRITES;
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
-	princess_sprite->x = 0;
-	princess_sprite->y = 0;
+	princess_sprite->x = 32;
+	princess_sprite->y = 128;
 	scroll_target = princess_sprite;
 
-	InitScrollTiles(0, 23, stage1_bg, 3);
+	InitScrollTiles(0, 128, stage1_bg, 3);
 	/*switch(level) {
 		case 0:
 			InitScroll(level1Width, level1Height, level1 , collision_tiles, 3);
