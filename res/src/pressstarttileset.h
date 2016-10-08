@@ -1,6 +1,6 @@
 /*
 
- SRC/PRINCESS.H
+ PRESSSTARTTILESET.H
 
  Include File.
 
@@ -9,8 +9,8 @@
   Format               : Gameboy 4 color.
   Compression          : None.
   Counter              : None.
-  Tile size            : 16 x 16
-  Tiles                : 0 to 11
+  Tile size            : 8 x 8
+  Tiles                : 0 to 112
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define spriteprincessBank 0
+#define pressstarttilesetBank 0
 /* Start of tile array. */
-extern unsigned char spriteprincess[];
+extern unsigned char pressstarttileset[];
 
-/* End of SRC/PRINCESS.H */
+/* End of PRESSSTARTTILESET.H */
