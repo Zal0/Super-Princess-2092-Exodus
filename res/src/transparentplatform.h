@@ -1,6 +1,6 @@
 /*
 
- SRC/MUSHROOM.H
+ SRC/TRANSPARENTPLATFORM.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 1
+  Tiles                : 0 to 2
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define mushroomBank 0
+#define transparentplatformBank 0
 /* Start of tile array. */
-extern unsigned char mushroom[];
+extern unsigned char transparentplatform[];
 
-/* End of SRC/MUSHROOM.H */
+/* End of SRC/TRANSPARENTPLATFORM.H */

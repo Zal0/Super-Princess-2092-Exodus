@@ -1,16 +1,16 @@
 /*
 
- SRC/MUSHROOM.H
+ SRC/ENEMYBULLET8X16.B3.C
 
- Include File.
+ Tile Source File.
 
  Info:
   Form                 : All tiles as one unit.
   Format               : Gameboy 4 color.
   Compression          : None.
   Counter              : None.
-  Tile size            : 16 x 16
-  Tiles                : 0 to 1
+  Tile size            : 8 x 16
+  Tiles                : 0 to 0
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -22,10 +22,13 @@
 
 */
 
-
-/* Bank of tiles. */
-#define mushroomBank 0
 /* Start of tile array. */
-extern unsigned char mushroom[];
+unsigned char enemybullet8x16[] =
+{
+  0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  0x00,0x00,0x00,0x00,0x18,0x00,0x3C,0x18,
+  0x34,0x18,0x18,0x00,0x00,0x00,0x00,0x00,
+  0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+};
 
-/* End of SRC/MUSHROOM.H */
+/* End of SRC/ENEMYBULLET8X16.B3.C */

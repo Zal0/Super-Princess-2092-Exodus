@@ -1,6 +1,6 @@
 /*
 
- SRC/MUSHROOM.H
+ SRC/WEIRDROLLER.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 1
+  Tiles                : 0 to 3
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define mushroomBank 0
+#define weirdrollerBank 0
 /* Start of tile array. */
-extern unsigned char mushroom[];
+extern unsigned char weirdroller[];
 
-/* End of SRC/MUSHROOM.H */
+/* End of SRC/WEIRDROLLER.H */

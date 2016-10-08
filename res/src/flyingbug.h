@@ -1,6 +1,6 @@
 /*
 
- SRC/MUSHROOM.H
+ SRC/FLYINGBUG.H
 
  Include File.
 
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define mushroomBank 0
+#define flyingbugBank 0
 /* Start of tile array. */
-extern unsigned char mushroom[];
+extern unsigned char flyingbug[];
 
-/* End of SRC/MUSHROOM.H */
+/* End of SRC/FLYINGBUG.H */

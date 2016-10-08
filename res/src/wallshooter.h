@@ -1,6 +1,6 @@
 /*
 
- SRC/MUSHROOM.H
+ SRC/WALLSHOOTER.H
 
  Include File.
 
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define mushroomBank 0
+#define wallshooterBank 0
 /* Start of tile array. */
-extern unsigned char mushroom[];
+extern unsigned char wallshooter[];
 
-/* End of SRC/MUSHROOM.H */
+/* End of SRC/WALLSHOOTER.H */

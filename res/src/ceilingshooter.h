@@ -1,6 +1,6 @@
 /*
 
- SRC/MUSHROOM.H
+ SRC/CEILINGSHOOTER.H
 
  Include File.
 
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define mushroomBank 0
+#define ceilingshooterBank 0
 /* Start of tile array. */
-extern unsigned char mushroom[];
+extern unsigned char ceilingshooter[];
 
-/* End of SRC/MUSHROOM.H */
+/* End of SRC/CEILINGSHOOTER.H */
