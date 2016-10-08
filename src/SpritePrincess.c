@@ -233,4 +233,8 @@ void Update_SPRITE_PRINCESS() {
 	}
 }
 
+void Destroy_SPRITE_PRINCESS() {
+
+}
+
 

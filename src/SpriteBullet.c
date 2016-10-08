@@ -19,3 +19,6 @@ void Update_SPRITE_BULLET() {
 		sprite_manager_current_sprite->x += 3 << delta_time;
 	}
 }
+
+void Destroy_SPRITE_BULLET() {
+}
