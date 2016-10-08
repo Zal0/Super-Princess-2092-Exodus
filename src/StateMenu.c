@@ -18,7 +18,7 @@ UINT8 bank_STATE_MENU = 2;
 
 void Start_STATE_MENU() {
 	InitScrollTiles(0, 102, splashtiles, 3);
-	InitScroll(splashmapWidth, splashmapHeight, splashmap, 0, 3);
+	InitScroll(splashmapWidth, splashmapHeight, splashmap, 0, 0, 3);
 	SHOW_BKG;
 
 	//level = 0;

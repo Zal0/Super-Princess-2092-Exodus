@@ -15,7 +15,8 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "../res/src/princess.h"
 
-const UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0};
+const UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0};
+const UINT8 collision_tiles_down[] = {23, 24, 0};
 UINT8 princess_idx;
 
 /*#include "SpritePrincess.h"
@@ -54,7 +55,7 @@ void Start_STATE_GAME() {
 	/*game_over_particle = 0;
 	*/
 	SPRITES_8x16;
-	princess_idx = LoadSprite(7 * 4, spriteprincess, 3);
+	princess_idx = LoadSprite(11 * 4, spriteprincess, 3);
 	/*zurrapa_idx = LoadSprite(2 * 4, zurrapa);
 	particles_idx = LoadSprite(6 * 4, particles);
 	aznar_idx = LoadSprite(5 * 4, aznar);
@@ -75,7 +76,7 @@ void Start_STATE_GAME() {
 			InitScroll(level2Width, level2Height, level2, collision_tiles, 3);
 			break;
 	}*/
-	InitScroll(stage1_1Width, stage1_1Height, stage1_1, collision_tiles, 3);
+	InitScroll(stage1_1Width, stage1_1Height, stage1_1, collision_tiles, collision_tiles_down, 3);
 	SHOW_BKG;
 
 	/*PlayMusic(level_mod_Data, 3, 1);*/
