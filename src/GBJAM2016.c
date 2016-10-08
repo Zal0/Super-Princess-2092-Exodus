@@ -6,6 +6,7 @@
 #include "SpritePrincess.h"
 #include "SpriteBullet.h"
 #include "SpriteMushroom.h"
+#include "SpriteEnemyBullet.h"
 
 UINT8 next_state = STATE_MENU;// STATE_GAME
 
@@ -14,13 +15,14 @@ SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
 
 void InitStates() {
 	INIT_STATE(STATE_MENU);
-	INIT_STATE(STATE_GAME);;
+	INIT_STATE(STATE_GAME);
 }
 
 void InitSprites() {
 	INIT_SPRITE(SPRITE_PRINCESS);
 	INIT_SPRITE(SPRITE_BULLET);
 	INIT_SPRITE(SPRITE_MUSHROOM);
+	INIT_SPRITE(SPRITE_ENEMY_BULLET);
 }
 
 UINT8 GetTileReplacement(UINT8 t) {
