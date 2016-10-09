@@ -44,7 +44,7 @@ UINT8 wshooter_idx;
 extern const unsigned char * level_mod_Data[];
 struct Sprite* game_over_particle;*/
 
-UINT8 current_level = 3;
+UINT8 current_level = 5;
 
 typedef struct LevelInfo {
 	UINT16 w;

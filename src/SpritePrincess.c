@@ -137,7 +137,7 @@ void Shoot(struct Sprite* sprite) {
 
 UINT8 jump_hold = 1;
 void Jump() {
-	princess_accel_y = -5;
+	princess_accel_y = -15;
 	jump_hold = 20;
 	princes_state = PRINCESS_STATE_JUMPING;
 }
