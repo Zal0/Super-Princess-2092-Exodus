@@ -24,6 +24,8 @@
     <ClCompile Include="src\SpritePrincessParticle.c" />
     <ClCompile Include="src\SpriteShooter.c" />
     <ClCompile Include="src\StateGame.c" />
+    <ClCompile Include="src\StateGameOver.c" />
+    <ClCompile Include="src\StateLiveLost.c" />
     <ClCompile Include="src\StateMenu.c" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +39,8 @@
     <ClInclude Include="include\SpritePrincessParticle.h" />
     <ClInclude Include="include\SpriteShooter.h" />
     <ClInclude Include="include\StateGame.h" />
+    <ClInclude Include="include\StateGameOver.h" />
+    <ClInclude Include="include\StateLiveLost.h" />
     <ClInclude Include="include\StateMenu.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -49,6 +49,7 @@ extern const unsigned char * level_mod_Data[];
 */
 
 UINT8 current_level = 0;
+UINT8 n_lives = 3;
 
 typedef struct LevelInfo {
 	UINT16 w;
@@ -115,6 +116,7 @@ void Start_STATE_GAME() {
 }
 
 extern struct Sprite* sprite_princess;
+
 UINT8 wait_end_time = 0;
 void Update_STATE_GAME() {
 	SpriteManagerUpdate();
@@ -123,7 +125,9 @@ void Update_STATE_GAME() {
 		wait_end_time ++;
 		if(wait_end_time > 80) {
 			wait_end_time = 0;
-			SetState(STATE_GAME);
+
+			n_lives --;
+			SetState(n_lives == 0 ? STATE_GAMEOVER : STATE_LIVELOST);
 		}
 	}
 }
