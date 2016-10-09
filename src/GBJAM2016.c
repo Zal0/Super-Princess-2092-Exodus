@@ -14,7 +14,7 @@
 #include "SpriteEnemyParticle.h"
 #include "SpritePrincessParticle.h"
 
-UINT8 next_state = STATE_LIVELOST;// STATE_GAME
+UINT8 next_state = STATE_MENU;
 
 SET_N_STATES(N_STATES);
 SET_N_SPRITE_TYPES(N_SPRITE_TYPES);

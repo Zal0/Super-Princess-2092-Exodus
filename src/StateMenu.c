@@ -10,14 +10,14 @@ UINT8 bank_STATE_MENU = 2;
 #include "../res/src/pressstarttilemap.h"
 #include "../res/src/pressstarttileset.h"
 
-//extern const unsigned char * start_mod_Data[];
+extern const unsigned char* exo_start_mod_Data[];
 
 void Start_STATE_MENU() {
 	InitScrollTiles(0, 128, pressstarttileset, 3);
 	InitScroll(pressstarttilemapWidth, pressstarttilemapHeight, pressstarttilemap, 0, 0, 3);
 	SHOW_BKG;
 
-	//PlayMusic(start_mod_Data, 2, 1);
+	PlayMusic(exo_start_mod_Data, 4, 0);
 }
 
 
