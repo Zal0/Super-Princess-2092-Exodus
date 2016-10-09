@@ -72,7 +72,7 @@ void Start_STATE_GAME() {
 	/*game_over_particle = 0;
 	*/
 	SPRITES_8x16;
-	princess_idx       = LoadSprite(11 * 4, spriteprincess,   3);
+	princess_idx       = LoadSprite(12 * 4, spriteprincess,   3);
 	mushroom_idx       = LoadSprite( 2 * 4, mushroom,         3);
 	enemy_bullet_idx   = LoadSprite( 1 * 4, enemybullet16x16, 3);
 	cshooter_idx       = LoadSprite( 2 * 4, ceilingshooter,   3);
