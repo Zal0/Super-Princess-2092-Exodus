@@ -9,6 +9,18 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\Sprites">
+      <UniqueIdentifier>{e82abcd0-3107-488f-8662-e3975500d795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sprites">
+      <UniqueIdentifier>{d10372fb-f9be-494b-9e64-47fbec96a67e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{e96b04b2-2d35-4e20-9ce4-4853667f7c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{0e327032-db2f-46ca-aafb-8cdd7c5d8bfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Makefile" />
@@ -17,52 +29,58 @@
     <ClCompile Include="src\GBJAM2016.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\StateGame.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StateMenu.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpritePrincess.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\SpriteBullet.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpriteMushroom.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpriteEnemyBullet.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="src\SpriteCeilingShooter.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteEnemyBullet.c">
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteMushroom.c">
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpritePrincess.c">
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteShooter.c">
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateGame.c">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateMenu.c">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\StateGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\StateMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SpritePrincess.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\SpriteBullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SpriteMushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SpriteEnemyBullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="include\SpriteCeilingShooter.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteEnemyBullet.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteMushroom.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpritePrincess.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteShooter.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StateGame.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StateMenu.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
