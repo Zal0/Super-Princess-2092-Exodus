@@ -48,8 +48,8 @@ UINT8 enemy_particle_idx;
 extern const unsigned char* exo_level1_mod_Data[];
 
 
-UINT8 current_level = 0;
-UINT8 n_lives = 3;
+UINT8 current_level;
+UINT8 n_lives;
 
 typedef struct LevelInfo {
 	UINT16 w;
@@ -112,8 +112,7 @@ void Start_STATE_GAME() {
 	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
 	SHOW_BKG;
 
-	if(current_level == 0)
-		PlayMusic(exo_level1_mod_Data, 4, 1);
+	PlayMusic(exo_level1_mod_Data, 4, 1);
 }
 
 extern struct Sprite* sprite_princess;
