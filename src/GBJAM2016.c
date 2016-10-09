@@ -5,6 +5,7 @@
 #include "StateLiveLost.h"
 #include "StateGameOver.h"
 #include "StateStageIntro.h"
+#include "StateWin.h"
 
 #include "SpritePrincess.h"
 #include "SpriteBullet.h"
@@ -26,6 +27,7 @@ void InitStates() {
 	INIT_STATE(STATE_LIVELOST);
 	INIT_STATE(STATE_GAMEOVER);
 	INIT_STATE(STATE_STAGEINTRO);
+	INIT_STATE(STATE_WIN);
 }
 
 void InitSprites() {

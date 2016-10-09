@@ -76,6 +76,11 @@ void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
 		case 35u:
 			Die(sprite, idx);
 			break;
+
+		case 27u:
+		case 28u:
+			SetState(STATE_WIN);
+			break;
 	}
 }
 

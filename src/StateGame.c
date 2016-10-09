@@ -34,7 +34,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "SpriteEnemyParticle.h"
 #include "SpritePrincessParticle.h"
 
-const UINT8 collision_tiles[] = {1, 2, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
+const UINT8 collision_tiles[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
 UINT8 princess_idx;
 UINT8 mushroom_idx;
