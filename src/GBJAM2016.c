@@ -2,6 +2,8 @@
 
 #include "StateMenu.h"
 #include "StateGame.h"
+#include "StateLiveLost.h"
+#include "StateGameOver.h"
 
 #include "SpritePrincess.h"
 #include "SpriteBullet.h"
@@ -12,7 +14,7 @@
 #include "SpriteEnemyParticle.h"
 #include "SpritePrincessParticle.h"
 
-UINT8 next_state = STATE_MENU;// STATE_GAME
+UINT8 next_state = STATE_LIVELOST;// STATE_GAME
 
 SET_N_STATES(N_STATES);
 SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
@@ -20,6 +22,8 @@ SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
 void InitStates() {
 	INIT_STATE(STATE_MENU);
 	INIT_STATE(STATE_GAME);
+	INIT_STATE(STATE_LIVELOST);
+	INIT_STATE(STATE_GAMEOVER);
 }
 
 void InitSprites() {
