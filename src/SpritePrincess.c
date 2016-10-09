@@ -135,6 +135,13 @@ void Shoot(struct Sprite* sprite) {
 	shoot_cooldown = 10;
 }
 
+UINT8 jump_hold = 1;
+void Jump() {
+	princess_accel_y = -5;
+	jump_hold = 20;
+	princes_state = PRINCESS_STATE_JUMPING;
+}
+
 void Update_SPRITE_PRINCESS() {
 	UINT8 i;
 	struct Sprite* spr;
@@ -156,8 +163,7 @@ void Update_SPRITE_PRINCESS() {
 
 			//Check jumping
 			if(KEY_TICKED(J_A)) {
-				princess_accel_y = -50;
-				princes_state = PRINCESS_STATE_JUMPING;
+				Jump();
 			} 
 
 			//Check falling
@@ -192,12 +198,18 @@ void Update_SPRITE_PRINCESS() {
 
 			//Check jumping
 			if(KEY_TICKED(J_A)) {
-				princess_accel_y = -50;
-				princes_state = PRINCESS_STATE_JUMPING;
+				Jump();
 			}
 			break;
 
 		case PRINCESS_STATE_JUMPING:
+			if(KEY_PRESSED(J_A) && jump_hold) {
+					jump_hold -= 4;
+					princess_accel_y -= jump_hold;
+			} else {
+				jump_hold = 0;
+			}
+
 			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
 			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
 			break;
