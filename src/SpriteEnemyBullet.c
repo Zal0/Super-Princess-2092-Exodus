@@ -22,6 +22,11 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 	spr->x = x;
 	spr->y = y;
 
+	spr->coll_x = 5u;
+	spr->coll_w = 4u;
+	spr->coll_y = 5u;
+	spr->coll_h = 4u;
+
 	data = &EnemyBulletCustomData[spr->custom_data_idx];
 	data->vx = vx;
 	data->vy = vy;

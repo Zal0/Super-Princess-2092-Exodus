@@ -46,7 +46,7 @@ UINT8 enemy_particle_idx;
 /*
 #include "gbt_player.h"
 extern const unsigned char * level_mod_Data[];
-struct Sprite* game_over_particle;*/
+*/
 
 UINT8 current_level = 0;
 
@@ -70,8 +70,6 @@ void Start_STATE_GAME() {
 	struct Sprite* princess_sprite;
 	UINT16 tile_start_x, tile_start_y;
 
-	/*game_over_particle = 0;
-	*/
 	SPRITES_8x16;
 	princess_idx       = LoadSprite(14 * 4, spriteprincess,   3);
 	mushroom_idx       = LoadSprite( 2 * 4, mushroom,         3);
