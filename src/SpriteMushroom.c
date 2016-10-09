@@ -50,12 +50,12 @@ void Update_SPRITE_MUSHROOM() {
 	if(data->time_out > 50) {
 		if(sprite_princess && (dist(sprite_princess->x, sprite_manager_current_sprite->x) < 40u)) {
 			data->time_out = 0;
-			x = ((sprite_princess->x - sprite_manager_current_sprite->x) & 0xF000) ? -2 : 2;
+			x = ((sprite_princess->x - sprite_manager_current_sprite->x) & 0xF000) ? -1 : 1;
 
-			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, 0, -2);
+			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, 0, -1);
 			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x,  0);
 			
-			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x, -2);
+			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x, -1);
 		}
 	} else {
 		data->time_out += 1;	
