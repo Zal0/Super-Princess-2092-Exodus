@@ -137,8 +137,8 @@ void Shoot(struct Sprite* sprite) {
 
 UINT8 jump_hold = 1;
 void Jump() {
-	princess_accel_y = -15;
-	jump_hold = 20;
+	princess_accel_y = -2;
+	jump_hold = 11;
 	princes_state = PRINCESS_STATE_JUMPING;
 }
 
@@ -204,10 +204,10 @@ void Update_SPRITE_PRINCESS() {
 
 		case PRINCESS_STATE_JUMPING:
 			if(KEY_PRESSED(J_A) && jump_hold) {
-					jump_hold -= 4;
+					jump_hold -= 1;
 					princess_accel_y -= jump_hold;
 					if(delta_time != 1 && jump_hold) {
-						jump_hold -= 4;
+						jump_hold -= 1;
 						princess_accel_y -= jump_hold;
 					}
 			} else {

@@ -32,6 +32,7 @@ void InitSprites() {
 UINT8 GetTileReplacement(UINT8 t) {
 	if(current_state == STATE_GAME) {
 		switch(t) {
+			case 1: return 254u;
 			case 2: return 254u;
 			case 3: return SPRITE_MUSHROOM;
 			case 6: return SPRITE_SHOOTER;
