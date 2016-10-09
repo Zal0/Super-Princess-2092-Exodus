@@ -1,0 +1,8 @@
+#ifndef STATE_STAGEINTRO_H
+#define STATE_STAGEINTRO_H
+
+#include "main.h"
+
+DECLARE_STATE(STATE_STAGEINTRO);
+
+#endif

@@ -27,6 +27,7 @@
     <ClCompile Include="src\StateGameOver.c" />
     <ClCompile Include="src\StateLiveLost.c" />
     <ClCompile Include="src\StateMenu.c" />
+    <ClCompile Include="src\StateStageIntro.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="include\StateGameOver.h" />
     <ClInclude Include="include\StateLiveLost.h" />
     <ClInclude Include="include\StateMenu.h" />
+    <ClInclude Include="include\StateStageIntro.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3A189EC5-0FCC-42F7-8448-C114413BF868}</ProjectGuid>

@@ -28,6 +28,6 @@ void Update_STATE_MENU() {
 		current_level = 0;
 		n_lives = 3;
 
-		SetState(STATE_GAME);
+		SetState(STATE_STAGEINTRO);
 	}
 }
