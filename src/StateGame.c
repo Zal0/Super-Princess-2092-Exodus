@@ -21,10 +21,12 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/mushroom.h"
 #include "../res/src/enemybullet16x16.h"
 #include "../res/src/ceilingshooter.h"
+#include "../res/src/wallshooter.h"
 
 #include "SpriteMushroom.h"
 #include "SpriteEnemyBullet.h"
 #include "SpriteCeilingShooter.h"
+#include "SpriteShooter.h"
 
 const UINT8 collision_tiles[] = {1, 2, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
@@ -32,6 +34,7 @@ UINT8 princess_idx;
 UINT8 mushroom_idx;
 UINT8 enemy_bullet_idx;
 UINT8 cshooter_idx;
+UINT8 wshooter_idx;
 
 /*
 #include "gbt_player.h"
@@ -64,11 +67,14 @@ void Start_STATE_GAME() {
 	mushroom_idx     = LoadSprite( 2 * 4, mushroom,         3);
 	enemy_bullet_idx = LoadSprite( 1 * 4, enemybullet16x16, 3);
 	cshooter_idx     = LoadSprite( 2 * 4, ceilingshooter,   3);
+	wshooter_idx     = LoadSprite( 2 * 4, wallshooter,      3);
 	SHOW_SPRITES;
 
 	MushroomResetCustomData();
 	EnemyBulletResetCustomData();
 	CShooterResetCustomData();
+	WShooterResetCustomData();
+
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
 	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
