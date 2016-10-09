@@ -13,6 +13,11 @@ const UINT8 bullet_anim_idle[] = {1, 6};
 void Start_SPRITE_BULLET(struct Sprite* sprite) {
 	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
 	SetSpriteAnim(sprite, bullet_anim_idle, 3u);
+
+	sprite->coll_x = 5u;
+	sprite->coll_w = 4u;
+	sprite->coll_y = 5u;
+	sprite->coll_h = 4u;
 }
 
 extern UINT8  scroll_collisions[128];
@@ -27,7 +32,7 @@ void Update_SPRITE_BULLET() {
 		sprite_manager_current_sprite->x += 3 << delta_time;
 	}
 
-	if(scroll_collisions[GetScrollTile((sprite_manager_current_sprite->x + 8)>> 3, sprite_manager_current_sprite->y >> 3)]) {
+	if(scroll_collisions[GetScrollTile((sprite_manager_current_sprite->x + 8)>> 3, (sprite_manager_current_sprite->y + 8) >> 3)]) {
 		SpriteManagerRemove(sprite_manager_current_index);
 		return;
 	}
