@@ -35,6 +35,8 @@ INT16 princess_accel_y;
 extern UINT8 princess_idx;
 //extern struct Sprite* game_over_particle;
 
+extern UINT8 current_level;
+
 INT8 shoot_cooldown = 0;
 
 struct Sprite* sprite_princess = 0;
@@ -68,6 +70,11 @@ void Die(struct Sprite* sprite, UINT8 idx) {
 UINT8 tile_collision;
 void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
 	switch(tile_collision) {
+		case 1u:
+			current_level ++;
+			SetState(STATE_GAME);
+			break;
+
 		case 33u:
 		case 35u:
 			Die(sprite, idx);
@@ -216,14 +223,9 @@ void Update_SPRITE_PRINCESS() {
 	//Check enemy collision
 	/*for(i = 0u; i != sprite_manager_updatables[0]; ++i) {
 		spr = sprite_manager_sprites[sprite_manager_updatables[i + 1u]];
-		if(spr->type == SPRITE_ZURRAPA || spr->type == SPRITE_AZNAR) {
+		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET) {
 			if(CheckCollision(sprite_manager_current_sprite, spr)) {
 				Die(sprite_manager_current_sprite, sprite_manager_current_index);
-			}
-		} else if(spr->type == SPRITE_FLAG) {
-			if(CheckCollision(sprite_manager_current_sprite, spr)) {
-				reset_x = spr->x;
-				reset_y = spr->y;
 			}
 		}
 	}*/
