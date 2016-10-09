@@ -32,6 +32,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "SpriteCeilingShooter.h"
 #include "SpriteShooter.h"
 #include "SpriteEnemyParticle.h"
+#include "SpritePrincessParticle.h"
 
 const UINT8 collision_tiles[] = {1, 2, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
@@ -72,18 +73,20 @@ void Start_STATE_GAME() {
 	/*game_over_particle = 0;
 	*/
 	SPRITES_8x16;
-	princess_idx       = LoadSprite(12 * 4, spriteprincess,   3);
+	princess_idx       = LoadSprite(14 * 4, spriteprincess,   3);
 	mushroom_idx       = LoadSprite( 2 * 4, mushroom,         3);
 	enemy_bullet_idx   = LoadSprite( 1 * 4, enemybullet16x16, 3);
 	cshooter_idx       = LoadSprite( 2 * 4, ceilingshooter,   3);
 	wshooter_idx       = LoadSprite( 2 * 4, wallshooter,      3);
 	enemy_particle_idx = LoadSprite( 4 * 4, enemyexplosion,   3);
+	LoadSprite(14 * 4, spriteprincess,   3);
 	SHOW_SPRITES;
 
 	MushroomResetCustomData();
 	EnemyBulletResetCustomData();
 	CShooterResetCustomData();
 	WShooterResetCustomData();
+	PParticleResetCustomData();
 
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
@@ -113,11 +116,17 @@ void Start_STATE_GAME() {
 	/*PlayMusic(level_mod_Data, 3, 1);*/
 }
 
+extern struct Sprite* sprite_princess;
+UINT8 wait_end_time = 0;
 void Update_STATE_GAME() {
 	SpriteManagerUpdate();
 
-	/*if(game_over_particle && game_over_particle->current_frame == 5) {
-		SetState(STATE_GAME);
-	}*/
+	if(sprite_princess == 0) {
+		wait_end_time ++;
+		if(wait_end_time > 80) {
+			wait_end_time = 0;
+			SetState(STATE_GAME);
+		}
+	}
 }
 

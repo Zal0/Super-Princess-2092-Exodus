@@ -9,6 +9,7 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 #include "Keys.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
+#include "SpritePrincessParticle.h"
 
 #include "../res/src/princess.h"
 
@@ -231,6 +232,12 @@ void Update_SPRITE_PRINCESS() {
 
 			if(sprite_manager_current_sprite->current_frame == 5) {
 				SpriteManagerRemove(sprite_manager_current_index);
+				scroll_target = 0;
+
+				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y,  1,  1);
+				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y,  1, -1);
+				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1,  1);
+				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1, -1);
 				SHOW_BKG;
 			}
 			break;
