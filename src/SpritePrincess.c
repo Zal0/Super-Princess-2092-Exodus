@@ -206,6 +206,10 @@ void Update_SPRITE_PRINCESS() {
 			if(KEY_PRESSED(J_A) && jump_hold) {
 					jump_hold -= 4;
 					princess_accel_y -= jump_hold;
+					if(delta_time != 1 && jump_hold) {
+						jump_hold -= 4;
+						princess_accel_y -= jump_hold;
+					}
 			} else {
 				jump_hold = 0;
 			}
