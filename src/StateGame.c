@@ -56,7 +56,7 @@ struct LevelInfo levels[] = {
 	{stage1_1Width,   stage1_1Height,  stage1_1,  3},
 	{stage1_2Width,   stage1_2Height,  stage1_2,  3},
 	{stage1_3Width,   stage1_3Height,  stage1_3,  3},
-	{stage1_3bHeight, stage1_3bHeight, stage1_3b, 3},
+	{stage1_3bWidth,  stage1_3bHeight, stage1_3b, 3},
 	{stage1_4Width,   stage1_4Height,  stage1_4,  3},
 	{stage1_5Width,   stage1_5Height,  stage1_5,  3},
 	{stage1_6Width,   stage1_6Height,  stage1_6,  3},
