@@ -25,11 +25,13 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/enemybullet16x16.h"
 #include "../res/src/ceilingshooter.h"
 #include "../res/src/wallshooter.h"
+#include "../res/src/enemyexplosion.h"
 
 #include "SpriteMushroom.h"
 #include "SpriteEnemyBullet.h"
 #include "SpriteCeilingShooter.h"
 #include "SpriteShooter.h"
+#include "SpriteEnemyParticle.h"
 
 const UINT8 collision_tiles[] = {1, 2, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
@@ -38,6 +40,7 @@ UINT8 mushroom_idx;
 UINT8 enemy_bullet_idx;
 UINT8 cshooter_idx;
 UINT8 wshooter_idx;
+UINT8 enemy_particle_idx;
 
 /*
 #include "gbt_player.h"
@@ -69,11 +72,12 @@ void Start_STATE_GAME() {
 	/*game_over_particle = 0;
 	*/
 	SPRITES_8x16;
-	princess_idx     = LoadSprite(11 * 4, spriteprincess,   3);
-	mushroom_idx     = LoadSprite( 2 * 4, mushroom,         3);
-	enemy_bullet_idx = LoadSprite( 1 * 4, enemybullet16x16, 3);
-	cshooter_idx     = LoadSprite( 2 * 4, ceilingshooter,   3);
-	wshooter_idx     = LoadSprite( 2 * 4, wallshooter,      3);
+	princess_idx       = LoadSprite(11 * 4, spriteprincess,   3);
+	mushroom_idx       = LoadSprite( 2 * 4, mushroom,         3);
+	enemy_bullet_idx   = LoadSprite( 1 * 4, enemybullet16x16, 3);
+	cshooter_idx       = LoadSprite( 2 * 4, ceilingshooter,   3);
+	wshooter_idx       = LoadSprite( 2 * 4, wallshooter,      3);
+	enemy_particle_idx = LoadSprite( 4 * 4, enemyexplosion,   3);
 	SHOW_SPRITES;
 
 	MushroomResetCustomData();

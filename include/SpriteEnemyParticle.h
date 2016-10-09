@@ -1,0 +1,8 @@
+#ifndef SPRITE_ENEMY_PARTICLE
+#define SPRITE_ENEMY_PARTICLE
+
+#include "main.h"
+
+DECLARE_SPRITE(SPRITE_EPARTICLE);
+
+#endif
