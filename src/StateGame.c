@@ -60,6 +60,8 @@ UINT8 level;
 
 struct Sprite* game_over_particle;*/
 
+UINT8 current_level = 0;
+
 typedef struct LevelInfo {
 	UINT16 w;
 	UINT16 h;
@@ -75,7 +77,6 @@ struct LevelInfo levels[] = {
 
 void Start_STATE_GAME() {
 	struct Sprite* princess_sprite;
-	UINT8 current_level = 3;
 
 	/*game_over_particle = 0;
 	*/
