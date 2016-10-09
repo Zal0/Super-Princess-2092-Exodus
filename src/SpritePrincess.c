@@ -23,11 +23,13 @@ const UINT8 anim_ladder_idle_cooldown[]   = {1, 9};
 const UINT8 anim_ladder_moving_cooldown[] = {2, 9, 10};
 const UINT8 anim_ladder_idle[]   = {1, 7};
 const UINT8 anim_ladder_moving[] = {2, 7, 8};
+const UINT8 anim_hit[] = {6, 1, 11, 1, 11, 1, 11};
 
 typedef enum  {
 	PRINCESS_STATE_NORMAL,
 	PRINCESS_STATE_JUMPING,
-	PRINCESS_STATE_LADDER
+	PRINCESS_STATE_LADDER,
+	PRINCESS_STATE_HIT
 }PRINCESS_STATE;
 PRINCESS_STATE princes_state;
 INT16 princess_accel_y;
@@ -59,12 +61,14 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 }
 
 void Die(struct Sprite* sprite, UINT8 idx) {
-	SpriteManagerRemove(idx);
+	/*SpriteManagerRemove(idx);
 	//game_over_particle = SpriteManagerAdd(SPRITE_DEAD_PARTICLE);
 	//game_over_particle->x = sprite->x;
 	//game_over_particle->y = sprite->y;
 
-	scroll_target = 0;
+	scroll_target = 0;*/
+	
+	princes_state = PRINCESS_STATE_HIT;
 }
 
 UINT8 tile_collision;
@@ -217,10 +221,23 @@ void Update_SPRITE_PRINCESS() {
 			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
 			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
 			break;
+
+		case PRINCESS_STATE_HIT:
+			SetSpriteAnim(sprite_manager_current_sprite, anim_hit, 15u);
+			if((sprite_manager_current_sprite->current_frame + 1) % 2)
+				HIDE_BKG;
+			else
+				SHOW_BKG;
+
+			if(sprite_manager_current_sprite->current_frame == 5) {
+				SpriteManagerRemove(sprite_manager_current_index);
+				SHOW_BKG;
+			}
+			break;
 	}
 
 #ifndef DEBUG_CONTROLS
-	if(princes_state != PRINCESS_STATE_LADDER) {
+	if(princes_state != PRINCESS_STATE_LADDER && princes_state != PRINCESS_STATE_HIT) {
 		//Simple gravity physics 
 		if(princess_accel_y < 40) {
 			princess_accel_y += 2 << delta_time;
@@ -237,20 +254,22 @@ void Update_SPRITE_PRINCESS() {
 #endif
 
 	//Check enemy collision
-	/*for(i = 0u; i != sprite_manager_updatables[0]; ++i) {
+	for(i = 0u; i != sprite_manager_updatables[0]; ++i) {
 		spr = sprite_manager_sprites[sprite_manager_updatables[i + 1u]];
-		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET) {
+		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER) {
 			if(CheckCollision(sprite_manager_current_sprite, spr)) {
 				Die(sprite_manager_current_sprite, sprite_manager_current_index);
 			}
 		}
-	}*/
+	}
 
-	if(shoot_cooldown) {
-		shoot_cooldown -= 1u;
-	} else {
-		if(KEY_TICKED(J_B)) {
-			Shoot(sprite_manager_current_sprite);
+	if(princes_state != PRINCESS_STATE_HIT) {
+		if(shoot_cooldown) {
+			shoot_cooldown -= 1u;
+		} else {
+			if(KEY_TICKED(J_B)) {
+				Shoot(sprite_manager_current_sprite);
+			}
 		}
 	}
 }
