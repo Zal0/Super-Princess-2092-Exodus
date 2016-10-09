@@ -33,34 +33,9 @@ UINT8 mushroom_idx;
 UINT8 enemy_bullet_idx;
 UINT8 cshooter_idx;
 
-/*#include "SpritePrincess.h"
-#include "SpriteAznar.h"
-
-#include "resources/map.h"
-#include "resources/map2.h"
-#include "resources/princess.h"
-#include "resources/particles.h"
-#include "resources/zurrapa.h"
-#include "resources/tilemap.h"
-#include "resources/aznar.h"
-#include "resources/flag.h"
-
+/*
 #include "gbt_player.h"
-
 extern const unsigned char * level_mod_Data[];
-
-const UINT8 collision_tiles[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 53, 56, 57, 58, 59, 0};
-
-UINT8 particles_idx;
-UINT8 zurrapa_idx;
-UINT8 aznar_idx;
-UINT8 flag_idx;
-
-UINT16 reset_x;
-UINT16 reset_y;
-
-UINT8 level;
-
 struct Sprite* game_over_particle;*/
 
 UINT8 current_level = 0;
@@ -89,10 +64,6 @@ void Start_STATE_GAME() {
 	mushroom_idx     = LoadSprite( 2 * 4, mushroom,         3);
 	enemy_bullet_idx = LoadSprite( 1 * 4, enemybullet16x16, 3);
 	cshooter_idx     = LoadSprite( 2 * 4, ceilingshooter,   3);
-	/*zurrapa_idx = LoadSprite(2 * 4, zurrapa);
-	particles_idx = LoadSprite(6 * 4, particles);
-	aznar_idx = LoadSprite(5 * 4, aznar);
-	flag_idx = LoadSprite(2 * 4, flag);*/
 	SHOW_SPRITES;
 
 	MushroomResetCustomData();
@@ -120,14 +91,6 @@ void Start_STATE_GAME() {
 	scroll_target = princess_sprite;
 
 	InitScrollTiles(0, 128, stage1_bg, 3);
-	/*switch(level) {
-		case 0:
-			InitScroll(level1Width, level1Height, level1 , collision_tiles, 3);
-			break;
-		case 1:
-			InitScroll(level2Width, level2Height, level2, collision_tiles, 3);
-			break;
-	}*/
 	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
 	SHOW_BKG;
 
