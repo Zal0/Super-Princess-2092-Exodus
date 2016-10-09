@@ -35,6 +35,9 @@
     <ClCompile Include="src\SpriteEnemyBullet.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SpriteCeilingShooter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h">
@@ -56,6 +59,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\SpriteEnemyBullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteCeilingShooter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

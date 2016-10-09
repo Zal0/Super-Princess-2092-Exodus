@@ -7,6 +7,7 @@
 #include "SpriteBullet.h"
 #include "SpriteMushroom.h"
 #include "SpriteEnemyBullet.h"
+#include "SpriteCeilingShooter.h"
 
 UINT8 next_state = STATE_MENU;// STATE_GAME
 
@@ -23,6 +24,7 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_BULLET);
 	INIT_SPRITE(SPRITE_MUSHROOM);
 	INIT_SPRITE(SPRITE_ENEMY_BULLET);
+	INIT_SPRITE(SPRITE_CSHOOTER);
 }
 
 UINT8 GetTileReplacement(UINT8 t) {
@@ -30,6 +32,7 @@ UINT8 GetTileReplacement(UINT8 t) {
 		switch(t) {
 			case 2: return 254u;
 			case 3: return SPRITE_MUSHROOM;
+			case 7: return SPRITE_CSHOOTER;
 		}
 	}
 	return 255u;
