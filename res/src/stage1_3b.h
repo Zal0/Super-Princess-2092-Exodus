@@ -1,13 +1,13 @@
 /*
 
- STAGE1_3.H
+ STAGE1_3B.H
 
  Map Include File.
 
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 24 x 40
+   Map size      : 24 x 18
    Tile set      : D:\GameBoyJam2016\res\stage1_bg.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
@@ -18,10 +18,10 @@
 
 */
 
-#define stage1_3Width 24
-#define stage1_3Height 40
-#define stage1_3Bank 0
+#define stage1_3bWidth 24
+#define stage1_3bHeight 18
+#define stage1_3bBank 0
 
-extern unsigned char stage1_3[];
+extern unsigned char stage1_3b[];
 
-/* End of STAGE1_3.H */
+/* End of STAGE1_3B.H */
