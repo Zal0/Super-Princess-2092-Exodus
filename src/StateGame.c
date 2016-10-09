@@ -10,8 +10,12 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "GBJAM2016.h"
 
-#include "../res/src/stage1_1.h"
 #include "../res/src/stage1_bg.h"
+#include "../res/src/stage1_1.h"
+#include "../res/src/stage1_2.h"
+#include "../res/src/stage1_3.h"
+#include "../res/src/stage1_4.h"
+
 
 #include "../res/src/princess.h"
 #include "../res/src/mushroom.h"
@@ -20,7 +24,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "SpriteMushroom.h"
 #include "SpriteEnemyBullet.h"
 
-const UINT8 collision_tiles[] = {33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
+const UINT8 collision_tiles[] = {1, 2, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
 UINT8 princess_idx;
 UINT8 mushroom_idx;
@@ -56,8 +60,22 @@ UINT8 level;
 
 struct Sprite* game_over_particle;*/
 
+typedef struct LevelInfo {
+	UINT16 w;
+	UINT16 h;
+	UINT8* map;
+	UINT8 bank;
+};
+struct LevelInfo levels[] = {
+	{stage1_1Width, stage1_1Height, stage1_1, 3},
+	{stage1_2Width, stage1_2Height, stage1_2, 3},
+	{stage1_3Width, stage1_3Height, stage1_3, 3},
+	{stage1_4Width, stage1_4Height, stage1_4, 3},
+};
+
 void Start_STATE_GAME() {
 	struct Sprite* princess_sprite;
+	UINT8 current_level = 3;
 
 	/*game_over_particle = 0;
 	*/
@@ -77,7 +95,8 @@ void Start_STATE_GAME() {
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
 	princess_sprite->x = 32;
 	princess_sprite->y = 114;
-	//ScrollFindTile(stage1_1Width, stage1_1Height, stage1_1, 3, 26u, &princess_sprite->x, &princess_sprite->y);
+	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &princess_sprite->x, &princess_sprite->y);
+	princess_sprite->y -= 8;
 	scroll_target = princess_sprite;
 
 	InitScrollTiles(0, 128, stage1_bg, 3);
@@ -89,7 +108,7 @@ void Start_STATE_GAME() {
 			InitScroll(level2Width, level2Height, level2, collision_tiles, 3);
 			break;
 	}*/
-	InitScroll(stage1_1Width, stage1_1Height, stage1_1, collision_tiles, collision_tiles_down, 3);
+	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
 	SHOW_BKG;
 
 	/*PlayMusic(level_mod_Data, 3, 1);*/
