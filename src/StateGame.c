@@ -77,6 +77,7 @@ struct LevelInfo levels[] = {
 
 void Start_STATE_GAME() {
 	struct Sprite* princess_sprite;
+	UINT16 tile_start_x, tile_start_y;
 
 	/*game_over_particle = 0;
 	*/
@@ -94,10 +95,23 @@ void Start_STATE_GAME() {
 	EnemyBulletResetCustomData();
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
-	princess_sprite->x = 32;
-	princess_sprite->y = 114;
-	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &princess_sprite->x, &princess_sprite->y);
-	princess_sprite->y -= 8;
+	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
+	
+	if(tile_start_x == 0)
+		tile_start_x += 1;
+	if(tile_start_x == levels[current_level].w - 1)
+		tile_start_x -= 2;
+
+	if(tile_start_y == 0)
+		tile_start_y += 1;
+	else if(tile_start_y == levels[current_level].h - 1)
+		tile_start_y -= 2;
+	else
+		tile_start_y -= 1;
+
+	princess_sprite->x = tile_start_x << 3;
+	princess_sprite->y = (tile_start_y << 3);
+	
 	scroll_target = princess_sprite;
 
 	InitScrollTiles(0, 128, stage1_bg, 3);
