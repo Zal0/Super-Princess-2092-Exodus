@@ -60,12 +60,8 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	princes_state = PRINCESS_STATE_NORMAL;
 }
 
-void Die(struct Sprite* sprite, UINT8 idx) {
-	princes_state = PRINCESS_STATE_HIT;
-}
-
 UINT8 tile_collision;
-void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
+void CheckCollisionTile() {
 	switch(tile_collision) {
 		case 1u:
 			current_level ++;
@@ -74,7 +70,7 @@ void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
 
 		case 33u:
 		case 35u:
-			Die(sprite, idx);
+			princes_state = PRINCESS_STATE_HIT;
 			break;
 
 		case 27u:
@@ -84,15 +80,15 @@ void CheckCollisionTile(struct Sprite* sprite, UINT8 idx) {
 	}
 }
 
-void MovePrincess(struct Sprite* sprite, UINT8 idx) {
+void MovePrincess(struct Sprite* sprite) {
 	if(KEY_PRESSED(J_RIGHT)) {
 		tile_collision = TranslateSprite(sprite, 1 << delta_time, 0);
 		sprite->flags = 0u;
-		CheckCollisionTile(sprite, idx);
+		CheckCollisionTile();
 	} else if(KEY_PRESSED(J_LEFT)) {
 		tile_collision = TranslateSprite(sprite, -1 << delta_time, 0);
 		sprite->flags = OAM_VERTICAL_FLAG;
-		CheckCollisionTile(sprite, idx);
+		CheckCollisionTile();
 	}
 
 	if(KEY_PRESSED(J_UP)) {
@@ -117,10 +113,10 @@ void MovePrincess(struct Sprite* sprite, UINT8 idx) {
 #ifdef DEBUG_CONTROLS
 	if(KEY_PRESSED(J_UP)) {
 		tile_collision = TranslateSprite(sprite, 0, -1 << delta_time);
-		CheckCollisionTile(sprite, idx);
+		CheckCollisionTile();
 	} else if(KEY_PRESSED(J_DOWN)) {
 		tile_collision = TranslateSprite(sprite, 0, 1 << delta_time);
-		CheckCollisionTile(sprite, idx);
+		CheckCollisionTile();
 	}
 #endif
 }
@@ -150,7 +146,7 @@ void Update_SPRITE_PRINCESS() {
 
 	switch(princes_state) {
 		case PRINCESS_STATE_NORMAL:
-			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
+			MovePrincess(sprite_manager_current_sprite);
 	
 			//Choose idle anim or walk
 			if(KEY_PRESSED(J_RIGHT) || KEY_PRESSED(J_LEFT) ) {
@@ -217,7 +213,7 @@ void Update_SPRITE_PRINCESS() {
 			}
 
 			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
-			MovePrincess(sprite_manager_current_sprite, sprite_manager_current_index);
+			MovePrincess(sprite_manager_current_sprite);
 			break;
 
 		case PRINCESS_STATE_HIT:
@@ -252,7 +248,7 @@ void Update_SPRITE_PRINCESS() {
 				princes_state = PRINCESS_STATE_NORMAL;
 			}
 
-			CheckCollisionTile(sprite_manager_current_sprite, sprite_manager_current_index);
+			CheckCollisionTile();
 		}
 	}
 #endif
@@ -262,7 +258,7 @@ void Update_SPRITE_PRINCESS() {
 		spr = sprite_manager_sprites[sprite_manager_updatables[i + 1u]];
 		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER) {
 			if(CheckCollision(sprite_manager_current_sprite, spr)) {
-				Die(sprite_manager_current_sprite, sprite_manager_current_index);
+				princes_state = PRINCESS_STATE_HIT;
 			}
 		}
 	}

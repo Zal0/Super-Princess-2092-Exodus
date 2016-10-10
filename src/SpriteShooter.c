@@ -40,7 +40,6 @@ void Start_SPRITE_SHOOTER(struct Sprite* sprite) {
 
 void Update_SPRITE_SHOOTER() {
 	struct CUSTOM_DATA_TYPE* data = &CUSTOM_DATA_VAR[sprite_manager_current_sprite->custom_data_idx];
-	UINT8 x;
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
