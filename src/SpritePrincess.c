@@ -133,11 +133,11 @@ void Shoot(struct Sprite* sprite) {
 	shoot_cooldown = 10;
 }
 
-UINT8 jump_hold = 1;
 void Jump() {
-	princess_accel_y = -2;
-	jump_hold = 11;
-	princes_state = PRINCESS_STATE_JUMPING;
+	if(princes_state != PRINCESS_STATE_JUMPING) {
+		princess_accel_y = -50;
+		princes_state = PRINCESS_STATE_JUMPING;
+	}
 }
 
 void Update_SPRITE_PRINCESS() {
@@ -201,15 +201,8 @@ void Update_SPRITE_PRINCESS() {
 			break;
 
 		case PRINCESS_STATE_JUMPING:
-			if(KEY_PRESSED(J_A) && jump_hold) {
-					jump_hold -= 1;
-					princess_accel_y -= jump_hold;
-					if(delta_time != 1 && jump_hold) {
-						jump_hold -= 1;
-						princess_accel_y -= jump_hold;
-					}
-			} else {
-				jump_hold = 0;
+			if((princess_accel_y < 0) && !KEY_PRESSED(J_A)) {
+				princess_accel_y = 0;
 			}
 
 			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
@@ -240,9 +233,14 @@ void Update_SPRITE_PRINCESS() {
 	if(princes_state != PRINCESS_STATE_LADDER && princes_state != PRINCESS_STATE_HIT) {
 		//Simple gravity physics 
 		if(princess_accel_y < 40) {
-			princess_accel_y += 2 << delta_time;
+			princess_accel_y += 2;
 		}
-		if(tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4) << delta_time)) {
+		tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
+		if(!tile_collision && delta_time != 0) { //Do another iteration if there is no collision
+			princess_accel_y += 2;
+			tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
+		}
+		if(tile_collision) {
 			princess_accel_y = 0;
 			if(princes_state == PRINCESS_STATE_JUMPING) {
 				princes_state = PRINCESS_STATE_NORMAL;
