@@ -236,7 +236,7 @@ void Update_SPRITE_PRINCESS() {
 			princess_accel_y += 2;
 		}
 		tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
-		if(!tile_collision && delta_time != 0) { //Do another iteration if there is no collision
+		if(!tile_collision && delta_time != 0 && princess_accel_y < 40) { //Do another iteration if there is no collision
 			princess_accel_y += 2;
 			tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
 		}
