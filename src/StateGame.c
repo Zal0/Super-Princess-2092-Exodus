@@ -81,12 +81,6 @@ void Start_STATE_GAME() {
 	LoadSprite(14 * 4, spriteprincess,   3);
 	SHOW_SPRITES;
 
-	MushroomResetCustomData();
-	EnemyBulletResetCustomData();
-	CShooterResetCustomData();
-	WShooterResetCustomData();
-	PParticleResetCustomData();
-
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
 	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
