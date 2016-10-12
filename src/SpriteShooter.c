@@ -6,15 +6,12 @@ UINT8 bank_SPRITE_SHOOTER = 2;
 #include "../res/src/wallshooter.h"
 #include "SpriteEnemyBullet.h"
 
-extern UINT8 wshooter_idx;
-
 struct WShooterCustomData {
 	UINT8 cool_down;
 };
 
 void Start_SPRITE_SHOOTER(struct Sprite* sprite) { 
 	struct WShooterCustomData* data = (struct WShooterCustomData*)sprite->custom_data;
-	InitSprite(sprite, FRAME_16x16, wshooter_idx >> 2);
 
 	data->cool_down = 0;
 }

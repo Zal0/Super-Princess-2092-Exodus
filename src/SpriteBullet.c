@@ -7,10 +7,7 @@ UINT8 bank_SPRITE_BULLET = 2;
 #include "GBJAM2016.h"
 #include "Scroll.h"
 
-extern UINT8 princess_idx;
-
 void Start_SPRITE_BULLET(struct Sprite* sprite) {
-	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
 	sprite->current_frame = 6;
 
 	sprite->coll_x = 5u;

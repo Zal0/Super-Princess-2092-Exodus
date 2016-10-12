@@ -6,15 +6,12 @@ UINT8 bank_SPRITE_CSHOOTER = 2;
 #include "SpriteManager.h"
 #include "SpriteEnemyBullet.h"
 
-extern UINT8 cshooter_idx;
-
 struct CShooterCustomData {
 	UINT8 cool_down;
 };
 
 void Start_SPRITE_CSHOOTER(struct Sprite* sprite) { 
 	struct CShooterCustomData* data = (struct CShooterCustomData*)sprite->custom_data;
-	InitSprite(sprite, FRAME_16x16, cshooter_idx >> 2);
 
 	data->cool_down = 0;
 }

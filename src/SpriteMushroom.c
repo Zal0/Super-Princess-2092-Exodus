@@ -6,7 +6,6 @@ UINT8 bank_SPRITE_MUSHROOM = 2;
 #include "SpriteManager.h"
 #include "SpriteEnemyBullet.h"
 
-extern UINT8 mushroom_idx;
 const UINT8 mushroom_anim_hide[] = {1, 0};
 const UINT8 mushroom_anim_show[] = {1, 1};
 
@@ -17,7 +16,6 @@ struct MushroomCustomData {
 
 void Start_SPRITE_MUSHROOM(struct Sprite* sprite) {
 	struct MushroomCustomData* data = (struct MushroomCustomData*)sprite->custom_data;
-	InitSprite(sprite, FRAME_16x16, mushroom_idx >> 2);
 	SetSpriteAnim(sprite, mushroom_anim_hide, 3u);
 
 	data->time_out = 200u;

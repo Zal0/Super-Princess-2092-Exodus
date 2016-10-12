@@ -6,8 +6,6 @@ UINT8 bank_SPRITE_ENEMY_BULLET = 2;
 #include "SpriteManager.h"
 #include "GBJAM2016.h"
 
-extern UINT8 enemy_bullet_idx;
-
 struct EnemyBulletCustomData {
 	INT8 vx;
 	INT8 vy;
@@ -29,7 +27,6 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 }
 
 void Start_SPRITE_ENEMY_BULLET(struct Sprite* sprite) {
-	InitSprite(sprite, FRAME_16x16, enemy_bullet_idx >> 2);
 }
 
 void Update_SPRITE_ENEMY_BULLET() {

@@ -6,7 +6,6 @@ UINT8 bank_SPRITE_PPARTICLE = 2;
 #include "../res/src/enemybullet16x16.h"
 #include "GBJAM2016.h"
 
-extern UINT8 princess_idx;
 const UINT8 pparticle_anim_idle[] = {2, 12, 13};
 
 struct PParticleCustomData {
@@ -25,7 +24,6 @@ void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 }
 
 void Start_SPRITE_PPARTICLE(struct Sprite* sprite) {
-	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
 	SetSpriteAnim(sprite, pparticle_anim_idle, 10u);
 }
 
