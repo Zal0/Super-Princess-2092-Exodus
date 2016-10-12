@@ -7,8 +7,6 @@ UINT8 bank_SPRITE_SHOOTER = 2;
 #include "SpriteEnemyBullet.h"
 
 extern UINT8 wshooter_idx;
-const UINT8 wshooter_anim_idle[] = {1, 0};
-const UINT8 wshooter_anim_fire[] = {1, 1};
 
 struct WShooterCustomData {
 	UINT8 cool_down;
@@ -17,7 +15,6 @@ struct WShooterCustomData {
 void Start_SPRITE_SHOOTER(struct Sprite* sprite) { 
 	struct WShooterCustomData* data = (struct WShooterCustomData*)sprite->custom_data;
 	InitSprite(sprite, FRAME_16x16, wshooter_idx >> 2);
-	SetSpriteAnim(sprite, wshooter_anim_idle, 3u);
 
 	data->cool_down = 0;
 }
@@ -32,9 +29,9 @@ void Update_SPRITE_SHOOTER() {
 	}
 
 	if(data->cool_down < 5u) {
-		SetSpriteAnim(sprite_manager_current_sprite, wshooter_anim_fire, 3);
+		sprite_manager_current_sprite->current_frame = 1;
 	} else {
-		SetSpriteAnim(sprite_manager_current_sprite, wshooter_anim_idle, 3);
+		sprite_manager_current_sprite->current_frame = 0;
 	}
 }
 

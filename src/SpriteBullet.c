@@ -8,11 +8,10 @@ UINT8 bank_SPRITE_BULLET = 2;
 #include "Scroll.h"
 
 extern UINT8 princess_idx;
-const UINT8 bullet_anim_idle[] = {1, 6};
 
 void Start_SPRITE_BULLET(struct Sprite* sprite) {
 	InitSprite(sprite, FRAME_16x16, princess_idx >> 2);
-	SetSpriteAnim(sprite, bullet_anim_idle, 3u);
+	sprite->current_frame = 6;
 
 	sprite->coll_x = 5u;
 	sprite->coll_w = 4u;
