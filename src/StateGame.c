@@ -78,7 +78,6 @@ void Start_STATE_GAME() {
 	cshooter_idx       = LoadSprite( 2 * 4, ceilingshooter,   3);
 	wshooter_idx       = LoadSprite( 2 * 4, wallshooter,      3);
 	enemy_particle_idx = LoadSprite( 4 * 4, enemyexplosion,   3);
-	LoadSprite(14 * 4, spriteprincess,   3);
 	SHOW_SPRITES;
 
 
