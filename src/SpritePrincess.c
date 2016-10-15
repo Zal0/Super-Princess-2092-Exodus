@@ -229,7 +229,7 @@ void Update_SPRITE_PRINCESS() {
 #ifndef DEBUG_CONTROLS
 	if(princes_state != PRINCESS_STATE_LADDER && princes_state != PRINCESS_STATE_HIT) {
 		//Simple gravity physics 
-		if(princess_accel_y < 40) {
+		if(princess_accel_y < 60) {
 			princess_accel_y += 2;
 		}
 		tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
