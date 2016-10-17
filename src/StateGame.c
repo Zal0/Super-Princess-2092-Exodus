@@ -52,26 +52,20 @@ struct LevelInfo levels[] = {
 };
 
 extern struct Sprite* sprite_princess;
-UINT16 tile_exit_x = 0;
-UINT16 tile_exit_y = 0;
-void InitScreen() {
-	UINT16 tile_start_x, tile_start_y;
-
-	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
+void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 	if(tile_start_x == 0) {
-		scroll_offset_x = 0x1F & (scroll_offset_x + scroll_tiles_w);
-		//scroll_offset_y = 0x1F & (tile_exit_y - tile_start_y);
 		tile_start_x += 1;
-	}
-	if(tile_start_x == levels[current_level].w - 1)
+	} else if(tile_start_x == levels[current_level].w - 1) {
 		tile_start_x -= 2;
+	}
 
-	if(tile_start_y == 0)
+	if(tile_start_y == 0) {
 		tile_start_y += 1;
-	else if(tile_start_y == levels[current_level].h - 1)
+	} else if(tile_start_y == levels[current_level].h - 1) {
 		tile_start_y -= 2;
-	else
+	} else {
 		tile_start_y -= 1;
+	}
 
 	sprite_princess->x = tile_start_x << 3;
 	sprite_princess->y = tile_start_y << 3;
@@ -79,6 +73,7 @@ void InitScreen() {
 
 void Start_STATE_GAME() {
 	struct Sprite* princess_sprite;
+	UINT16 tile_start_x, tile_start_y;
 	
 	SPRITES_8x16;
 	SpriteManagerLoad(SPRITE_PRINCESS);
@@ -93,8 +88,9 @@ void Start_STATE_GAME() {
 
 	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
 	
-	InitScreen();
-
+	
+	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
+	InitPlayerPos(tile_start_x, tile_start_y);
 	scroll_target = princess_sprite;
 
 	InitScrollTiles(0, 128, stage1_bg, 3);
@@ -104,27 +100,83 @@ void Start_STATE_GAME() {
 	PlayMusic(exo_level1_mod_Data, 4, 1);
 }
 
-void LoadNextScreen() {
-	UINT8 ix;
-	InitScreen();
-
-	scroll_tiles_w = levels[current_level].w;
-	scroll_tiles_h = levels[current_level].h;
-	scroll_map     = levels[current_level].map;
-	scroll_w       = scroll_tiles_w << 3;
-	scroll_h       = scroll_tiles_h << 3;
-	scroll_bank    = levels[current_level].bank;
-
-	scroll_target = 0;
-	for(ix = 0; ix != SCREENWIDTH; ++ix) {
-		MoveScroll(scroll_x + 1, scroll_y);
-		wait_vbl_done();
-	}
-	scroll_target = sprite_princess;
+INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
+	return a + (b - a) * t / max;
 }
 
+INT16 DespRight(INT16 a, INT16 b);
+INT8 load_next = 0;
+extern INT16 old_scroll_x, old_scroll_y;
+void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
+	struct Sprite* player = scroll_target;
+	INT16 old_player_x = scroll_target->x - scroll_x;
+	INT16 old_player_y = scroll_target->y - scroll_y;
+	UINT8 ix;
+	UINT16 tile_start_x, tile_start_y;
+	INT16 scroll_start_x, scroll_end_x, scroll_start_y, scroll_end_y;
 
-UINT8 load_next = 0;
+	ScrollFindTile(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
+	InitPlayerPos(tile_start_x, tile_start_y);
+	ScrollSetMap(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank);
+	
+	scroll_start_x = scroll_end_x = scroll_x;
+	if(tile_start_x == 0) {
+		scroll_offset_x = 0x1F & (scroll_offset_x + levels[current_level].w);
+		scroll_start_x = -((INT16)SCREENWIDTH);
+	} else if(tile_start_x == levels[next_level].w - 1) {
+		scroll_offset_x = 0x1F & (scroll_offset_x - levels[next_level].w);
+		scroll_start_x = scroll_x + SCREENWIDTH;
+	}
+
+	scroll_start_y = scroll_end_y = scroll_y;
+	if(tile_start_y == 0) {
+		scroll_offset_y = 0x1F & (scroll_offset_y + levels[current_level].h);
+		scroll_start_y = -((INT16)SCREENHEIGHT);
+	} else if(tile_start_y == levels[next_level].h - 1) {
+		scroll_offset_y = 0x1F & (scroll_offset_y - levels[next_level].h);
+		scroll_start_y = scroll_y + SCREENHEIGHT;
+	}
+
+	old_scroll_x = scroll_x = scroll_start_x;
+	old_scroll_y = scroll_y = scroll_start_y;
+	
+	old_player_x = scroll_start_x + old_player_x;
+	old_player_y = scroll_start_y + old_player_y;
+
+	//Clear all sprites except the first one
+	for(ix = 1u; ix != sprite_manager_updatables[0]; ++ix) {
+		SpriteManagerRemove(ix);
+	}
+	SpriteManagerFlushRemove();
+
+	//Because the way I update the scroll there are 2 columns or 1 that need to be updated first
+	//Do this here, after settting scroll_x and scroll_y to avoid an annoying blink (because scroll_x and scroll_y are used on vblank)
+	if(tile_start_x == 0) {
+		ScrollUpdateColumn(DespRight(scroll_end_x, 3), DespRight(scroll_y, 3));
+		ScrollUpdateColumn(DespRight(scroll_end_x, 3) + 1, DespRight(scroll_y, 3));
+	} else if(tile_start_x == levels[next_level].w - 1) {
+		ScrollUpdateColumn(DespRight(scroll_start_x, 3) - 1, DespRight(scroll_y, 3));
+	}
+
+	scroll_target = 0;
+	clamp_enabled = 0;
+	for(ix = 0; ix != SCREENWIDTH; ix += 2) {
+		MoveScroll(
+			Interpole(scroll_start_x, scroll_end_x, ix >> 2, SCREENWIDTH >> 2), 
+			Interpole(scroll_start_y, scroll_end_y, ix >> 2, SCREENWIDTH >> 2)
+		);
+		
+		DrawFrame(player->oam_idx, player->size, player->first_tile + player->current_frame, 
+			scroll_x + Interpole(old_player_x - scroll_x, player->x - scroll_x, ix >> 2, SCREENWIDTH >> 2),
+			scroll_y + Interpole(old_player_y - scroll_y, player->y - scroll_y, ix >> 2, SCREENWIDTH >> 2),
+		player->flags);
+
+		wait_vbl_done();
+	}
+	scroll_target = player;
+	clamp_enabled = 1;
+}
+
 UINT8 wait_end_time = 0;
 void Update_STATE_GAME() {
 	SpriteManagerUpdate();
@@ -140,8 +192,8 @@ void Update_STATE_GAME() {
 	}
 
 	if(load_next) {
-		current_level ++;
-		LoadNextScreen();
+		current_level += load_next;
+		LoadNextScreen(current_level - load_next, current_level);
 
 		load_next = 0;
 	}

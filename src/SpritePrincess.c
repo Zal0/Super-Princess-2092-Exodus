@@ -58,15 +58,15 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 }
 
 UINT8 tile_collision;
-extern UINT16 tile_exit_x;
-extern UINT16 tile_exit_y;
-extern UINT8 load_next;
+extern INT8 load_next;
 void CheckCollisionTile() {
 	switch(tile_collision) {
 		case 1u:
-			tile_exit_x = (sprite_manager_current_sprite->x + 2) >> 3;
-			tile_exit_y = (sprite_manager_current_sprite->y    ) >> 3;
 			load_next = 1;
+			break;
+
+		case 2u:
+			load_next = -1;
 			break;
 
 		case 33u:
