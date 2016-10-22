@@ -107,41 +107,63 @@ INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
 INT16 DespRight(INT16 a, INT16 b);
 INT8 load_next = 0;
 extern INT16 old_scroll_x, old_scroll_y;
+void ClampScrollLimits(UINT16* x, UINT16* y);
 void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	struct Sprite* player = scroll_target;
-	INT16 old_player_x = scroll_target->x - scroll_x;
-	INT16 old_player_y = scroll_target->y - scroll_y;
+	INT16 old_scr_x = scroll_x;
+	INT16 old_scr_y = scroll_y;
+	INT16 old_player_x = scroll_target->x;
+	INT16 old_player_y = scroll_target->y;
 	UINT8 ix;
 	UINT16 tile_start_x, tile_start_y;
 	INT16 scroll_start_x, scroll_end_x, scroll_start_y, scroll_end_y;
 
+	wait_vbl_done();
 	ScrollFindTile(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	ScrollSetMap(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank);
 	
 	scroll_start_x = scroll_end_x = scroll_x;
-	if(tile_start_x == 0) {
-		scroll_offset_x = 0x1F & (scroll_offset_x + levels[current_level].w);
-		scroll_start_x = -((INT16)SCREENWIDTH);
-	} else if(tile_start_x == levels[next_level].w - 1) {
-		scroll_offset_x = 0x1F & (scroll_offset_x - levels[next_level].w);
-		scroll_start_x = scroll_x + SCREENWIDTH;
+	scroll_start_y = scroll_end_y = scroll_y;
+	if((tile_start_x == 0) || (tile_start_x == levels[next_level].w - 1)) {
+		if(tile_start_x == 0) {
+			scroll_offset_x = 0x1F & (scroll_offset_x + levels[current_level].w);
+			scroll_start_x = -((INT16)SCREENWIDTH);
+		} else  { // tile_start_x == levels[next_level].w - 1)
+			scroll_offset_x = 0x1F & (scroll_offset_x - levels[next_level].w);
+			scroll_start_x = scroll_x + SCREENWIDTH;
+		}
+
+		//This keeps the scroll y in the same position it was on the previous screen
+		scroll_y = scroll_target->y + (old_scr_y - old_player_y);
+		ClampScrollLimits(&scroll_x, &scroll_y);	
+		scroll_end_y = scroll_y;
+
+		//This keeps the scroll y in the same position it was relative to the player
+		scroll_offset_y = 0x1F & (scroll_offset_y + DespRight(old_player_y + 15, 3) - tile_start_y);
+		scroll_start_y = scroll_target->y + (old_scr_y - old_player_y);
 	}
 
-	scroll_start_y = scroll_end_y = scroll_y;
-	if(tile_start_y == 0) {
-		scroll_offset_y = 0x1F & (scroll_offset_y + levels[current_level].h);
-		scroll_start_y = -((INT16)SCREENHEIGHT);
-	} else if(tile_start_y == levels[next_level].h - 1) {
-		scroll_offset_y = 0x1F & (scroll_offset_y - levels[next_level].h);
-		scroll_start_y = scroll_y + SCREENHEIGHT;
+	
+	if((tile_start_y == 0) || (tile_start_y == levels[next_level].h - 1)) {
+		if(tile_start_y == 0) {
+			scroll_offset_y = 0x1F & (scroll_offset_y + levels[current_level].h);
+			scroll_start_y = -((INT16)SCREENHEIGHT);
+		} else { //(tile_start_y == levels[next_level].h - 1)
+			scroll_offset_y = 0x1F & (scroll_offset_y - levels[next_level].h);
+			scroll_start_y = scroll_y + SCREENHEIGHT;
+		}
+
+		//This keeps the scroll x in the same position it was relative to the player
+		scroll_offset_x = 0x1F & (scroll_offset_x + DespRight(old_player_x + player->coll_x, 3) - tile_start_x);
+		scroll_start_x =  scroll_target->x + (old_scr_x - old_player_x);
 	}
 
 	old_scroll_x = scroll_x = scroll_start_x;
 	old_scroll_y = scroll_y = scroll_start_y;
 	
-	old_player_x = scroll_start_x + old_player_x;
-	old_player_y = scroll_start_y + old_player_y;
+	old_player_x = scroll_start_x + (old_player_x - old_scr_x);
+	old_player_y = scroll_start_y + (old_player_y - old_scr_y);;
 
 	//Clear all sprites except the first one
 	for(ix = 1u; ix != sprite_manager_updatables[0]; ++ix) {
@@ -166,9 +188,9 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 			Interpole(scroll_start_y, scroll_end_y, ix >> 2, SCREENWIDTH >> 2)
 		);
 		
-		DrawFrame(player->oam_idx, player->size, player->first_tile + player->current_frame, 
-			scroll_x + Interpole(old_player_x - scroll_x, player->x - scroll_x, ix >> 2, SCREENWIDTH >> 2),
-			scroll_y + Interpole(old_player_y - scroll_y, player->y - scroll_y, ix >> 2, SCREENWIDTH >> 2),
+		DrawFrame(player->oam_idx, player->size, player->first_tile + player->data[1 + player->current_frame], 
+			scroll_start_x + Interpole(old_player_x - scroll_start_x, player->x - scroll_start_x, ix >> 2, SCREENWIDTH >> 2),
+			scroll_start_y + Interpole(old_player_y - scroll_start_y, player->y - scroll_start_y, ix >> 2, SCREENWIDTH >> 2),
 		player->flags);
 
 		wait_vbl_done();
@@ -192,8 +214,10 @@ void Update_STATE_GAME() {
 	}
 
 	if(load_next) {
-		current_level += load_next;
-		LoadNextScreen(current_level - load_next, current_level);
+		if(current_level != 0 || load_next == 1) { //current_level > 0 || load_next == 1 (to avoid going under 0)
+			current_level += load_next;
+			LoadNextScreen(current_level - load_next, current_level);
+		}
 
 		load_next = 0;
 	}
