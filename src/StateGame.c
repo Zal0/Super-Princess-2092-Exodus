@@ -120,7 +120,7 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	INT16 offset_x, offset_y;
 
 	wait_vbl_done();
-	ScrollFindTile(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
+	ScrollFindTileInCorners(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	ScrollSetMap(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank);
 	
@@ -184,7 +184,7 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 
 	scroll_target = 0;
 	clamp_enabled = 0;
-	for(ix = 0; ix != SCREENWIDTH; ix += 2) {
+	for(ix = 0; ix != SCREENWIDTH; ix += 8) {
 		MoveScroll(
 			Interpole(scroll_start_x, scroll_end_x, ix >> 2, SCREENWIDTH >> 2), 
 			Interpole(scroll_start_y, scroll_end_y, ix >> 2, SCREENWIDTH >> 2)
