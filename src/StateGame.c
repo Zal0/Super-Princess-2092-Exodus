@@ -117,48 +117,47 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	UINT8 ix;
 	UINT16 tile_start_x, tile_start_y;
 	INT16 scroll_start_x, scroll_end_x, scroll_start_y, scroll_end_y;
+	INT16 offset_x, offset_y;
 
 	wait_vbl_done();
 	ScrollFindTile(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	ScrollSetMap(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank);
 	
-	scroll_start_x = scroll_end_x = scroll_x;
-	scroll_start_y = scroll_end_y = scroll_y;
 	if((tile_start_x == 0) || (tile_start_x == levels[next_level].w - 1)) {
 		if(tile_start_x == 0) {
-			scroll_offset_x = 0x1F & (scroll_offset_x + levels[current_level].w);
-			scroll_start_x = -((INT16)SCREENWIDTH);
+			offset_x = levels[current_level].w << 3;
+			offset_x = -offset_x;
 		} else  { // tile_start_x == levels[next_level].w - 1)
-			scroll_offset_x = 0x1F & (scroll_offset_x - levels[next_level].w);
-			scroll_start_x = scroll_x + SCREENWIDTH;
+			offset_x = levels[next_level].w << 3;
 		}
+		offset_y = (tile_start_y << 3) - (INT16)((old_player_y + 15) & 0xFFF8);
 
 		//This keeps the scroll y in the same position it was on the previous screen
-		scroll_y = scroll_target->y + (old_scr_y - old_player_y);
-		ClampScrollLimits(&scroll_x, &scroll_y);	
-		scroll_end_y = scroll_y;
-
-		//This keeps the scroll y in the same position it was relative to the player
-		scroll_offset_y = 0x1F & (scroll_offset_y + DespRight(old_player_y + 15, 3) - tile_start_y);
-		scroll_start_y = scroll_target->y + (old_scr_y - old_player_y);
+		//scroll_y = scroll_target->y + (old_scr_y - old_player_y);
+		//ClampScrollLimits(&scroll_x, &scroll_y);	
+		//scroll_end_y = scroll_y;
 	}
-
 	
 	if((tile_start_y == 0) || (tile_start_y == levels[next_level].h - 1)) {
 		if(tile_start_y == 0) {
-			scroll_offset_y = 0x1F & (scroll_offset_y + levels[current_level].h);
-			scroll_start_y = -((INT16)SCREENHEIGHT);
+			offset_y = levels[current_level].h << 3;
+			offset_y = -offset_y;
 		} else { //(tile_start_y == levels[next_level].h - 1)
-			scroll_offset_y = 0x1F & (scroll_offset_y - levels[next_level].h);
-			scroll_start_y = scroll_y + SCREENHEIGHT;
+			offset_y = levels[next_level].h << 3;
 		}
-
-		//This keeps the scroll x in the same position it was relative to the player
-		scroll_offset_x = 0x1F & (scroll_offset_x + DespRight(old_player_x + player->coll_x, 3) - tile_start_x);
-		scroll_start_x =  scroll_target->x + (old_scr_x - old_player_x);
+		offset_x = (tile_start_x << 3) - (INT16)((old_player_x + + player->coll_x) & 0xFFF8);
 	}
 
+	//Adding offset_x and offset_y will convert coordinates from old screen to the new one
+	scroll_offset_x = 0x1F & (scroll_offset_x - (offset_x >> 3));
+	scroll_start_x = old_scr_x + offset_x;
+	scroll_offset_y = 0x1F & (scroll_offset_y - (offset_y >> 3));
+	scroll_start_y = old_scr_y + offset_y;
+
+
+	scroll_end_x = scroll_x;
+	scroll_end_y = scroll_y;
 	old_scroll_x = scroll_x = scroll_start_x;
 	old_scroll_y = scroll_y = scroll_start_y;
 	
@@ -178,6 +177,9 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 		ScrollUpdateColumn(DespRight(scroll_end_x, 3) + 1, DespRight(scroll_y, 3));
 	} else if(tile_start_x == levels[next_level].w - 1) {
 		ScrollUpdateColumn(DespRight(scroll_start_x, 3) - 1, DespRight(scroll_y, 3));
+	}
+	if(tile_start_y == 0) {
+		ScrollUpdateRow(DespRight(scroll_end_x, 3) - 1, DespRight(scroll_end_y, 3));
 	}
 
 	scroll_target = 0;
