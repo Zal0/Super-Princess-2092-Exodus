@@ -42,9 +42,7 @@ void Update_SPRITE_BULLET() {
 					SpriteManagerRemove(sprite_manager_current_index);
 					break;
 				} else {
-					spr2 = SpriteManagerAdd(SPRITE_EPARTICLE);
-					spr2->x = spr->x;
-					spr2->y = spr->y;
+					spr2 = SpriteManagerAdd(SPRITE_EPARTICLE, spr->x, spr->y);
 				
 					SpriteManagerRemove(i);
 				}

@@ -123,7 +123,7 @@ void MovePrincess(struct Sprite* sprite) {
 }
 
 void Shoot(struct Sprite* sprite) {
-	struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET);
+	struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET, 0, 0);
 
 	bullet_sprite->flags = sprite->flags;
 	if(sprite->flags & OAM_VERTICAL_FLAG) 

@@ -12,10 +12,8 @@ struct EnemyBulletCustomData {
 };
 
 void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
-	struct Sprite* spr = SpriteManagerAdd(SPRITE_ENEMY_BULLET);
+	struct Sprite* spr = SpriteManagerAdd(SPRITE_ENEMY_BULLET, x, y);
 	struct EnemyBulletCustomData* data = (struct EnemyBulletCustomData*)spr->custom_data;
-	spr->x = x;
-	spr->y = y;
 
 	spr->coll_x = 5u;
 	spr->coll_w = 4u;

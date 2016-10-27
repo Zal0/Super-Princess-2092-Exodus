@@ -18,6 +18,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_4.h"
 #include "../res/src/stage1_5.h"
 #include "../res/src/stage1_6.h"
+#include "../res/src/stage1_7.h"
 
 #include "SpriteMushroom.h"
 #include "SpriteEnemyBullet.h"
@@ -49,6 +50,7 @@ struct LevelInfo levels[] = {
 	{stage1_4Width,   stage1_4Height,  stage1_4,  3},
 	{stage1_5Width,   stage1_5Height,  stage1_5,  3},
 	{stage1_6Width,   stage1_6Height,  stage1_6,  3},
+	{stage1_7Width,   stage1_7Height,  stage1_7,  3}
 };
 
 extern struct Sprite* sprite_princess;
@@ -84,9 +86,10 @@ void Start_STATE_GAME() {
 	SpriteManagerLoad(SPRITE_CSHOOTER);
 	SpriteManagerLoad(SPRITE_SHOOTER);
 	SpriteManagerLoad(SPRITE_EPARTICLE);
+	SpriteManagerLoad(SPRITE_PLATFORM);
 	SHOW_SPRITES;
 
-	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS);
+	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS, 0, 0);
 	
 	
 	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);

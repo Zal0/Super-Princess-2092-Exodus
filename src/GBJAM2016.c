@@ -15,6 +15,7 @@
 #include "SpriteShooter.h"
 #include "SpriteEnemyParticle.h"
 #include "SpritePrincessParticle.h"
+#include "SpritePlatform.h"
 
 #include "../res/src/princess.h"
 #include "../res/src/mushroom.h"
@@ -22,6 +23,7 @@
 #include "../res/src/ceilingshooter.h"
 #include "../res/src/wallshooter.h"
 #include "../res/src/enemyexplosion.h"
+#include "../res/src/mobileplatform.h"
 
 UINT8 next_state = STATE_MENU;
 
@@ -46,6 +48,7 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_CSHOOTER,     ceilingshooter,   3, FRAME_16x16,  2 * 4);
 	INIT_SPRITE(SPRITE_SHOOTER,      wallshooter,      3, FRAME_16x16,  2 * 4); 
 	INIT_SPRITE(SPRITE_EPARTICLE,    enemyexplosion,   3, FRAME_16x16,  4 * 4);
+	INIT_SPRITE(SPRITE_PLATFORM,		 mobileplatform,   3, FRAME_16x16,  1 * 4);
 }
 
 UINT8 GetTileReplacement(UINT8 t) {
@@ -54,6 +57,7 @@ UINT8 GetTileReplacement(UINT8 t) {
 			case 1: return 254u;
 			case 2: return 254u;
 			case 3: return SPRITE_MUSHROOM;
+			case 4: return SPRITE_PLATFORM;
 			case 6: return SPRITE_SHOOTER;
 			case 7: return SPRITE_CSHOOTER;
 		}

@@ -14,10 +14,8 @@ struct PParticleCustomData {
 };
 
 void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
-	struct Sprite* spr = SpriteManagerAdd(SPRITE_PPARTICLE);
+	struct Sprite* spr = SpriteManagerAdd(SPRITE_PPARTICLE, x, y);
 	struct PParticleCustomData* data = (struct PParticleCustomData*)spr->custom_data;
-	spr->x = x;
-	spr->y = y;
 
 	data->vx = vx;
 	data->vy = vy;
