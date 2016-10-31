@@ -41,6 +41,9 @@ INT8 shoot_cooldown = 0;
 
 struct Sprite* sprite_princess = 0;
 
+struct Sprite* princess_parent = 0;
+UINT16 princess_old_x, princess_old_y;
+
 void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 	SetSpriteAnim(sprite, anim_idle, 3u);
 	sprite->coll_x += 4u;
@@ -145,6 +148,9 @@ void Update_SPRITE_PRINCESS() {
 	UINT8 i;
 	struct Sprite* spr;
 
+	princess_old_x = sprite_manager_current_sprite->x;
+	princess_old_y = sprite_manager_current_sprite->y;
+
 	switch(princes_state) {
 		case PRINCESS_STATE_NORMAL:
 			MovePrincess(sprite_manager_current_sprite);
@@ -231,7 +237,7 @@ void Update_SPRITE_PRINCESS() {
 	}
 
 #ifndef DEBUG_CONTROLS
-	if(princes_state != PRINCESS_STATE_LADDER && princes_state != PRINCESS_STATE_HIT) {
+	if(princess_parent == 0 && princes_state != PRINCESS_STATE_LADDER && princes_state != PRINCESS_STATE_HIT) {
 		//Simple gravity physics 
 		if(princess_accel_y < 60) {
 			princess_accel_y += 2;
