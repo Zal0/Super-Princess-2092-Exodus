@@ -141,6 +141,7 @@ void Jump() {
 	if(princes_state != PRINCESS_STATE_JUMPING) {
 		princess_accel_y = -50;
 		princes_state = PRINCESS_STATE_JUMPING;
+		princess_parent = 0;
 	}
 }
 
@@ -255,6 +256,9 @@ void Update_SPRITE_PRINCESS() {
 
 			CheckCollisionTile();
 		}
+	}
+	if(princess_parent && princes_state == PRINCESS_STATE_JUMPING) {
+		princes_state = PRINCESS_STATE_NORMAL;
 	}
 #endif
 

@@ -27,6 +27,8 @@ UINT8 bank_STATE_GAME = 2;
 #include "SpriteEnemyParticle.h"
 #include "SpritePrincessParticle.h"
 
+#include "../res/src/font.h"
+
 const UINT8 collision_tiles[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
 const UINT8 collision_tiles_down[] = {23, 24, 0};
 
@@ -99,6 +101,13 @@ void Start_STATE_GAME() {
 	InitScrollTiles(0, 128, stage1_bg, 3);
 	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
 	SHOW_BKG;
+
+#ifndef NDEBUG 
+	InitScrollTiles(128, 45, font, 3);
+	WX_REG = 7;
+  WY_REG = 128;
+	SHOW_WIN;
+#endif
 
 	PlayMusic(exo_level1_mod_Data, 4, 1);
 }
