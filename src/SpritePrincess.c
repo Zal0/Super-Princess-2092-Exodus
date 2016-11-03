@@ -258,6 +258,7 @@ void Update_SPRITE_PRINCESS() {
 		}
 	}
 	if(princess_parent && princes_state == PRINCESS_STATE_JUMPING) {
+		princess_accel_y = 0;
 		princes_state = PRINCESS_STATE_NORMAL;
 	}
 #endif
