@@ -5,6 +5,7 @@ UINT8 bank_SPRITE_PLATFORM = 2;
 #include "SpriteManager.h"
 #include "Scroll.h"
 #include "Print.h"
+#include "Math.h"
 
 struct PlatformCustomData {
 	INT8 vx, vy;
@@ -27,8 +28,6 @@ extern struct Sprite* princess_parent;
 extern UINT16 princess_old_x;
 extern UINT16 princess_old_y;
 extern struct Sprite* sprite_princess;
-
-#define U_LESS_THAN(A, B) ((A) - (B) & 0x8000u)
 
 struct Rect {
 	UINT16 x, y;
