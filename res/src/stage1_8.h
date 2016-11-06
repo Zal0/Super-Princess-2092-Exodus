@@ -1,6 +1,6 @@
 /*
 
- STAGE1_7.H
+ STAGE1_8.H
 
  Map Include File.
 
@@ -18,10 +18,10 @@
 
 */
 
-#define stage1_7Width 20
-#define stage1_7Height 18
-#define stage1_7Bank 0
+#define stage1_8Width 20
+#define stage1_8Height 18
+#define stage1_8Bank 0
 
-extern unsigned char stage1_7[];
+extern unsigned char stage1_8[];
 
-/* End of STAGE1_7.H */
+/* End of STAGE1_8.H */

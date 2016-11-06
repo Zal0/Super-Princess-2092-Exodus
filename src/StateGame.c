@@ -19,6 +19,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_5.h"
 #include "../res/src/stage1_6.h"
 #include "../res/src/stage1_7.h"
+#include "../res/src/stage1_8.h"
 
 #include "SpriteMushroom.h"
 #include "SpriteEnemyBullet.h"
@@ -52,7 +53,8 @@ struct LevelInfo levels[] = {
 	{stage1_4Width,   stage1_4Height,  stage1_4,  3},
 	{stage1_5Width,   stage1_5Height,  stage1_5,  3},
 	{stage1_6Width,   stage1_6Height,  stage1_6,  3},
-	{stage1_7Width,   stage1_7Height,  stage1_7,  3}
+	{stage1_7Width,   stage1_7Height,  stage1_7,  3},
+	{stage1_8Width,   stage1_8Height,  stage1_8,  3},
 };
 
 extern struct Sprite* sprite_princess;
