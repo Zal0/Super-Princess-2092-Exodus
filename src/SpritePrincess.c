@@ -95,6 +95,7 @@ void MovePrincess(struct Sprite* sprite) {
 		CheckCollisionTile();
 	}
 
+#ifndef DEBUG_CONTROLS
 	if(KEY_PRESSED(J_UP)) {
 		UINT8 tile = GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite ->y + 15u) >> 3);
 		if(tile == 23u )
@@ -113,7 +114,7 @@ void MovePrincess(struct Sprite* sprite) {
 			princes_state = PRINCESS_STATE_LADDER;
 		}
 	}
-	
+#endif
 #ifdef DEBUG_CONTROLS
 	if(KEY_PRESSED(J_UP)) {
 		tile_collision = TranslateSprite(sprite, 0, -1 << delta_time);
