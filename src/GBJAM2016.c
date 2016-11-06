@@ -51,16 +51,23 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_PLATFORM,		 mobileplatform,   3, FRAME_16x16,  1 * 4);
 }
 
-UINT8 GetTileReplacement(UINT8 t) {
+UINT8 GetTileReplacement(UINT8* tile_ptr, UINT8* tile) {
 	if(current_state == STATE_GAME) {
-		switch(t) {
-			case 1: return 254u;
-			case 2: return 254u;
+		*tile = 0;
+		switch(*tile_ptr) {
+			case 1:
+			case 2:
+				if(*(tile_ptr + 1) == 24) 
+					*tile = 23;
+				return 255u;
+
 			case 3: return SPRITE_MUSHROOM;
 			case 4: return SPRITE_PLATFORM;
 			case 6: return SPRITE_SHOOTER;
 			case 7: return SPRITE_CSHOOTER;
 		}
+		*tile = *tile_ptr;
 	}
+
 	return 255u;
 }
