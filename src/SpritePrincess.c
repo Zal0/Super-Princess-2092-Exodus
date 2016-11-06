@@ -58,7 +58,11 @@ void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
 
 	sprite_princess = sprite;
 
-	princes_state = PRINCESS_STATE_NORMAL;
+	if(GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite->y + sprite->coll_y) >> 3) == 23u) {
+		princes_state = PRINCESS_STATE_LADDER;
+	} else {
+		princes_state = PRINCESS_STATE_NORMAL;
+	}
 }
 
 UINT8 tile_collision;

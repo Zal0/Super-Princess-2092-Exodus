@@ -73,12 +73,15 @@ void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 		tile_start_y -= 1;
 	}
 
-	sprite_princess->x = tile_start_x << 3;
-	sprite_princess->y = tile_start_y << 3;
+	if(sprite_princess) {
+		sprite_princess->x = tile_start_x << 3;
+		sprite_princess->y = tile_start_y << 3;
+	} else {
+		SpriteManagerAdd(SPRITE_PRINCESS, tile_start_x << 3, tile_start_y << 3);
+	}
 }
 
 void Start_STATE_GAME() {
-	struct Sprite* princess_sprite;
 	UINT16 tile_start_x, tile_start_y;
 	
 	SPRITES_8x16;
@@ -93,12 +96,10 @@ void Start_STATE_GAME() {
 	SpriteManagerLoad(SPRITE_PLATFORM);
 	SHOW_SPRITES;
 
-	princess_sprite = SpriteManagerAdd(SPRITE_PRINCESS, 0, 0);
-	
-	
+	ScrollSetMap(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank);
 	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
-	scroll_target = princess_sprite;
+	scroll_target = sprite_princess;
 
 	InitScrollTiles(0, 128, stage1_bg, 3);
 	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
