@@ -10,6 +10,7 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 #include "Scroll.h"
 #include "SpriteManager.h"
 #include "SpritePrincessParticle.h"
+#include "Math.h"
 
 #include "../res/src/princess.h"
 
@@ -110,6 +111,7 @@ void MovePrincess(struct Sprite* sprite) {
 		if(tile == 23u )
 		{
 			sprite->x = ((sprite->x + sprite->coll_x)>> 3) << 3;
+			sprite->y = sprite->y + 1u;
 			princess_accel_y = 0;
 			princes_state = PRINCESS_STATE_LADDER;
 		}
@@ -180,12 +182,17 @@ void Update_SPRITE_PRINCESS() {
 			break;
 
 		case PRINCESS_STATE_LADDER:
+			i = 23;
 			if(KEY_PRESSED(J_UP)) {
 				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
-				sprite_manager_current_sprite->y -= 1 << delta_time;
+				tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, -1 << delta_time);
+				CheckCollisionTile();
+				i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 15u) >> 3);
 			} else if(KEY_PRESSED(J_DOWN)) {
 				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
-				sprite_manager_current_sprite->y += 1 << delta_time;
+				tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
+				CheckCollisionTile();
+				i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 16u) >> 3);
 			} else {
 				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_idle_cooldown : anim_ladder_idle, 12u);
 			}
@@ -196,10 +203,9 @@ void Update_SPRITE_PRINCESS() {
 			}
 
 			//Check the end of the ladder
-			i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 16u) >> 3);
-			if(i != 23u )
+			if(i != 23u && i != 1u && i != 2u)
 			{
-				TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
+				//TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
 				princes_state = PRINCESS_STATE_NORMAL;
 			}
 
@@ -250,9 +256,11 @@ void Update_SPRITE_PRINCESS() {
 			tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
 		}
 		if(tile_collision) {
-			princess_accel_y = 0;
-			if(princes_state == PRINCESS_STATE_JUMPING) {
-				princes_state = PRINCESS_STATE_NORMAL;
+			if(tile_collision != 1u && tile_collision != 2u) {
+				princess_accel_y = 0;
+				if(princes_state == PRINCESS_STATE_JUMPING) {
+					princes_state = PRINCESS_STATE_NORMAL;
+				}
 			}
 
 			CheckCollisionTile();
