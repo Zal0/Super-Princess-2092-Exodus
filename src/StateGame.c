@@ -197,7 +197,6 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 		ScrollUpdateRow(DespRight(scroll_end_x, 3) - 1, DespRight(scroll_end_y, 3));
 	}
 
-	scroll_target = 0;
 	clamp_enabled = 0;
 	for(ix = 0; ix != SCREENWIDTH; ix += 8) {
 		MoveScroll(
@@ -212,7 +211,6 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 
 		wait_vbl_done();
 	}
-	scroll_target = player;
 	clamp_enabled = 1;
 }
 
