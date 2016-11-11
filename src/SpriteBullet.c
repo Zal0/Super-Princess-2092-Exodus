@@ -40,11 +40,13 @@ void Update_SPRITE_BULLET() {
 				if(spr->type == SPRITE_MUSHROOM && spr->data[1 + spr->current_frame] != 1u) {
 					//Mushroom can only die on frame 1
 					SpriteManagerRemove(sprite_manager_current_index);
+					SpriteManagerRemove(sprite_manager_current_index);
 					break;
 				} else {
 					spr2 = SpriteManagerAdd(SPRITE_EPARTICLE, spr->x, spr->y);
 				
 					SpriteManagerRemove(i);
+					SpriteManagerRemove(sprite_manager_current_index);
 				}
 			}
 		}
