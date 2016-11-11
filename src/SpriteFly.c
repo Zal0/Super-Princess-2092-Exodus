@@ -34,7 +34,7 @@ void Update_SPRITE_FLY() {
 	if(sprite_manager_current_sprite->flags == 0) { //Moving Left
 		data->vx.w -= 100;
 		if(U_LESS_THAN(scroll_target->x, sprite_manager_current_sprite->x)) {
-			if(U_LESS_THAN(sprite_manager_current_sprite->x - DIST_ACTION, scroll_target->x)){
+			if(U_LESS_THAN(sprite_manager_current_sprite->x - scroll_target->x, scroll_target->y - sprite_manager_current_sprite->y)){
 				data->vx.w += (scroll_target->x - sprite_manager_current_sprite->x) << ACCEL_OFFSET;
 				data->vy.w += (scroll_target->y + 8 - sprite_manager_current_sprite->y) << ACCEL_OFFSET;
 				data->h = scroll_target->y - HEIGHT;
@@ -49,7 +49,7 @@ void Update_SPRITE_FLY() {
 	} else {
 		data->vx.w += 100;
 		if(U_LESS_THAN(sprite_manager_current_sprite->x, scroll_target->x)) {
-			if(U_LESS_THAN(scroll_target->x, sprite_manager_current_sprite->x + DIST_ACTION)){
+			if(U_LESS_THAN(scroll_target->x - sprite_manager_current_sprite->x, scroll_target->y - sprite_manager_current_sprite->y)){
 				data->vx.w += (scroll_target->x - sprite_manager_current_sprite->x) << ACCEL_OFFSET;
 				data->vy.w += (scroll_target->y + 8 - sprite_manager_current_sprite->y) << ACCEL_OFFSET;
 				data->h = scroll_target->y - HEIGHT;
