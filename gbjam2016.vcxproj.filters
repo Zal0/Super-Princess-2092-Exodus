@@ -74,6 +74,9 @@
     <ClCompile Include="src\SpritePlatform.c">
       <Filter>Source Files\Sprites</Filter>
     </ClCompile>
+    <ClCompile Include="src\SpriteFly.c">
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h">
@@ -122,6 +125,9 @@
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="include\SpritePlatform.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteFly.h">
       <Filter>Header Files\Sprites</Filter>
     </ClInclude>
   </ItemGroup>

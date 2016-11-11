@@ -25,7 +25,7 @@ extern UINT8 current_level;
 extern UINT8 n_lives;
 void Update_STATE_MENU() {
 	if(KEY_TICKED(J_START)) {
-		current_level = 8;
+		current_level = 7;
 		n_lives = 3;
 
 		SetState(STATE_STAGEINTRO);
