@@ -7,18 +7,48 @@ UINT8 bank_SPRITE_PLATFORM = 2;
 #include "Print.h"
 #include "Math.h"
 
+#include "Print.h"
+
 struct PlatformCustomData {
 	INT8 vx, vy;
 	INT8 frame_accum;
 };
 
 void Start_SPRITE_PLATFORM(struct Sprite* sprite) {
+	UINT16 tile_x = sprite->x >> 3;
+	UINT16 tile_y = sprite->y >> 3;
+	UINT16 tile;
+
 	struct PlatformCustomData* data = (struct PlatformCustomData*)sprite->custom_data;
-	data->vy =  -1;
-	data->vx =  0;
 	data->frame_accum = 0;
 
-	sprite->x += 4;
+	tile = GetScrollTile(tile_x + 1, tile_y + 1);
+	if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
+		data->vy = -1;
+		data->vx =  0;
+		sprite->x += 4;
+	} else {
+		tile = GetScrollTile(tile_x - 1, tile_y + 1);
+		if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
+			data->vy = 1;
+			data->vx = 0;
+			sprite->x -= 12;
+		} else {
+			tile = GetScrollTile(tile_x, tile_y + 2);
+			if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
+				data->vy =  0;
+				data->vx = -1;
+				sprite->y += 12;
+			} else {
+				tile = GetScrollTile(tile_x, tile_y);
+				if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
+					data->vy = 0;
+					data->vx = 1;
+					sprite->y -= 4;
+				}
+			}
+		}
+	}
 
 	sprite->coll_y = 5;
 	sprite->coll_h = 6;
