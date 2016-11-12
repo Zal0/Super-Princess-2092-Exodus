@@ -35,7 +35,7 @@ void Update_SPRITE_MUSHROOM() {
 	UINT8 x;
 	
 	if(data->time_out > 50) {
-		if(sprite_princess && (dist(sprite_princess->x, sprite_manager_current_sprite->x) < 40u)) {
+		if(sprite_princess && (dist(sprite_princess->x, sprite_manager_current_sprite->x) < 60u)) {
 			data->time_out = 0;
 			x = ((sprite_princess->x - sprite_manager_current_sprite->x) & 0xF000) ? -1 : 1;
 
