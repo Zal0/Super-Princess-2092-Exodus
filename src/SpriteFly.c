@@ -26,6 +26,7 @@ void Start_SPRITE_FLY(struct Sprite* sprite) {
 	data->vx.w = 0;
 	data->vy.w = 0;
 	data->tx = 0;
+	sprite->flags = U_LESS_THAN(scroll_target->x, sprite->x) ? 0 : OAM_VERTICAL_FLAG;
 }
 
 void Update_SPRITE_FLY() {
