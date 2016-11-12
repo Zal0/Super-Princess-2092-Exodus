@@ -28,8 +28,6 @@ void Start_SPRITE_FLY(struct Sprite* sprite) {
 	data->tx = 0;
 }
 
-#define DISTANCE(A, B) (U_LESS_THAN(A, B) ? (B - A) : (A - B))
-
 void Update_SPRITE_FLY() {
 	struct FlyCustomData* data = (struct FlyCustomData*)sprite_manager_current_sprite->custom_data;
 

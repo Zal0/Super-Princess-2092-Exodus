@@ -6,9 +6,10 @@ UINT8 bank_SPRITE_MUSHROOM = 2;
 #include "SpriteManager.h"
 #include "SpriteEnemyBullet.h"
 
+#include "Math.h"
+
 const UINT8 mushroom_anim_hide[] = {1, 0};
 const UINT8 mushroom_anim_show[] = {1, 1};
-
 
 struct MushroomCustomData {
 	UINT8 time_out;
@@ -21,13 +22,6 @@ void Start_SPRITE_MUSHROOM(struct Sprite* sprite) {
 	data->time_out = 200u;
 }
 
-UINT16 dist(UINT16 v0, UINT16 v1) {
-	if((v0 - v1) & 0xF000)
-		return v1 - v0;
-	else
-		return v0 - v1;
-}
-
 extern struct Sprite* sprite_princess;
 
 void Update_SPRITE_MUSHROOM() {
@@ -35,7 +29,7 @@ void Update_SPRITE_MUSHROOM() {
 	UINT8 x;
 	
 	if(data->time_out > 50) {
-		if(sprite_princess && (dist(sprite_princess->x, sprite_manager_current_sprite->x) < 60u)) {
+		if(sprite_princess && (DISTANCE(sprite_princess->x, sprite_manager_current_sprite->x) < 60u)) {
 			data->time_out = 0;
 			x = ((sprite_princess->x - sprite_manager_current_sprite->x) & 0xF000) ? -1 : 1;
 
