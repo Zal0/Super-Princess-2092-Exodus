@@ -77,6 +77,9 @@
     <ClCompile Include="src\SpriteFly.c">
       <Filter>Source Files\Sprites</Filter>
     </ClCompile>
+    <ClCompile Include="src\SpriteRoller.c">
+      <Filter>Source Files\Sprites</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GBJAM2016.h">
@@ -128,6 +131,9 @@
       <Filter>Header Files\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="include\SpriteFly.h">
+      <Filter>Header Files\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteRoller.h">
       <Filter>Header Files\Sprites</Filter>
     </ClInclude>
   </ItemGroup>

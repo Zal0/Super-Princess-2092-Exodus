@@ -95,6 +95,7 @@ void Start_STATE_GAME() {
 	SpriteManagerLoad(SPRITE_EPARTICLE);
 	SpriteManagerLoad(SPRITE_PLATFORM);
 	SpriteManagerLoad(SPRITE_FLY);
+	SpriteManagerLoad(SPRITE_ROLLER);
 	SHOW_SPRITES;
 
 	ScrollSetMap(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank);
