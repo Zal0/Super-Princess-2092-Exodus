@@ -18,6 +18,10 @@ struct RollerCustomData {
 void Start_SPRITE_ROLLER(struct Sprite* sprite) {
 	struct RollerCustomData* data = (struct RollerCustomData*)sprite->custom_data;
 
+	sprite->coll_y += 1;
+	sprite->coll_h -= 1;
+	
+
 	data->vx.w = 0;
 	data->vy.w = 0;
 	data->tx.w = 0;
@@ -32,7 +36,7 @@ void Update_SPRITE_ROLLER() {
 	struct RollerCustomData* data = (struct RollerCustomData*)sprite_manager_current_sprite->custom_data;
 	
 	if(sprite_manager_current_sprite->data == 0) {
-		if(U_LESS_THAN(DISTANCE(scroll_target->x + 8, sprite_manager_current_sprite->x), 100)) {
+		if(U_LESS_THAN(DISTANCE(scroll_target->x + 8, sprite_manager_current_sprite->x), 60)) {
 			SetSpriteAnim(sprite_manager_current_sprite, roller_anim_roll, 33);
 		}
 	} else {
