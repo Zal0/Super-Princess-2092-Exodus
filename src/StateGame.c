@@ -98,6 +98,14 @@ void Start_STATE_GAME() {
 	SpriteManagerLoad(SPRITE_ROLLER);
 	SHOW_SPRITES;
 
+#ifndef NDEBUG 
+	font_idx = 255 - 45;
+	InitScrollTiles(255 - 45, 45, font, 3);
+	WX_REG = 7;
+  WY_REG = 128;
+	SHOW_WIN;
+#endif
+
 	ScrollSetMap(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank);
 	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
@@ -106,13 +114,6 @@ void Start_STATE_GAME() {
 	InitScrollTiles(0, 128, stage1_bg, 3);
 	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
 	SHOW_BKG;
-
-#ifndef NDEBUG 
-	InitScrollTiles(128, 45, font, 3);
-	WX_REG = 7;
-  WY_REG = 128;
-	SHOW_WIN;
-#endif
 
 	PlayMusic(exo_level1_mod_Data, 4, 1);
 }
