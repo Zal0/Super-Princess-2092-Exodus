@@ -21,13 +21,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_7.h"
 #include "../res/src/stage1_8.h"
 
-#include "SpriteMushroom.h"
-#include "SpriteEnemyBullet.h"
-#include "SpriteCeilingShooter.h"
-#include "SpriteShooter.h"
-#include "SpriteEnemyParticle.h"
-#include "SpritePrincessParticle.h"
-
+#include "Print.h"
 #include "../res/src/font.h"
 
 const UINT8 collision_tiles[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
@@ -96,6 +90,8 @@ void Start_STATE_GAME() {
 	SpriteManagerLoad(SPRITE_PLATFORM);
 	SpriteManagerLoad(SPRITE_FLY);
 	SpriteManagerLoad(SPRITE_ROLLER);
+	SpriteManagerLoad(SPRITE_OVNI);
+	SpriteManagerLoad(SPRITE_MISSILE);
 	SHOW_SPRITES;
 
 #ifndef NDEBUG 

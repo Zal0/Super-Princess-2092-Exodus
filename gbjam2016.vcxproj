@@ -20,7 +20,9 @@
     <ClCompile Include="src\SpriteEnemyBullet.c" />
     <ClCompile Include="src\SpriteEnemyParticle.c" />
     <ClCompile Include="src\SpriteFly.c" />
+    <ClCompile Include="src\SpriteMissile.c" />
     <ClCompile Include="src\SpriteMushroom.c" />
+    <ClCompile Include="src\SpriteOvni.c" />
     <ClCompile Include="src\SpritePlatform.c" />
     <ClCompile Include="src\SpritePrincess.c" />
     <ClCompile Include="src\SpritePrincessParticle.c" />
@@ -40,7 +42,9 @@
     <ClInclude Include="include\SpriteEnemyBullet.h" />
     <ClInclude Include="include\SpriteEnemyParticle.h" />
     <ClInclude Include="include\SpriteFly.h" />
+    <ClInclude Include="include\SpriteMissile.h" />
     <ClInclude Include="include\SpriteMushroom.h" />
+    <ClInclude Include="include\SpriteOvni.h" />
     <ClInclude Include="include\SpritePlatform.h" />
     <ClInclude Include="include\SpritePrincess.h" />
     <ClInclude Include="include\SpritePrincessParticle.h" />

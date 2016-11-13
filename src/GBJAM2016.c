@@ -18,6 +18,8 @@
 #include "SpritePlatform.h"
 #include "SpriteFly.h"
 #include "SpriteRoller.h"
+#include "SpriteOvni.h"
+#include "SpriteMissile.h"
 
 #include "../res/src/princess.h"
 #include "../res/src/mushroom.h"
@@ -28,6 +30,8 @@
 #include "../res/src/mobileplatform.h"
 #include "../res/src/flyingbug.h"
 #include "../res/src/weirdroller.h"
+#include "../res/src/ovni.h"
+#include "../res/src/missile.h"
 
 UINT8 next_state = STATE_MENU;
 
@@ -55,6 +59,8 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_PLATFORM,		 mobileplatform,   3, FRAME_16x16,  1 * 4);
 	INIT_SPRITE(SPRITE_FLY,          flyingbug,        3, FRAME_16x16,  2 * 4);
 	INIT_SPRITE(SPRITE_ROLLER,       weirdroller,      3, FRAME_16x16,  4 * 4);
+	INIT_SPRITE(SPRITE_OVNI,         ovni,             3, FRAME_16x16,  1 * 4);
+	INIT_SPRITE(SPRITE_MISSILE,      missile,          3, FRAME_16x16,  1 * 4);
 }
 
 UINT8 GetTileReplacement(UINT8* tile_ptr, UINT8* tile) {
@@ -69,6 +75,7 @@ UINT8 GetTileReplacement(UINT8* tile_ptr, UINT8* tile) {
 
 			case 3: return SPRITE_MUSHROOM;
 			case 4: return SPRITE_PLATFORM;
+			case 5: return SPRITE_OVNI;
 			case 6: return SPRITE_SHOOTER;
 			case 7: return SPRITE_CSHOOTER;
 			case 8: return SPRITE_FLY;
