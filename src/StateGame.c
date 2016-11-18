@@ -203,7 +203,7 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 			Interpole(scroll_start_y, scroll_end_y, ix >> 2, SCREENWIDTH >> 2)
 		);
 		
-		DrawFrame(player->oam_idx, player->size, player->first_tile + player->data[1 + player->current_frame], 
+		DrawFrame(player->oam_idx, player->size, player->first_tile + player->data[1 + player->current_frame] << player->size, 
 			scroll_start_x + Interpole(old_player_x - scroll_start_x, player->x - scroll_start_x, ix >> 2, SCREENWIDTH >> 2),
 			scroll_start_y + Interpole(old_player_y - scroll_start_y, player->y - scroll_start_y, ix >> 2, SCREENWIDTH >> 2),
 		player->flags);
