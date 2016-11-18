@@ -25,7 +25,7 @@ const UINT8 anim_ladder_idle_cooldown[]   = {1, 9};
 const UINT8 anim_ladder_moving_cooldown[] = {2, 9, 10};
 const UINT8 anim_ladder_idle[]   = {1, 7};
 const UINT8 anim_ladder_moving[] = {2, 7, 8};
-const UINT8 anim_hit[] = {6, 1, 11, 1, 11, 1, 11};
+const UINT8 anim_hit[] = {6, 1, 6, 1, 6, 1, 6};
 
 typedef enum  {
 	PRINCESS_STATE_NORMAL,
@@ -137,9 +137,9 @@ void Shoot(struct Sprite* sprite) {
 
 	bullet_sprite->flags = sprite->flags;
 	if(sprite->flags & OAM_VERTICAL_FLAG) 
-		bullet_sprite->x = sprite->x - 8u;
+		bullet_sprite->x = sprite->x - 5u;
 	else
-		bullet_sprite->x = sprite->x + 8u; 
+		bullet_sprite->x = sprite->x + 5u; 
 	bullet_sprite->y = sprite->y + 1u;
 	shoot_cooldown = 10;
 }

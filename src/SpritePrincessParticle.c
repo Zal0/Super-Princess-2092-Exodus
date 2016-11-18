@@ -6,7 +6,7 @@ UINT8 bank_SPRITE_PPARTICLE = 2;
 #include "../res/src/enemybullet16x16.h"
 #include "GBJAM2016.h"
 
-const UINT8 pparticle_anim_idle[] = {2, 12, 13};
+const UINT8 pparticle_anim_idle[] = {2, 11, 12};
 
 struct PParticleCustomData {
 	INT16 vx;
