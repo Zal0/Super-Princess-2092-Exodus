@@ -24,7 +24,7 @@
 #include "../res/src/princess.h"
 #include "../res/src/princessBullet.h"
 #include "../res/src/mushroom.h"
-#include "../res/src/enemybullet16x16.h"
+#include "../res/src/enemybullet.h"
 #include "../res/src/ceilingshooter.h"
 #include "../res/src/wallshooter.h"
 #include "../res/src/enemyexplosion.h"
@@ -53,7 +53,7 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_BULLET,       princessBullet,   3,  FRAME_8x16,  1);
 	INIT_SPRITE(SPRITE_PPARTICLE,    spriteprincess,   3, FRAME_16x16, 14);
 	INIT_SPRITE(SPRITE_MUSHROOM,     mushroom,         3, FRAME_16x16,  2);
-	INIT_SPRITE(SPRITE_ENEMY_BULLET, enemybullet16x16, 3, FRAME_16x16,  1);
+	INIT_SPRITE(SPRITE_ENEMY_BULLET, enemyBullet,      3, FRAME_8x16,   1);
 	INIT_SPRITE(SPRITE_CSHOOTER,     ceilingshooter,   3, FRAME_16x16,  2);
 	INIT_SPRITE(SPRITE_SHOOTER,      wallshooter,      3, FRAME_16x16,  2); 
 	INIT_SPRITE(SPRITE_EPARTICLE,    enemyexplosion,   3, FRAME_16x16,  4);

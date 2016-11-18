@@ -33,10 +33,10 @@ void Update_SPRITE_MUSHROOM() {
 			data->time_out = 0;
 			x = ((sprite_princess->x - sprite_manager_current_sprite->x) & 0xF000) ? -1 : 1;
 
-			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, 0, -1);
-			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x,  0);
+			CreateEnemyBullet(sprite_manager_current_sprite->x + 8, sprite_manager_current_sprite->y, 0, -1);
+			CreateEnemyBullet(sprite_manager_current_sprite->x + 8, sprite_manager_current_sprite->y + 2, x,  0);
 			
-			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, x, -1);
+			CreateEnemyBullet(sprite_manager_current_sprite->x + 8, sprite_manager_current_sprite->y, x, -1);
 		}
 	} else {
 		data->time_out += 1;	

@@ -1,6 +1,6 @@
 /*
 
- SRC/ENEMYBULLET8X16.H
+ SRC/ENEMYBULLET.H
 
  Include File.
 
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define enemybullet8x16Bank 0
+#define enemyBulletBank 0
 /* Start of tile array. */
-extern unsigned char enemybullet8x16[];
+extern unsigned char enemyBullet[];
 
-/* End of SRC/ENEMYBULLET8X16.H */
+/* End of SRC/ENEMYBULLET.H */

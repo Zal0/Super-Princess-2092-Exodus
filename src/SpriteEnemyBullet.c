@@ -2,7 +2,7 @@
 #include "SpriteEnemyBullet.h"
 UINT8 bank_SPRITE_ENEMY_BULLET = 2;
 
-#include "../res/src/enemybullet16x16.h"
+#include "../res/src/enemybullet.h"
 #include "SpriteManager.h"
 #include "GBJAM2016.h"
 
@@ -15,9 +15,9 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 	struct Sprite* spr = SpriteManagerAdd(SPRITE_ENEMY_BULLET, x, y);
 	struct EnemyBulletCustomData* data = (struct EnemyBulletCustomData*)spr->custom_data;
 
-	spr->coll_x = 5u;
+	spr->coll_x = 2u;
 	spr->coll_w = 4u;
-	spr->coll_y = 5u;
+	spr->coll_y = 6u;
 	spr->coll_h = 4u;
 
 	data->vx = vx;

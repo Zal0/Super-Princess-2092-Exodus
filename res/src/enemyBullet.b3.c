@@ -1,6 +1,6 @@
 /*
 
- SRC/ENEMYBULLET8X16.B3.C
+ SRC/ENEMYBULLET.B3.C
 
  Tile Source File.
 
@@ -23,7 +23,7 @@
 */
 
 /* Start of tile array. */
-const unsigned  char enemybullet8x16[] =
+const unsigned  char enemyBullet[] =
 {
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
   0x00,0x00,0x00,0x00,0x18,0x00,0x3C,0x18,
@@ -31,4 +31,4 @@ const unsigned  char enemybullet8x16[] =
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-/* End of SRC/ENEMYBULLET8X16.B3.C */
+/* End of SRC/ENEMYBULLET.B3.C */

@@ -21,7 +21,7 @@ void Update_SPRITE_CSHOOTER() {
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
-		CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, 0, 1);
+		CreateEnemyBullet(sprite_manager_current_sprite->x + 4, sprite_manager_current_sprite->y, 0, 1);
 		data->cool_down = 0;
 	}
 

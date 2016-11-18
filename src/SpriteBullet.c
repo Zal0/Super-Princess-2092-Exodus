@@ -28,7 +28,7 @@ void Update_SPRITE_BULLET() {
 		sprite_manager_current_sprite->x += 3 << delta_time;
 	}
 
-	if(scroll_collisions[GetScrollTile((sprite_manager_current_sprite->x + 8)>> 3, (sprite_manager_current_sprite->y + 8) >> 3)]) {
+	if(scroll_collisions[GetScrollTile((sprite_manager_current_sprite->x + 4)>> 3, (sprite_manager_current_sprite->y + 4) >> 3)]) {
 		SpriteManagerRemove(sprite_manager_current_index);
 		return;
 	}
