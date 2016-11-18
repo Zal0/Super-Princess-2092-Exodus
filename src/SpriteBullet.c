@@ -8,9 +8,9 @@ UINT8 bank_SPRITE_BULLET = 2;
 #include "Scroll.h"
 
 void Start_SPRITE_BULLET(struct Sprite* sprite) {
-	sprite->current_frame = 6;
+	sprite->current_frame = 0;
 
-	sprite->coll_x = 5u;
+	sprite->coll_x = 0u;
 	sprite->coll_w = 4u;
 	sprite->coll_y = 5u;
 	sprite->coll_h = 4u;
