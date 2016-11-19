@@ -7,7 +7,7 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 40 x 18
+   Map size      : 22 x 18
    Tile set      : stage2_bg.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
@@ -18,7 +18,7 @@
 
 */
 
-#define stage2_3Width 40
+#define stage2_3Width 22
 #define stage2_3Height 18
 #define stage2_3Bank 0
 
