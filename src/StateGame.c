@@ -21,6 +21,16 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_7.h"
 #include "../res/src/stage1_8.h"
 
+#include "../res/src/stage2_1.h"
+#include "../res/src/stage2_2.h"
+#include "../res/src/stage2_3.h"
+#include "../res/src/stage2_4.h"
+#include "../res/src/stage2_5.h"
+#include "../res/src/stage2_6.h"
+#include "../res/src/stage2_7.h"
+
+#include "../res/src/stage3_1.h"
+
 #include "Print.h"
 #include "../res/src/font.h"
 
@@ -39,7 +49,8 @@ typedef struct LevelInfo {
 	UINT8* map;
 	UINT8 bank;
 };
-struct LevelInfo levels[] = {
+
+struct LevelInfo levels_1[] = {
 	{stage1_1Width,   stage1_1Height,  stage1_1,  3},
 	{stage1_2Width,   stage1_2Height,  stage1_2,  3},
 	{stage1_3Width,   stage1_3Height,  stage1_3,  3},
@@ -50,6 +61,22 @@ struct LevelInfo levels[] = {
 	{stage1_7Width,   stage1_7Height,  stage1_7,  3},
 	{stage1_8Width,   stage1_8Height,  stage1_8,  3},
 };
+
+struct LevelInfo levels_2[] = {
+	{stage2_1Width,   stage2_1Height,  stage2_1,  3},
+	{stage2_2Width,   stage2_2Height,  stage2_2,  3},
+	{stage2_3Width,   stage2_3Height,  stage2_3,  3},
+	{stage2_4Width,   stage2_4Height,  stage2_4,  3},
+	{stage2_5Width,   stage2_5Height,  stage2_5,  3},
+	{stage2_6Width,   stage2_6Height,  stage2_6,  3},
+	{stage2_7Width,   stage2_7Height,  stage2_7,  3},
+};
+
+struct LevelInfo levels_3[] = {
+	{stage3_1Width,   stage3_1Height,  stage3_1,  3},
+};
+
+struct LevelInfo* levels;
 
 extern struct Sprite* sprite_princess;
 void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
