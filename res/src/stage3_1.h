@@ -18,10 +18,10 @@
 
 */
 
-#define stage1_7Width 40
-#define stage1_7Height 18
-#define stage1_7Bank 0
+#define stage3_1Width 40
+#define stage3_1Height 18
+#define stage3_1Bank 0
 
-extern unsigned char stage1_7[];
+extern unsigned char stage3_1[];
 
 /* End of STAGE3_1.H */
