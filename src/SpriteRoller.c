@@ -35,7 +35,7 @@ INT16 Disp(INT16 v, INT8 desp) {
 void Update_SPRITE_ROLLER() {
 	struct RollerCustomData* data = (struct RollerCustomData*)sprite_manager_current_sprite->custom_data;
 	
-	if(sprite_manager_current_sprite->data == 0) {
+	if(sprite_manager_current_sprite->anim_data == 0) {
 		if(U_LESS_THAN(DISTANCE(scroll_target->x + 8, sprite_manager_current_sprite->x), 60)) {
 			SetSpriteAnim(sprite_manager_current_sprite, roller_anim_roll, 33);
 		}

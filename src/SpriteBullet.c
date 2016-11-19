@@ -38,7 +38,7 @@ void Update_SPRITE_BULLET() {
 		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER || spr->type == SPRITE_FLY || 
 			 spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
 			if(CheckCollision(sprite_manager_current_sprite, spr)) {
-				if(spr->type != SPRITE_MUSHROOM || spr->data[1 + spr->current_frame] == 1u) { //Mushroom can only die on frame 1
+				if(spr->type != SPRITE_MUSHROOM || spr->anim_data[1 + spr->current_frame] == 1u) { //Mushroom can only die on frame 1
 					SpriteManagerRemove(i);
 				}
 				spr2 = SpriteManagerAdd(SPRITE_EPARTICLE, spr->x, spr->y);
