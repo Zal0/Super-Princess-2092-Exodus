@@ -15,16 +15,15 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 	struct Sprite* spr = SpriteManagerAdd(SPRITE_ENEMY_BULLET, x, y);
 	struct EnemyBulletCustomData* data = (struct EnemyBulletCustomData*)spr->custom_data;
 
-	spr->coll_x = 2u;
-	spr->coll_w = 4u;
-	spr->coll_y = 6u;
-	spr->coll_h = 4u;
-
 	data->vx = vx;
 	data->vy = vy;
 }
 
 void Start_SPRITE_ENEMY_BULLET(struct Sprite* sprite) {
+	sprite->coll_x = 2u;
+	sprite->coll_w = 4u;
+	sprite->coll_y = 6u;
+	sprite->coll_h = 4u;
 }
 
 void Update_SPRITE_ENEMY_BULLET() {
