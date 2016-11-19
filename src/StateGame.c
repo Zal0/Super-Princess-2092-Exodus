@@ -21,6 +21,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage1_7.h"
 #include "../res/src/stage1_8.h"
 
+#include "../res/src/stage2_bg.h"
 #include "../res/src/stage2_1.h"
 #include "../res/src/stage2_2.h"
 #include "../res/src/stage2_3.h"
@@ -29,13 +30,20 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage2_6.h"
 #include "../res/src/stage2_7.h"
 
+#include "../res/src/stage3_bg.h"
 #include "../res/src/stage3_1.h"
 
 #include "Print.h"
 #include "../res/src/font.h"
 
-const UINT8 collision_tiles[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
-const UINT8 collision_tiles_down[] = {23, 24, 0};
+const UINT8 collision_tiles_1[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
+const UINT8 collision_tiles_down_1[] = {23, 24, 0};
+
+const UINT8 collision_tiles_2[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 55, 56, 57, 58, 0};
+const UINT8 collision_tiles_down_2[] = {23, 24, 0};
+
+const UINT8 collision_tiles_3[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
+const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
 #include "gbt_player.h"
 extern const unsigned char* exo_level1_mod_Data[];
@@ -63,17 +71,17 @@ struct LevelInfo levels_1[] = {
 };
 
 struct LevelInfo levels_2[] = {
-	{stage2_1Width,   stage2_1Height,  stage2_1,  3},
-	{stage2_2Width,   stage2_2Height,  stage2_2,  3},
-	{stage2_3Width,   stage2_3Height,  stage2_3,  3},
-	{stage2_4Width,   stage2_4Height,  stage2_4,  3},
-	{stage2_5Width,   stage2_5Height,  stage2_5,  3},
-	{stage2_6Width,   stage2_6Height,  stage2_6,  3},
-	{stage2_7Width,   stage2_7Height,  stage2_7,  3},
+	{stage2_1Width,   stage2_1Height,  stage2_1,  5},
+	{stage2_2Width,   stage2_2Height,  stage2_2,  5},
+	{stage2_3Width,   stage2_3Height,  stage2_3,  5},
+	{stage2_4Width,   stage2_4Height,  stage2_4,  5},
+	{stage2_5Width,   stage2_5Height,  stage2_5,  5},
+	{stage2_6Width,   stage2_6Height,  stage2_6,  5},
+	{stage2_7Width,   stage2_7Height,  stage2_7,  5},
 };
 
 struct LevelInfo levels_3[] = {
-	{stage3_1Width,   stage3_1Height,  stage3_1,  3},
+	{stage3_1Width,   stage3_1Height,  stage3_1,  6},
 };
 
 struct LevelInfo* levels;
@@ -106,7 +114,9 @@ extern UINT8 n_sprite_types;
 void Start_STATE_GAME() {
 	UINT8 i;
 	UINT16 tile_start_x, tile_start_y;
-	
+	UINT8* coll_list;
+	UINT8* coll_down_list;
+
 	SPRITES_8x16;
 	for(i = 0; i != n_sprite_types; ++ i) {
 		SpriteManagerLoad(i);
@@ -126,8 +136,21 @@ void Start_STATE_GAME() {
 	InitPlayerPos(tile_start_x, tile_start_y);
 	scroll_target = sprite_princess;
 
-	InitScrollTiles(0, 128, stage1_bg, 3);
-	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, collision_tiles, collision_tiles_down, levels[current_level].bank);
+	if(levels == levels_1) {
+		InitScrollTiles(0, 128, stage1_bg, 3);
+		coll_list = collision_tiles_1;
+		coll_down_list = collision_tiles_down_1;
+	} else if(levels == levels_2) {
+		InitScrollTiles(0, 128, stage2_bg, 3);
+		coll_list = collision_tiles_2;
+		coll_down_list = collision_tiles_down_2;
+	} else if(levels == levels_2) {
+		InitScrollTiles(0, 128, stage3_bg, 6);
+		coll_list = collision_tiles_3;
+		coll_down_list = collision_tiles_down_3;
+	}
+
+	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, coll_list, coll_down_list, levels[current_level].bank);
 	SHOW_BKG;
 
 	PlayMusic(exo_level1_mod_Data, 4, 1);
