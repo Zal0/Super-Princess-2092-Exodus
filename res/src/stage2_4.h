@@ -1,13 +1,13 @@
 /*
 
- STAGE2_5.H
+ STAGE2_4.H
 
  Map Include File.
 
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 48 x 18
+   Map size      : 22 x 36
    Tile set      : stage2_bg.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
@@ -18,10 +18,10 @@
 
 */
 
-#define stage2_5Width 48
-#define stage2_5Height 18
-#define stage2_5Bank 0
+#define stage2_4Width 22
+#define stage2_4Height 36
+#define stage2_4Bank 0
 
-extern unsigned char stage2_5[];
+extern unsigned char stage2_4[];
 
-/* End of STAGE2_5.H */
+/* End of STAGE2_4.H */
