@@ -75,23 +75,15 @@ void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 	}
 }
 
+extern UINT8 n_sprite_types;
 void Start_STATE_GAME() {
+	UINT8 i;
 	UINT16 tile_start_x, tile_start_y;
 	
 	SPRITES_8x16;
-	SpriteManagerLoad(SPRITE_PRINCESS);
-	SpriteManagerLoad(SPRITE_BULLET);
-	SpriteManagerLoad(SPRITE_PPARTICLE);
-	SpriteManagerLoad(SPRITE_MUSHROOM);
-	SpriteManagerLoad(SPRITE_ENEMY_BULLET);
-	SpriteManagerLoad(SPRITE_CSHOOTER);
-	SpriteManagerLoad(SPRITE_SHOOTER);
-	SpriteManagerLoad(SPRITE_EPARTICLE);
-	SpriteManagerLoad(SPRITE_PLATFORM);
-	SpriteManagerLoad(SPRITE_FLY);
-	SpriteManagerLoad(SPRITE_ROLLER);
-	SpriteManagerLoad(SPRITE_OVNI);
-	SpriteManagerLoad(SPRITE_MISSILE);
+	for(i = 0; i != n_sprite_types; ++ i) {
+		SpriteManagerLoad(i);
+	}
 	SHOW_SPRITES;
 
 #ifndef NDEBUG 
