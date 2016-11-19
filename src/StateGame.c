@@ -42,7 +42,7 @@ const UINT8 collision_tiles_down_1[] = {23, 24, 0};
 const UINT8 collision_tiles_2[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 55, 56, 57, 58, 0};
 const UINT8 collision_tiles_down_2[] = {23, 24, 0};
 
-const UINT8 collision_tiles_3[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
+const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0};
 const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
 #include "gbt_player.h"
@@ -144,7 +144,7 @@ void Start_STATE_GAME() {
 		InitScrollTiles(0, 128, stage2_bg, 3);
 		coll_list = collision_tiles_2;
 		coll_down_list = collision_tiles_down_2;
-	} else if(levels == levels_2) {
+	} else if(levels == levels_3) {
 		InitScrollTiles(0, 128, stage3_bg, 6);
 		coll_list = collision_tiles_3;
 		coll_down_list = collision_tiles_down_3;
