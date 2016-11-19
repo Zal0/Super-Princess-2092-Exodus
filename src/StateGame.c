@@ -81,7 +81,7 @@ void Start_STATE_GAME() {
 	SPRITES_8x16;
 	SpriteManagerLoad(SPRITE_PRINCESS);
 	SpriteManagerLoad(SPRITE_BULLET);
-	SpriteManagerLoadSubsprite(SPRITE_PPARTICLE, SPRITE_PRINCESS);
+	SpriteManagerLoad(SPRITE_PPARTICLE);
 	SpriteManagerLoad(SPRITE_MUSHROOM);
 	SpriteManagerLoad(SPRITE_ENEMY_BULLET);
 	SpriteManagerLoad(SPRITE_CSHOOTER);
