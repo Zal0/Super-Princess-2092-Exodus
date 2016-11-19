@@ -65,6 +65,7 @@ void InitSprites() {
 	INIT_SPRITE(SPRITE_MISSILE,      missile,          3, FRAME_16x16,  1);
 }
 
+#include "Math.h"
 UINT8 GetTileReplacement(UINT8* tile_ptr, UINT8* tile) {
 	if(current_state == STATE_GAME) {
 		*tile = 0;
@@ -75,13 +76,10 @@ UINT8 GetTileReplacement(UINT8* tile_ptr, UINT8* tile) {
 					*tile = 23;
 				return 255u;
 
-			case 3: return SPRITE_MUSHROOM;
-			case 4: return SPRITE_PLATFORM;
-			case 5: return SPRITE_OVNI;
-			case 6: return SPRITE_SHOOTER;
-			case 7: return SPRITE_CSHOOTER;
-			case 8: return SPRITE_FLY;
-			case 9: return SPRITE_ROLLER;
+			default:
+				if(U_LESS_THAN(255 - (UINT16)*tile_ptr, N_SPRITE_TYPES)) {
+					return 255 - (UINT16)*tile_ptr;
+				}
 		}
 		*tile = *tile_ptr;
 	}
