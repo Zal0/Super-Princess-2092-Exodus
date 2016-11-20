@@ -32,8 +32,8 @@ void Update_SPRITE_OVNI() {
 	data->tx.b.h = 0;
 
 	if(data->missile_launched == 0) {
-		if( (U_LESS_THAN(data->vx.w, 0) && U_LESS_THAN(sprite_manager_current_sprite->x, scroll_target->x + 8)) ||
-			  (U_LESS_THAN(0, data->vx.w) && U_LESS_THAN(scroll_target->x - 8, sprite_manager_current_sprite->x)) 
+		if( (U_LESS_THAN(data->vx.w, 0) && U_LESS_THAN(sprite_manager_current_sprite->x, scroll_target->x)) ||
+			  (U_LESS_THAN(0, data->vx.w) && U_LESS_THAN(scroll_target->x, sprite_manager_current_sprite->x)) 
 		) {
 			SpriteManagerAdd(SPRITE_MISSILE, sprite_manager_current_sprite->x, sprite_manager_current_sprite->y + 8);
 			data->missile_launched = 1;
