@@ -24,7 +24,7 @@ void Update_SPRITE_MISSILE() {
 	struct MissileCustomData* data = sprite_manager_current_sprite->custom_data;
 
 	if(U_LESS_THAN(data->vy.w, 1600)) {
-		data->vy.w += 32;
+		data->vy.w += 32 << delta_time;
 	}
 
 	data->ty.w += data->vy.w;

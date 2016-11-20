@@ -27,7 +27,7 @@ void Start_SPRITE_OVNI(struct Sprite* sprite) {
 void Update_SPRITE_OVNI() {
 	struct OvniCustomData* data = (struct OvniCustomData*)sprite_manager_current_sprite->custom_data;
 	
-	data->tx.w += data->vx.w;
+	data->tx.w += data->vx.w << (INT16)delta_time;
 	sprite_manager_current_sprite->x += (INT16)data->tx.b.h;
 	data->tx.b.h = 0;
 

@@ -1,6 +1,6 @@
-#pragma bank=2
+#pragma bank=1
 #include "SpriteFly.h"
-UINT8 bank_SPRITE_FLY = 2;
+UINT8 bank_SPRITE_FLY = 1;
 
 #include "Scroll.h"
 #include "Math.h"
@@ -33,18 +33,18 @@ void Update_SPRITE_FLY() {
 	struct FlyCustomData* data = (struct FlyCustomData*)sprite_manager_current_sprite->custom_data;
 
 	if(data->tx == 0) {
-		data->vx.w = (sprite_manager_current_sprite->flags == 0) ? (data->vx.w - 100) : (data->vx.w + 100);
+		data->vx.w = (sprite_manager_current_sprite->flags == 0) ? (data->vx.w - (100 << delta_time)) : (data->vx.w + (100 << delta_time));
 		if(U_LESS_THAN(DISTANCE(sprite_manager_current_sprite->x, scroll_target->x), DIST_ACTION)){
 			data->tx = scroll_target->x;
 			data->ty = scroll_target->y + 16;
 		} 
 	} else {
-		data->vx.w += (data->tx - sprite_manager_current_sprite->x) << ACCEL_OFFSET;
-		data->vy.w += (data->ty - sprite_manager_current_sprite->y) << ACCEL_OFFSET;
+		data->vx.w += (data->tx - sprite_manager_current_sprite->x) << ACCEL_OFFSET << delta_time;
+		data->vy.w += (data->ty - sprite_manager_current_sprite->y) << ACCEL_OFFSET << delta_time;
 		if(U_LESS_THAN(sprite_manager_current_sprite->y, data->ty)) {
 			//ATTACKING
 			if(U_LESS_THAN(DISTANCE(data->ty, sprite_manager_current_sprite->y), 8)){
-				data->tx = (sprite_manager_current_sprite->flags == 0) ? (data->tx - DIST_COUNTER) : (data->tx + DIST_COUNTER); 
+				data->tx = (sprite_manager_current_sprite->flags == 0) ? (data->tx - (DIST_COUNTER << delta_time)) : (data->tx + (DIST_COUNTER << delta_time)); 
 				data->ty = data->ty - HEIGHT;
 			}
 		} else {
