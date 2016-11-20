@@ -6,14 +6,20 @@ UINT8 bank_SPRITE_SHOOTER = 2;
 #include "../res/src/wallshooter.h"
 #include "SpriteEnemyBullet.h"
 
+#include "Scroll.h"
+
 struct WShooterCustomData {
 	UINT8 cool_down;
 };
 
 void Start_SPRITE_SHOOTER(struct Sprite* sprite) { 
+	UINT8 tile = GetScrollTile((sprite->x - 8) >> 3, sprite->y >> 3);
 	struct WShooterCustomData* data = (struct WShooterCustomData*)sprite->custom_data;
-
 	data->cool_down = 0;
+
+	if(scroll_collisions[tile] == 1u || scroll_collisions_down[tile] == 1u) {
+		sprite->flags = OAM_VERTICAL_FLAG;
+	}
 }
 
 void Update_SPRITE_SHOOTER() {
@@ -21,7 +27,7 @@ void Update_SPRITE_SHOOTER() {
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
-		CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1, 0);
+		CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, sprite_manager_current_sprite->flags == OAM_VERTICAL_FLAG ? 1 :-1, 0);
 		data->cool_down = 0;
 	}
 

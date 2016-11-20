@@ -48,11 +48,11 @@ void Update_SPRITE_ROLLER() {
 
 		data->tx.w += data->vx.w;
 		if(TranslateSprite(sprite_manager_current_sprite, data->tx.b.h, 0)){
-			data->vx.w = 0;
+			data->vx.w = -data->vx.w;
 		}
 		data->tx.b.h = 0;
 
-		if(U_LESS_THAN(data->vy.w, 1600)) {
+		if(U_LESS_THAN(data->vy.w, 1200)) {
 			data->vy.w += 32; 
 		}
 		data->ty.w += data->vy.w;
