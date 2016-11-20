@@ -53,6 +53,7 @@ void Start_SPRITE_PLATFORM(struct Sprite* sprite) {
 	sprite->coll_y = 5;
 	sprite->coll_h = 6;
 	sprite->lim_x = 100u;
+	sprite->lim_y = 100u;
 }
 
 extern struct Sprite* princess_parent;
