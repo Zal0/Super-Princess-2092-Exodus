@@ -32,6 +32,7 @@ UINT8 bank_STATE_GAME = 2;
 
 #include "../res/src/stage3_bg.h"
 #include "../res/src/stage3_1.h"
+#include "../res/src/stage3_2.h"
 
 #include "Print.h"
 #include "../res/src/font.h"
@@ -42,7 +43,7 @@ const UINT8 collision_tiles_down_1[] = {23, 24, 0};
 const UINT8 collision_tiles_2[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 55, 56, 57, 58, 0};
 const UINT8 collision_tiles_down_2[] = {23, 24, 0};
 
-const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0};
+const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 33, 35, 0};
 const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
 #include "gbt_player.h"
@@ -82,6 +83,7 @@ struct LevelInfo levels_2[] = {
 
 struct LevelInfo levels_3[] = {
 	{stage3_1Width,   stage3_1Height,  stage3_1,  6},
+	{stage3_2Width,   stage3_2Height,  stage3_2,  6},
 };
 
 struct LevelInfo* levels;
