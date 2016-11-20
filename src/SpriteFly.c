@@ -15,8 +15,8 @@ struct FlyCustomData {
 
 const UINT8 anim_fly[] = {2, 0, 1};
 
-#define DIST_ACTION 20
-#define DIST_COUNTER 10
+#define DIST_ACTION 40
+#define DIST_COUNTER 40
 #define ACCEL_OFFSET 4
 #define HEIGHT 50
 void Start_SPRITE_FLY(struct Sprite* sprite) {
@@ -34,7 +34,7 @@ void Update_SPRITE_FLY() {
 
 	if(data->tx == 0) {
 		data->vx.w = (sprite_manager_current_sprite->flags == 0) ? (data->vx.w - (100 << delta_time)) : (data->vx.w + (100 << delta_time));
-		if(U_LESS_THAN(DISTANCE(sprite_manager_current_sprite->x, scroll_target->x), DIST_ACTION)){
+		if(U_LESS_THAN(DISTANCE(sprite_manager_current_sprite->x + 8, scroll_target->x + 8), DIST_ACTION)){
 			data->tx = scroll_target->x;
 			data->ty = scroll_target->y + 16;
 		} 
@@ -44,7 +44,7 @@ void Update_SPRITE_FLY() {
 		if(U_LESS_THAN(sprite_manager_current_sprite->y, data->ty)) {
 			//ATTACKING
 			if(U_LESS_THAN(DISTANCE(data->ty, sprite_manager_current_sprite->y), 8)){
-				data->tx = (sprite_manager_current_sprite->flags == 0) ? (data->tx - (DIST_COUNTER << delta_time)) : (data->tx + (DIST_COUNTER << delta_time)); 
+				data->tx = (sprite_manager_current_sprite->flags == 0) ? (scroll_target->x - DIST_COUNTER) : (scroll_target->x + DIST_COUNTER); 
 				data->ty = data->ty - HEIGHT;
 			}
 		} else {
