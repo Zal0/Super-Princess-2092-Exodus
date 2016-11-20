@@ -29,6 +29,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage2_5.h"
 #include "../res/src/stage2_6.h"
 #include "../res/src/stage2_7.h"
+#include "../res/src/stage2_8.h"
 
 #include "../res/src/stage3_bg.h"
 #include "../res/src/stage3_1.h"
@@ -80,6 +81,7 @@ const struct LevelInfo levels_2[] = {
 	{stage2_5Width,   stage2_5Height,  stage2_5,  5},
 	{stage2_6Width,   stage2_6Height,  stage2_6,  5},
 	{stage2_7Width,   stage2_7Height,  stage2_7,  5},
+	{stage2_8Width,   stage2_8Height,  stage2_8,  5},
 };
 
 const struct LevelInfo levels_3[] = {
