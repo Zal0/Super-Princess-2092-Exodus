@@ -16,6 +16,9 @@ struct MissileCustomData {
 void Start_SPRITE_MISSILE(struct Sprite* sprite) {
 	struct MissileCustomData* data = sprite->custom_data;
 
+	sprite->coll_x += 2;
+	sprite->coll_w -= 4;
+
 	data->ty.w = 0;
 	data->vy.w = 255;
 }
