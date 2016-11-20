@@ -50,7 +50,7 @@ void InitStates() {
 }                                         
 
 void InitSprites() {
-	INIT_SPRITE(SPRITE_PRINCESS,     spriteprincess,   3, FRAME_16x16, 10);
+	INIT_SPRITE(SPRITE_PRINCESS,     spriteprincess,   3, FRAME_16x16, 11);
 	INIT_SPRITE(SPRITE_BULLET,       princessBullet,   3,  FRAME_8x16,  1);
 	INIT_SPRITE(SPRITE_PPARTICLE,    princessParticle, 3, FRAME_16x16,  2);
 	INIT_SPRITE(SPRITE_MUSHROOM,     mushroom,         3, FRAME_16x16,  2);
