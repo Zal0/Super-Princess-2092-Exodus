@@ -41,9 +41,9 @@ void Update_SPRITE_ROLLER() {
 		}
 	} else {
 		if(U_LESS_THAN(scroll_target->x, sprite_manager_current_sprite->x)) {
-			data->vx.w = data->vx.w - (INT16)16;
+			data->vx.w = data->vx.w - (INT16)(16 << delta_time);
 		} else {
-			data->vx.w = data->vx.w + (INT16)16;
+			data->vx.w = data->vx.w + (INT16)(16 << delta_time);
 		}
 
 		data->tx.w += data->vx.w;
@@ -53,7 +53,7 @@ void Update_SPRITE_ROLLER() {
 		data->tx.b.h = 0;
 
 		if(U_LESS_THAN(data->vy.w, 1200)) {
-			data->vy.w += 32; 
+			data->vy.w += 32 << delta_time;
 		}
 		data->ty.w += data->vy.w;
 		if(TranslateSprite(sprite_manager_current_sprite, 0, data->ty.b.h)) {
