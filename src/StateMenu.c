@@ -29,7 +29,7 @@ extern UINT8 current_level;
 extern UINT8 n_lives;
 void Update_STATE_MENU() {
 	if(KEY_TICKED(J_START)) {
-		levels = levels_3;
+		levels = levels_2;
 		current_level = 0;
 		n_lives = 3;
 
