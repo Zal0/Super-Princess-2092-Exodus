@@ -33,6 +33,7 @@ UINT8 bank_STATE_GAME = 2;
 #include "../res/src/stage3_bg.h"
 #include "../res/src/stage3_1.h"
 #include "../res/src/stage3_2.h"
+#include "../res/src/stage3_3.h"
 
 #include "Print.h"
 #include "../res/src/font.h"
@@ -59,7 +60,7 @@ typedef struct LevelInfo {
 	UINT8 bank;
 };
 
-struct LevelInfo levels_1[] = {
+const struct LevelInfo levels_1[] = {
 	{stage1_1Width,   stage1_1Height,  stage1_1,  3},
 	{stage1_2Width,   stage1_2Height,  stage1_2,  3},
 	{stage1_3Width,   stage1_3Height,  stage1_3,  3},
@@ -71,7 +72,7 @@ struct LevelInfo levels_1[] = {
 	{stage1_8Width,   stage1_8Height,  stage1_8,  3},
 };
 
-struct LevelInfo levels_2[] = {
+const struct LevelInfo levels_2[] = {
 	{stage2_1Width,   stage2_1Height,  stage2_1,  5},
 	{stage2_2Width,   stage2_2Height,  stage2_2,  5},
 	{stage2_3Width,   stage2_3Height,  stage2_3,  5},
@@ -81,9 +82,10 @@ struct LevelInfo levels_2[] = {
 	{stage2_7Width,   stage2_7Height,  stage2_7,  5},
 };
 
-struct LevelInfo levels_3[] = {
+const struct LevelInfo levels_3[] = {
 	{stage3_1Width,   stage3_1Height,  stage3_1,  6},
 	{stage3_2Width,   stage3_2Height,  stage3_2,  6},
+	{stage3_3Width,   stage3_3Height,  stage3_3,  6},
 };
 
 struct LevelInfo* levels;
