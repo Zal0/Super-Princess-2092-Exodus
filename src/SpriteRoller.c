@@ -28,7 +28,7 @@ void Start_SPRITE_ROLLER(struct Sprite* sprite) {
 	data->ty.w = 0;
 }
 
-INT16 Disp(INT16 v, INT8 desp) {
+INT16 DispLeft(INT16 v, INT8 desp) {
 	return v >> desp;
 }
 
@@ -49,6 +49,7 @@ void Update_SPRITE_ROLLER() {
 		data->tx.w += data->vx.w;
 		if(TranslateSprite(sprite_manager_current_sprite, data->tx.b.h, 0)){
 			data->vx.w = -data->vx.w;
+			data->vx.w = DispLeft(data->vx.w, 1);
 		}
 		data->tx.b.h = 0;
 
@@ -58,7 +59,7 @@ void Update_SPRITE_ROLLER() {
 		data->ty.w += data->vy.w;
 		if(TranslateSprite(sprite_manager_current_sprite, 0, data->ty.b.h)) {
 			data->vy.w = -data->vy.w;
-			data->vy.w = Disp(data->vy.w, 1);
+			data->vy.w = DispLeft(data->vy.w, 1);
 		}		
 		data->ty.b.h = 0;
 	}
