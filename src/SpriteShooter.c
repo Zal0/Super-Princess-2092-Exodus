@@ -17,7 +17,7 @@ void Start_SPRITE_SHOOTER(struct Sprite* sprite) {
 	struct WShooterCustomData* data = (struct WShooterCustomData*)sprite->custom_data;
 	data->cool_down = 70;
 
-	if(scroll_collisions[tile] == 1u || scroll_collisions_down[tile] == 1u) {
+	if(scroll_collisions[tile] == 1u) {
 		sprite->flags = OAM_VERTICAL_FLAG;
 	}
 }
@@ -27,7 +27,11 @@ void Update_SPRITE_SHOOTER() {
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
-		CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, sprite_manager_current_sprite->flags == OAM_VERTICAL_FLAG ? 1 :-1, 0);
+		if(sprite_manager_current_sprite->flags == OAM_VERTICAL_FLAG) {
+			CreateEnemyBullet(sprite_manager_current_sprite->x + 8, sprite_manager_current_sprite->y, 1, 0);
+		} else {
+			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1, 0);
+		}
 		data->cool_down = 0;
 	}
 
