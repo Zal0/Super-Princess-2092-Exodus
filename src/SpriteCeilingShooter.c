@@ -13,7 +13,7 @@ struct CShooterCustomData {
 void Start_SPRITE_CSHOOTER(struct Sprite* sprite) { 
 	struct CShooterCustomData* data = (struct CShooterCustomData*)sprite->custom_data;
 
-	data->cool_down = 0;
+	data->cool_down = 70;
 }
 
 void Update_SPRITE_CSHOOTER() {
