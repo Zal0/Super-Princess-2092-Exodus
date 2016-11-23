@@ -20,19 +20,8 @@ void Start_STATE_MENU() {
 	PlayMusic(exo_start_mod_Data, 4, 0);
 }
 
-extern struct LevelInfo levels_1[];
-extern struct LevelInfo levels_2[];
-extern struct LevelInfo levels_3[];
-extern struct LevelInfo* levels;
-
-extern UINT8 current_level;
-extern UINT8 n_lives;
 void Update_STATE_MENU() {
 	if(KEY_TICKED(J_START)) {
-		levels = levels_2;
-		current_level = 0;
-		n_lives = 3;
-
-		SetState(STATE_STAGEINTRO);
+		SetState(STATE_STAGE_SELECT);
 	}
 }

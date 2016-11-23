@@ -33,6 +33,7 @@
     <ClCompile Include="src\StateLiveLost.c" />
     <ClCompile Include="src\StateMenu.c" />
     <ClCompile Include="src\StateStageIntro.c" />
+    <ClCompile Include="src\StateStageSelect.c" />
     <ClCompile Include="src\StateWin.c" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,7 @@
     <ClInclude Include="include\StateLiveLost.h" />
     <ClInclude Include="include\StateMenu.h" />
     <ClInclude Include="include\StateStageIntro.h" />
+    <ClInclude Include="include\StateStageSelect.h" />
     <ClInclude Include="include\StateWin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
