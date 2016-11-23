@@ -140,6 +140,9 @@ void Start_STATE_GAME() {
 	SHOW_SPRITES;
 
 #ifndef NDEBUG 
+	print_target = PRINT_WIN;
+	print_x = 0; 
+	print_y = 0;
 	font_idx = 255 - 45;
 	InitScrollTiles(255 - 45, 45, font, 3);
 	WX_REG = 7;
