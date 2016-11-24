@@ -10,38 +10,20 @@ UINT8 bank_STATE_STAGE_SELECT = 2;
 #include "Print.h"
 #include "Scroll.h"
 #include "Keys.h"
+#include "Math.h"
 
-extern struct LevelInfo levels_1[];
-extern struct LevelInfo levels_2[];
-extern struct LevelInfo levels_3[];
-extern struct LevelInfo* levels;
 
+extern struct LevelInfo* stages[];
+extern UINT8 current_stage;
 extern UINT8 current_level;
 extern UINT8 n_lives;
 
 void SetStage(UINT8 stage) {
-	struct LevelInfo* lvls[] = {levels_1, levels_2, levels_3};
-	levels = lvls[stage];
+	current_stage = stage;
 
 	print_x = 6;
 	print_y = 13;
 	Printf("STAGE %d", (UINT16)stage + 1);
-}
-
-UINT8 GetStageIdx() {
-	if(levels == levels_1) {
-		return 0;
-	}
-	
-	if(levels == levels_2) {
-		return 1;
-	}
-
-	if(levels == levels_3) {
-		return 2;
-	}
-
-	return 0;
 }
 
 void Start_STATE_STAGE_SELECT() {
@@ -60,18 +42,14 @@ void Start_STATE_STAGE_SELECT() {
 }
 
 void Update_STATE_STAGE_SELECT() {
-	UINT8 stage_idx = 0;
-
 	if(KEY_TICKED(J_LEFT)) {
-		stage_idx = GetStageIdx();
-		if(stage_idx != 0)
-			SetStage(stage_idx - 1);
+		if(current_stage != 0)
+			SetStage(current_stage - 1);
 	}
 
 	if(KEY_TICKED(J_RIGHT)) {
-		stage_idx = GetStageIdx();
-		if(stage_idx != 2)
-			SetStage(stage_idx + 1);
+		if(current_stage != 2)
+			SetStage(current_stage + 1);
 	}
 
 
