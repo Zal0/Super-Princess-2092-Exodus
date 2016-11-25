@@ -156,21 +156,21 @@ void Update_SPRITE_PRINCESS() {
 	UINT8 i;
 	struct Sprite* spr;
 
-	princess_old_x = sprite_manager_current_sprite->x;
-	princess_old_y = sprite_manager_current_sprite->y;
+	princess_old_x = THIS->x;
+	princess_old_y = THIS->y;
 
 	switch(princes_state) {
 		case PRINCESS_STATE_NORMAL:
-			MovePrincess(sprite_manager_current_sprite);
+			MovePrincess(THIS);
 	
 			//Choose idle anim or walk
 			if(KEY_PRESSED(J_RIGHT) || KEY_PRESSED(J_LEFT) ) {
-				SetSpriteAnim(sprite_manager_current_sprite, anim_walk, 33u);
+				SetSpriteAnim(THIS, anim_walk, 33u);
 			} else {
 				if(shoot_cooldown) {
-					SetSpriteAnim(sprite_manager_current_sprite, anim_idle_shoot, 3u);
+					SetSpriteAnim(THIS, anim_idle_shoot, 3u);
 				} else {
-					SetSpriteAnim(sprite_manager_current_sprite, anim_idle, 3u);
+					SetSpriteAnim(THIS, anim_idle, 3u);
 				}
 			}
 
@@ -188,28 +188,28 @@ void Update_SPRITE_PRINCESS() {
 		case PRINCESS_STATE_LADDER:
 			i = 23;
 			if(KEY_PRESSED(J_UP)) {
-				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
-				tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, -1 << delta_time);
+				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
+				tile_collision = TranslateSprite(THIS, 0, -1 << delta_time);
 				CheckCollisionTile();
-				i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 15u) >> 3);
+				i = GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + 15u) >> 3);
 			} else if(KEY_PRESSED(J_DOWN)) {
-				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
-				tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
+				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
+				tile_collision = TranslateSprite(THIS, 0, 1 << delta_time);
 				CheckCollisionTile();
-				i = GetScrollTile((sprite_manager_current_sprite->x + sprite_manager_current_sprite->coll_x) >> 3, (sprite_manager_current_sprite->y + 16u) >> 3);
+				i = GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + 16u) >> 3);
 			} else {
-				SetSpriteAnim(sprite_manager_current_sprite, shoot_cooldown ? anim_ladder_idle_cooldown : anim_ladder_idle, 12u);
+				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_idle_cooldown : anim_ladder_idle, 12u);
 			}
 			if(KEY_PRESSED(J_RIGHT)) {
-				sprite_manager_current_sprite->flags = 0u;
+				THIS->flags = 0u;
 			} else if(KEY_PRESSED(J_LEFT)) {
-				sprite_manager_current_sprite->flags = OAM_VERTICAL_FLAG;
+				THIS->flags = OAM_VERTICAL_FLAG;
 			}
 
 			//Check the end of the ladder
 			if(i != 23u && i != 1u && i != 2u)
 			{
-				//TranslateSprite(sprite_manager_current_sprite, 0, 1 << delta_time);
+				//TranslateSprite(THIS, 0, 1 << delta_time);
 				princes_state = PRINCESS_STATE_NORMAL;
 			}
 
@@ -224,25 +224,25 @@ void Update_SPRITE_PRINCESS() {
 				princess_accel_y = 0;
 			}
 
-			SetSpriteAnim(sprite_manager_current_sprite, anim_jump, 33u);
-			MovePrincess(sprite_manager_current_sprite);
+			SetSpriteAnim(THIS, anim_jump, 33u);
+			MovePrincess(THIS);
 			break;
 
 		case PRINCESS_STATE_HIT:
-			SetSpriteAnim(sprite_manager_current_sprite, anim_hit, 15u);
-			if((sprite_manager_current_sprite->current_frame + 1) % 2)
+			SetSpriteAnim(THIS, anim_hit, 15u);
+			if((THIS->current_frame + 1) % 2)
 				HIDE_BKG;
 			else
 				SHOW_BKG;
 
-			if(sprite_manager_current_sprite->current_frame == 5) {
+			if(THIS->current_frame == 5) {
 				SpriteManagerRemove(sprite_manager_current_index);
 				scroll_target = 0;
 
-				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y,  1,  1);
-				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y,  1, -1);
-				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1,  1);
-				CreatePParticle(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1, -1);
+				CreatePParticle(THIS->x, THIS->y,  1,  1);
+				CreatePParticle(THIS->x, THIS->y,  1, -1);
+				CreatePParticle(THIS->x, THIS->y, -1,  1);
+				CreatePParticle(THIS->x, THIS->y, -1, -1);
 				SHOW_BKG;
 			}
 			break;
@@ -254,10 +254,10 @@ void Update_SPRITE_PRINCESS() {
 		if(princess_accel_y < 60) {
 			princess_accel_y += 2;
 		}
-		tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
+		tile_collision = TranslateSprite(THIS, 0, (princess_accel_y >> 4));
 		if(!tile_collision && delta_time != 0 && princess_accel_y < 40) { //Do another iteration if there is no collision
 			princess_accel_y += 2;
-			tile_collision = TranslateSprite(sprite_manager_current_sprite, 0, (princess_accel_y >> 4));
+			tile_collision = TranslateSprite(THIS, 0, (princess_accel_y >> 4));
 		}
 		if(tile_collision) {
 			if(tile_collision != 1u && tile_collision != 2u) {
@@ -281,7 +281,7 @@ void Update_SPRITE_PRINCESS() {
 		spr = sprite_manager_sprites[sprite_manager_updatables[i + 1u]];
 		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER ||
 			 spr->type == SPRITE_FLY || spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
-			if(CheckCollision(sprite_manager_current_sprite, spr)) {
+			if(CheckCollision(THIS, spr)) {
 				princes_state = PRINCESS_STATE_HIT;
 			}
 		}
@@ -292,7 +292,7 @@ void Update_SPRITE_PRINCESS() {
 			shoot_cooldown -= 1u;
 		} else {
 			if(KEY_TICKED(J_B)) {
-				Shoot(sprite_manager_current_sprite);
+				Shoot(THIS);
 			}
 		}
 	}

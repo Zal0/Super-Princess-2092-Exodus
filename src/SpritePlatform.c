@@ -103,8 +103,8 @@ UINT8 CheckColl(UINT16 x1, UINT16 y1, UINT16 w1, UINT16 h1,
 }
 
 void Update_SPRITE_PLATFORM() {
-	struct PlatformCustomData* data = (struct PlatformCustomData*)sprite_manager_current_sprite->custom_data;
-	struct Sprite* sprite = sprite_manager_current_sprite;
+	struct PlatformCustomData* data = (struct PlatformCustomData*)THIS->custom_data;
+	struct Sprite* sprite = THIS;
 	UINT8 offset_x = 8;
 	UINT8 offset_y = 8;
 	UINT8 tile;
@@ -169,11 +169,11 @@ void Update_SPRITE_PLATFORM() {
 
 		if(U_LESS_THAN(0, sprite_princess->y - princess_old_y)) { //Only check collision when the sprite is falling
 			if(CheckColl(r1.x, r1.y, r1.w, r1.h, r2.x, r2.y, r2.w, r2.h)) {
-				princess_parent = sprite_manager_current_sprite;
+				princess_parent = THIS;
 				sprite_princess->y = sprite->y + sprite->coll_y - sprite_princess->coll_y - sprite_princess->coll_h;
 			}
 		}
-	} else if(princess_parent == sprite_manager_current_sprite) {
+	} else if(princess_parent == THIS) {
 		//If it goes beyond left or right  limits, detach (the sprite will detach itself when jumping)
 		if( U_LESS_THAN((sprite->x + sprite->coll_x + sprite->coll_w), (sprite_princess->x + sprite_princess->coll_x)) ||
 				U_LESS_THAN((sprite_princess->x + sprite_princess->coll_x + sprite_princess->coll_w), sprite->x)

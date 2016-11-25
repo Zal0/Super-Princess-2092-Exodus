@@ -27,10 +27,10 @@ void Start_SPRITE_ENEMY_BULLET(struct Sprite* sprite) {
 }
 
 void Update_SPRITE_ENEMY_BULLET() {
-	struct EnemyBulletCustomData* data = (struct EnemyBulletCustomData*)sprite_manager_current_sprite->custom_data;
+	struct EnemyBulletCustomData* data = (struct EnemyBulletCustomData*)THIS->custom_data;
 	
-	sprite_manager_current_sprite->x += (INT16)data->vx << delta_time;
-	sprite_manager_current_sprite->y += (INT16)data->vy << delta_time;
+	THIS->x += (INT16)data->vx << delta_time;
+	THIS->y += (INT16)data->vy << delta_time;
 }
 
 void Destroy_SPRITE_ENEMY_BULLET() {

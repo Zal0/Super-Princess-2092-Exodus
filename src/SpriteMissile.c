@@ -24,16 +24,16 @@ void Start_SPRITE_MISSILE(struct Sprite* sprite) {
 }
 
 void Update_SPRITE_MISSILE() {
-	struct MissileCustomData* data = sprite_manager_current_sprite->custom_data;
+	struct MissileCustomData* data = THIS->custom_data;
 
 	if(U_LESS_THAN(data->vy.w, 1600)) {
 		data->vy.w += 32 << delta_time;
 	}
 
 	data->ty.w += data->vy.w;
-	if( TranslateSprite(sprite_manager_current_sprite, 0, (INT16)data->ty.b.h)) {
+	if( TranslateSprite(THIS, 0, (INT16)data->ty.b.h)) {
 		SpriteManagerRemove(sprite_manager_current_index);
-		SpriteManagerAdd(SPRITE_EPARTICLE, sprite_manager_current_sprite->x, sprite_manager_current_sprite->y);
+		SpriteManagerAdd(SPRITE_EPARTICLE, THIS->x, THIS->y);
 	}
 	data->ty.b.h = 0;
 }

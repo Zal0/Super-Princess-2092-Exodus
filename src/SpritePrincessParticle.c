@@ -25,10 +25,10 @@ void Start_SPRITE_PPARTICLE(struct Sprite* sprite) {
 }
 
 void Update_SPRITE_PPARTICLE() {
-	struct PParticleCustomData* data = (struct PParticleCustomData*)sprite_manager_current_sprite->custom_data;
+	struct PParticleCustomData* data = (struct PParticleCustomData*)THIS->custom_data;
 	
-	sprite_manager_current_sprite->x += (INT16)data->vx << delta_time;
-	sprite_manager_current_sprite->y += (INT16)data->vy << delta_time;
+	THIS->x += (INT16)data->vx << delta_time;
+	THIS->y += (INT16)data->vy << delta_time;
 }
 
 void Destroy_SPRITE_PPARTICLE() {

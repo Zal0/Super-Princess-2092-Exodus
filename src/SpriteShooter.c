@@ -23,22 +23,22 @@ void Start_SPRITE_SHOOTER(struct Sprite* sprite) {
 }
 
 void Update_SPRITE_SHOOTER() {
-	struct WShooterCustomData* data = (struct WShooterCustomData*)sprite_manager_current_sprite->custom_data;
+	struct WShooterCustomData* data = (struct WShooterCustomData*)THIS->custom_data;
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
-		if(sprite_manager_current_sprite->flags == OAM_VERTICAL_FLAG) {
-			CreateEnemyBullet(sprite_manager_current_sprite->x + 8, sprite_manager_current_sprite->y, 1, 0);
+		if(THIS->flags == OAM_VERTICAL_FLAG) {
+			CreateEnemyBullet(THIS->x + 8, THIS->y, 1, 0);
 		} else {
-			CreateEnemyBullet(sprite_manager_current_sprite->x, sprite_manager_current_sprite->y, -1, 0);
+			CreateEnemyBullet(THIS->x, THIS->y, -1, 0);
 		}
 		data->cool_down = 0;
 	}
 
 	if(data->cool_down < 5u) {
-		sprite_manager_current_sprite->current_frame = 1;
+		THIS->current_frame = 1;
 	} else {
-		sprite_manager_current_sprite->current_frame = 0;
+		THIS->current_frame = 0;
 	}
 }
 

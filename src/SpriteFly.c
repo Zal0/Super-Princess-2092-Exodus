@@ -30,27 +30,27 @@ void Start_SPRITE_FLY(struct Sprite* sprite) {
 }
 
 void Update_SPRITE_FLY() {
-	struct FlyCustomData* data = (struct FlyCustomData*)sprite_manager_current_sprite->custom_data;
+	struct FlyCustomData* data = (struct FlyCustomData*)THIS->custom_data;
 
 	if(scroll_target) {
 		if(data->tx == 0) {
-			data->vx.w = (sprite_manager_current_sprite->flags == 0) ? (data->vx.w - (100 << delta_time)) : (data->vx.w + (100 << delta_time));
-			if(U_LESS_THAN(DISTANCE(sprite_manager_current_sprite->x + 8, scroll_target->x + 8), DIST_ACTION)){
+			data->vx.w = (THIS->flags == 0) ? (data->vx.w - (100 << delta_time)) : (data->vx.w + (100 << delta_time));
+			if(U_LESS_THAN(DISTANCE(THIS->x + 8, scroll_target->x + 8), DIST_ACTION)){
 				data->tx = scroll_target->x;
 				data->ty = scroll_target->y + 8;
 			} 
 		} else {
-			data->vx.w += (data->tx - sprite_manager_current_sprite->x) << ACCEL_OFFSET << delta_time;
-			data->vy.w += (data->ty - sprite_manager_current_sprite->y) << ACCEL_OFFSET << delta_time;
-			if(U_LESS_THAN(sprite_manager_current_sprite->y, data->ty)) {
+			data->vx.w += (data->tx - THIS->x) << ACCEL_OFFSET << delta_time;
+			data->vy.w += (data->ty - THIS->y) << ACCEL_OFFSET << delta_time;
+			if(U_LESS_THAN(THIS->y, data->ty)) {
 				//ATTACKING
-				if(U_LESS_THAN(DISTANCE(data->ty, sprite_manager_current_sprite->y), 8)){
-					if(sprite_manager_current_sprite->flags == 0) {
-						if(U_LESS_THAN(sprite_manager_current_sprite->x - 8, scroll_target->x)) {
+				if(U_LESS_THAN(DISTANCE(data->ty, THIS->y), 8)){
+					if(THIS->flags == 0) {
+						if(U_LESS_THAN(THIS->x - 8, scroll_target->x)) {
 							data->tx = (scroll_target->x - DIST_COUNTER);
 						}
 					} else {
-						if(U_LESS_THAN(scroll_target->x - 8, sprite_manager_current_sprite->x)) {
+						if(U_LESS_THAN(scroll_target->x - 8, THIS->x)) {
 							data->tx = (scroll_target->x + DIST_COUNTER);
 						}
 					}
@@ -59,8 +59,8 @@ void Update_SPRITE_FLY() {
 				}
 			} else {
 				//CHARGING 
-				if(U_LESS_THAN(DISTANCE(data->ty, sprite_manager_current_sprite->y), 4)){
-					sprite_manager_current_sprite->flags = U_LESS_THAN(scroll_target->x, sprite_manager_current_sprite->x) ? 0 : OAM_VERTICAL_FLAG;
+				if(U_LESS_THAN(DISTANCE(data->ty, THIS->y), 4)){
+					THIS->flags = U_LESS_THAN(scroll_target->x, THIS->x) ? 0 : OAM_VERTICAL_FLAG;
 					data->tx = 0;
 				}
 			}
@@ -68,8 +68,8 @@ void Update_SPRITE_FLY() {
 	}
 	
 
-	sprite_manager_current_sprite->x += (INT16)data->vx.b.h;
-	sprite_manager_current_sprite->y += (INT16)data->vy.b.h;
+	THIS->x += (INT16)data->vx.b.h;
+	THIS->y += (INT16)data->vy.b.h;
 	data->vx.b.h = 0;
 	data->vy.b.h = 0;
 }

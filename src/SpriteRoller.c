@@ -33,21 +33,21 @@ INT16 DispLeft(INT16 v, INT8 desp) {
 }
 
 void Update_SPRITE_ROLLER() {
-	struct RollerCustomData* data = (struct RollerCustomData*)sprite_manager_current_sprite->custom_data;
+	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
 	
-	if(sprite_manager_current_sprite->anim_data == 0) {
-		if(U_LESS_THAN(DISTANCE(scroll_target->x + 8, sprite_manager_current_sprite->x), 60)) {
-			SetSpriteAnim(sprite_manager_current_sprite, roller_anim_roll, 33);
+	if(THIS->anim_data == 0) {
+		if(U_LESS_THAN(DISTANCE(scroll_target->x + 8, THIS->x), 60)) {
+			SetSpriteAnim(THIS, roller_anim_roll, 33);
 		}
 	} else {
-		if(U_LESS_THAN(scroll_target->x, sprite_manager_current_sprite->x)) {
+		if(U_LESS_THAN(scroll_target->x, THIS->x)) {
 			data->vx.w = data->vx.w - (INT16)(16 << delta_time);
 		} else {
 			data->vx.w = data->vx.w + (INT16)(16 << delta_time);
 		}
 
 		data->tx.w += data->vx.w;
-		if(TranslateSprite(sprite_manager_current_sprite, data->tx.b.h, 0)){
+		if(TranslateSprite(THIS, data->tx.b.h, 0)){
 			data->vx.w = -data->vx.w;
 			data->vx.w = DispLeft(data->vx.w, 1);
 		}
@@ -57,7 +57,7 @@ void Update_SPRITE_ROLLER() {
 			data->vy.w += 32 << delta_time;
 		}
 		data->ty.w += data->vy.w;
-		if(TranslateSprite(sprite_manager_current_sprite, 0, data->ty.b.h)) {
+		if(TranslateSprite(THIS, 0, data->ty.b.h)) {
 			data->vy.w = -data->vy.w;
 			data->vy.w = DispLeft(data->vy.w, 1);
 		}		
