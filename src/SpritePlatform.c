@@ -14,46 +14,46 @@ struct PlatformCustomData {
 	INT8 frame_accum;
 };
 
-void Start_SPRITE_PLATFORM(struct Sprite* sprite) {
-	UINT16 tile_x = sprite->x >> 3;
-	UINT16 tile_y = sprite->y >> 3;
+void Start_SPRITE_PLATFORM() {
+	UINT16 tile_x = THIS->x >> 3;
+	UINT16 tile_y = THIS->y >> 3;
 	UINT16 tile;
 
-	struct PlatformCustomData* data = (struct PlatformCustomData*)sprite->custom_data;
+	struct PlatformCustomData* data = (struct PlatformCustomData*)THIS->custom_data;
 	data->frame_accum = 0;
 
 	tile = GetScrollTile(tile_x + 1, tile_y + 1);
 	if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 		data->vy = -1;
 		data->vx =  0;
-		sprite->x += 4;
+		THIS->x += 4;
 	} else {
 		tile = GetScrollTile(tile_x - 1, tile_y + 1);
 		if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 			data->vy = 1;
 			data->vx = 0;
-			sprite->x -= 12;
+			THIS->x -= 12;
 		} else {
 			tile = GetScrollTile(tile_x, tile_y + 2);
 			if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 				data->vy =  0;
 				data->vx = -1;
-				sprite->y += 12;
+				THIS->y += 12;
 			} else {
 				tile = GetScrollTile(tile_x, tile_y);
 				if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 					data->vy = 0;
 					data->vx = 1;
-					sprite->y -= 4;
+					THIS->y -= 4;
 				}
 			}
 		}
 	}
 
-	sprite->coll_y = 5;
-	sprite->coll_h = 6;
-	sprite->lim_x = 100u;
-	sprite->lim_y = 100u;
+	THIS->coll_y = 5;
+	THIS->coll_h = 6;
+	THIS->lim_x = 100u;
+	THIS->lim_y = 100u;
 }
 
 extern struct Sprite* princess_parent;

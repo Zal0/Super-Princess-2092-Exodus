@@ -19,14 +19,14 @@ const UINT8 anim_fly[] = {2, 0, 1};
 #define DIST_COUNTER 40
 #define ACCEL_OFFSET 4
 #define HEIGHT 50
-void Start_SPRITE_FLY(struct Sprite* sprite) {
-	struct FlyCustomData* data = (struct FlyCustomData*)sprite->custom_data;
+void Start_SPRITE_FLY() {
+	struct FlyCustomData* data = (struct FlyCustomData*)THIS->custom_data;
 	
-	SetSpriteAnim(sprite, anim_fly, 33);
+	SetSpriteAnim(THIS, anim_fly, 33);
 	data->vx.w = 0;
 	data->vy.w = 0;
 	data->tx = 0;
-	sprite->flags = U_LESS_THAN(scroll_target->x, sprite->x) ? 0 : OAM_VERTICAL_FLAG;
+	THIS->flags = U_LESS_THAN(scroll_target->x, THIS->x) ? 0 : OAM_VERTICAL_FLAG;
 }
 
 void Update_SPRITE_FLY() {

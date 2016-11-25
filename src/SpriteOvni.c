@@ -12,8 +12,8 @@ struct OvniCustomData {
 	UINT8 missile_launched;
 };
 
-void Start_SPRITE_OVNI(struct Sprite* sprite) {
-	struct OvniCustomData* data = (struct OvniCustomData*)sprite->custom_data;
+void Start_SPRITE_OVNI() {
+	struct OvniCustomData* data = (struct OvniCustomData*)THIS->custom_data;
 
 	data->vx.w = 0;
 	data->tx.w = 0;

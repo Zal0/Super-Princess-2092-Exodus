@@ -20,8 +20,8 @@ void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 	data->vy = vy;
 }
 
-void Start_SPRITE_PPARTICLE(struct Sprite* sprite) {
-	SetSpriteAnim(sprite, pparticle_anim_idle, 10u);
+void Start_SPRITE_PPARTICLE() {
+	SetSpriteAnim(THIS, pparticle_anim_idle, 10u);
 }
 
 void Update_SPRITE_PPARTICLE() {

@@ -12,13 +12,13 @@ struct WShooterCustomData {
 	UINT8 cool_down;
 };
 
-void Start_SPRITE_SHOOTER(struct Sprite* sprite) { 
-	UINT8 tile = GetScrollTile((sprite->x - 8) >> 3, sprite->y >> 3);
-	struct WShooterCustomData* data = (struct WShooterCustomData*)sprite->custom_data;
+void Start_SPRITE_SHOOTER() { 
+	UINT8 tile = GetScrollTile((THIS->x - 8) >> 3, THIS->y >> 3);
+	struct WShooterCustomData* data = (struct WShooterCustomData*)THIS->custom_data;
 	data->cool_down = 70;
 
 	if(scroll_collisions[tile] == 1u) {
-		sprite->flags = OAM_VERTICAL_FLAG;
+		THIS->flags = OAM_VERTICAL_FLAG;
 	}
 }
 

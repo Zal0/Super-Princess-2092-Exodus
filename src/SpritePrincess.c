@@ -45,20 +45,20 @@ struct Sprite* sprite_princess = 0;
 struct Sprite* princess_parent = 0;
 UINT16 princess_old_x, princess_old_y;
 
-void Start_SPRITE_PRINCESS(struct Sprite* sprite) {
-	SetSpriteAnim(sprite, anim_idle, 3u);
-	sprite->coll_x += 4u;
-	sprite->coll_w -= 7u;
-	sprite->coll_y += 2u;
-	sprite->coll_h -= 2u;
+void Start_SPRITE_PRINCESS() {
+	SetSpriteAnim(THIS, anim_idle, 3u);
+	THIS->coll_x += 4u;
+	THIS->coll_w -= 7u;
+	THIS->coll_y += 2u;
+	THIS->coll_h -= 2u;
 
 	princess_accel_y = 0;
 
-	scroll_target = sprite;
+	scroll_target = THIS;
 
-	sprite_princess = sprite;
+	sprite_princess = THIS;
 
-	if(GetScrollTile((sprite->x + sprite->coll_x) >> 3, (sprite->y + sprite->coll_y) >> 3) == 23u) {
+	if(GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + THIS->coll_y) >> 3) == 23u) {
 		princes_state = PRINCESS_STATE_LADDER;
 	} else {
 		princes_state = PRINCESS_STATE_NORMAL;

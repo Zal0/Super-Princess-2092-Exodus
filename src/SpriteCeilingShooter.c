@@ -10,8 +10,8 @@ struct CShooterCustomData {
 	UINT8 cool_down;
 };
 
-void Start_SPRITE_CSHOOTER(struct Sprite* sprite) { 
-	struct CShooterCustomData* data = (struct CShooterCustomData*)sprite->custom_data;
+void Start_SPRITE_CSHOOTER() { 
+	struct CShooterCustomData* data = (struct CShooterCustomData*)THIS->custom_data;
 
 	data->cool_down = 70;
 }

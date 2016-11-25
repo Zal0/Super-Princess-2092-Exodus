@@ -15,11 +15,11 @@ struct RollerCustomData {
 	fixed vy;
 };
 
-void Start_SPRITE_ROLLER(struct Sprite* sprite) {
-	struct RollerCustomData* data = (struct RollerCustomData*)sprite->custom_data;
+void Start_SPRITE_ROLLER() {
+	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
 
-	sprite->coll_y += 1;
-	sprite->coll_h -= 1;
+	THIS->coll_y += 1;
+	THIS->coll_h -= 1;
 	
 
 	data->vx.w = 0;

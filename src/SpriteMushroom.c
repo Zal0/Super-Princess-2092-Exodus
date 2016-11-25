@@ -15,9 +15,9 @@ struct MushroomCustomData {
 	UINT8 time_out;
 };
 
-void Start_SPRITE_MUSHROOM(struct Sprite* sprite) {
-	struct MushroomCustomData* data = (struct MushroomCustomData*)sprite->custom_data;
-	SetSpriteAnim(sprite, mushroom_anim_hide, 3u);
+void Start_SPRITE_MUSHROOM() {
+	struct MushroomCustomData* data = (struct MushroomCustomData*)THIS->custom_data;
+	SetSpriteAnim(THIS, mushroom_anim_hide, 3u);
 
 	data->time_out = 200u;
 }

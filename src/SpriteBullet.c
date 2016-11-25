@@ -7,13 +7,13 @@ UINT8 bank_SPRITE_BULLET = 2;
 #include "GBJAM2016.h"
 #include "Scroll.h"
 
-void Start_SPRITE_BULLET(struct Sprite* sprite) {
-	sprite->current_frame = 0;
+void Start_SPRITE_BULLET() {
+	THIS->current_frame = 0;
 
-	sprite->coll_x = 0u;
-	sprite->coll_w = 4u;
-	sprite->coll_y = 5u;
-	sprite->coll_h = 4u;
+	THIS->coll_x = 0u;
+	THIS->coll_w = 4u;
+	THIS->coll_y = 5u;
+	THIS->coll_h = 4u;
 }
 
 extern UINT8  scroll_collisions[128];

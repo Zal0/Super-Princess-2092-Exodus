@@ -19,11 +19,11 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 	data->vy = vy;
 }
 
-void Start_SPRITE_ENEMY_BULLET(struct Sprite* sprite) {
-	sprite->coll_x = 2u;
-	sprite->coll_w = 4u;
-	sprite->coll_y = 6u;
-	sprite->coll_h = 4u;
+void Start_SPRITE_ENEMY_BULLET() {
+	THIS->coll_x = 2u;
+	THIS->coll_w = 4u;
+	THIS->coll_y = 6u;
+	THIS->coll_h = 4u;
 }
 
 void Update_SPRITE_ENEMY_BULLET() {

@@ -7,8 +7,8 @@ UINT8 bank_SPRITE_EPARTICLE = 2;
 
 const UINT8 eparticle_anim[] = {5, 0, 1, 2, 3, 3};
 
-void Start_SPRITE_EPARTICLE(struct Sprite* sprite) {
-	SetSpriteAnim(sprite, eparticle_anim, 33);
+void Start_SPRITE_EPARTICLE() {
+	SetSpriteAnim(THIS, eparticle_anim, 33);
 }
 
 void Update_SPRITE_EPARTICLE() {
