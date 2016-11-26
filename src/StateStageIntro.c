@@ -15,6 +15,7 @@ UINT8 bank_STATE_STAGEINTRO = 2;
 
 extern const unsigned char* exo_stage_mod_Data[];
 extern UINT8 current_stage;
+extern UINT8 n_lives;
 
 void Start_STATE_STAGEINTRO() {
 	InitScrollTiles(0, 128, pressstarttileset, 3);
@@ -22,9 +23,11 @@ void Start_STATE_STAGEINTRO() {
 	SHOW_BKG;
 
 	INIT_FONT(font, 3, PRINT_BKG);
-	PRINT_POS(6, 8);
+	PRINT_POS(6, 6);
 	Printf("STAGE %d", (UINT16)(current_stage + 1));
-	PRINT(8, 10, "GO!");
+	PRINT(8, 8, "GO!");
+	PRINT_POS(4, 13);
+	Printf("%d LIFES LEFT", (UINT16)(n_lives));
 
 	PlayMusic(exo_stage_mod_Data, 4, 0);
 }
