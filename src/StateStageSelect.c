@@ -11,12 +11,13 @@ UINT8 bank_STATE_STAGE_SELECT = 2;
 #include "Scroll.h"
 #include "Keys.h"
 #include "Math.h"
-
+#include "gbt_player.h"
 
 extern struct LevelInfo* stages[];
 extern UINT8 current_stage;
 extern UINT8 current_level;
 extern UINT8 n_lives;
+extern UINT8 stage_completion;
 
 void SetStage(UINT8 stage) {
 	current_stage = stage;
@@ -27,29 +28,49 @@ void SetStage(UINT8 stage) {
 }
 
 void Start_STATE_STAGE_SELECT() {
-	InitScrollTiles(0, 128, pressstarttileset, 3);
-	InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
-	SHOW_BKG;
+	gbt_stop();
+	if(stage_completion == 7) {
+		SetState(STATE_WIN);
+	} else {
+		InitScrollTiles(0, 128, pressstarttileset, 3);
+		InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
+		SHOW_BKG;
 	
-	font_idx = 255 - 45;
-	InitScrollTiles(255 - 45, 45, font, 3);
+		font_idx = 255 - 45;
+		InitScrollTiles(255 - 45, 45, font, 3);
 
-	print_target = PRINT_BKG;
-	print_x = 4;
-	print_y = 11;
-	Printf("STAGE SELECT");
-	SetStage(0);
+		print_target = PRINT_BKG;
+		print_x = 4;
+		print_y = 11;
+		Printf("STAGE SELECT");
+
+		for(current_stage = 0; current_stage != 3; current_stage += 1) {
+			if(GET_BIT(stage_completion, current_stage) == 0) {
+				SetStage(current_stage);
+				break;
+			}
+		}
+	}
 }
 
 void Update_STATE_STAGE_SELECT() {
+	UINT8 tmp;
 	if(KEY_TICKED(J_LEFT)) {
-		if(current_stage != 0)
-			SetStage(current_stage - 1);
+		for(tmp = current_stage - 1; tmp != 255; -- tmp) {
+			if(GET_BIT(stage_completion, tmp) == 0) {
+				SetStage(tmp);
+				break;
+			}
+		}
 	}
 
 	if(KEY_TICKED(J_RIGHT)) {
-		if(current_stage != 2)
-			SetStage(current_stage + 1);
+		for(tmp = current_stage + 1; tmp != 3; ++ tmp) {
+			if(GET_BIT(stage_completion, tmp) == 0) {
+				SetStage(tmp);
+				break;
+			}
+		}
 	}
 
 

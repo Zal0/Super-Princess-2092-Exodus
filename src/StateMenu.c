@@ -20,8 +20,10 @@ void Start_STATE_MENU() {
 	PlayMusic(exo_start_mod_Data, 4, 0);
 }
 
+extern UINT8 stage_completion;
 void Update_STATE_MENU() {
 	if(KEY_TICKED(J_START)) {
+		stage_completion = 0;
 		SetState(STATE_STAGE_SELECT);
 	}
 }

@@ -67,6 +67,9 @@ void Start_SPRITE_PRINCESS() {
 
 UINT8 tile_collision;
 extern INT8 load_next;
+
+extern UINT8 stage_completion;
+extern UINT8 current_stage;
 void CheckCollisionTile() {
 	switch(tile_collision) {
 		case 1u:
@@ -84,7 +87,8 @@ void CheckCollisionTile() {
 
 		case 27u:
 		case 28u:
-			SetState(STATE_WIN);
+			SET_BIT(stage_completion, current_stage);
+			SetState(STATE_STAGE_SELECT);
 			break;
 	}
 }
