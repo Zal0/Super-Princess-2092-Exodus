@@ -22,8 +22,7 @@ extern UINT8 stage_completion;
 void SetStage(UINT8 stage) {
 	current_stage = stage;
 
-	print_x = 6;
-	print_y = 13;
+	PRINT_POS(6, 13);
 	Printf("STAGE %d", (UINT16)stage + 1);
 }
 
@@ -36,13 +35,8 @@ void Start_STATE_STAGE_SELECT() {
 		InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
 		SHOW_BKG;
 	
-		font_idx = 255 - 45;
-		InitScrollTiles(255 - 45, 45, font, 3);
-
-		print_target = PRINT_BKG;
-		print_x = 4;
-		print_y = 11;
-		Printf("STAGE SELECT");
+		INIT_FONT(font, 3, PRINT_BKG);
+		PRINT(4, 11, "STAGE SELECT");
 
 		for(current_stage = 0; current_stage != 3; current_stage += 1) {
 			if(GET_BIT(stage_completion, current_stage) == 0) {

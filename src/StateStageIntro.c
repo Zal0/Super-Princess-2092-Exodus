@@ -8,28 +8,28 @@ UINT8 bank_STATE_STAGEINTRO = 2;
 #include "Keys.h"
 
 #include "../res/src/pressstarttileset.h"
-#include "../res/src/stagenumber.h"
-#include "../res/src/numbers.h"
+#include "../res/src/menuBG.h"
+#include "../res/src/font.h"
+
+#include "Print.h"
 
 extern const unsigned char* exo_stage_mod_Data[];
+extern UINT8 current_stage;
 
 void Start_STATE_STAGEINTRO() {
 	InitScrollTiles(0, 128, pressstarttileset, 3);
-	InitScroll(stagenumberWidth, stagenumberHeight, stagenumber, 0, 0, 3);
+	InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
 	SHOW_BKG;
 
-	SPRITES_8x16;
-	LoadSprite(3 * 4, numbers, 3);
-	SHOW_SPRITES;
-
+	INIT_FONT(font, 3, PRINT_BKG);
+	PRINT_POS(6, 8);
+	Printf("STAGE %d", (UINT16)(current_stage + 1));
+	PRINT(8, 10, "GO!");
 
 	PlayMusic(exo_stage_mod_Data, 4, 0);
 }
 
-extern UINT8 n_lives;
 void Update_STATE_STAGEINTRO() {
-	DrawFrame(0, FRAME_8x16, 0, 96, 64, 0); 
-
 	if(KEY_TICKED(J_START)) {
 		SetState(STATE_GAME);
 	}
