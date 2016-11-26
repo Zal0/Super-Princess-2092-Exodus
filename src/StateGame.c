@@ -7,6 +7,8 @@ UINT8 bank_STATE_GAME = 2;
 #include "Sprite.h"
 #include "Keys.h"
 #include "SpriteManager.h"
+#include "Math.h"
+#include "gbt_player.h"
 
 #include "GBJAM2016.h"
 
@@ -53,11 +55,11 @@ const UINT8 collision_tiles_down_2[] = {23, 24, 0};
 const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 27, 28, 33, 35, 0};
 const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
-#include "gbt_player.h"
 extern const unsigned char* exo_level1_mod_Data[];
 
 UINT8 current_level;
 UINT8 n_lives;
+UINT8 stage_completion;
 
 typedef struct LevelInfo {
 	UINT16 w;
@@ -183,7 +185,6 @@ INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
 	return a + (b - a) * t / max;
 }
 
-INT16 DespRight(INT16 a, INT16 b);
 INT8 load_next = 0;
 extern INT16 old_scroll_x, old_scroll_y;
 void ClampScrollLimits(UINT16* x, UINT16* y);
