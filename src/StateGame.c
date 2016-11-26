@@ -145,7 +145,7 @@ void Start_STATE_GAME() {
 	}
 	SHOW_SPRITES;
 
-#ifndef NDEBUG 
+/*#ifndef NDEBUG 
 	print_target = PRINT_WIN;
 	print_x = 0; 
 	print_y = 0;
@@ -154,7 +154,8 @@ void Start_STATE_GAME() {
 	WX_REG = 7;
   WY_REG = 128;
 	SHOW_WIN;
-#endif
+#endif*/
+	INIT_CONSOLE(font, 3, 2);
 
 	ScrollSetMap(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank);
 	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
