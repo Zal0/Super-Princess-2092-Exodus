@@ -7,6 +7,7 @@
 #include "StateStageIntro.h"
 #include "StateWin.h"
 #include "StateStageSelect.h"
+#include "StateEnding.h"
 
 #include "SpritePrincess.h"
 #include "SpriteBullet.h"
@@ -36,7 +37,7 @@
 #include "../res/src/ovni.h"
 #include "../res/src/missile.h"
 
-UINT8 next_state = STATE_MENU;
+UINT8 next_state = STATE_ENDING;//STATE_MENU;
 
 SET_N_STATES(N_STATES);
 SET_N_SPRITE_TYPES(N_SPRITE_TYPES);
@@ -49,6 +50,7 @@ void InitStates() {
 	INIT_STATE(STATE_STAGEINTRO);
 	INIT_STATE(STATE_WIN);
 	INIT_STATE(STATE_STAGE_SELECT);
+	INIT_STATE(STATE_ENDING);
 }                                         
 
 void InitSprites() {

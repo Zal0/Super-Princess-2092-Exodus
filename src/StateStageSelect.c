@@ -29,7 +29,7 @@ void SetStage(UINT8 stage) {
 void Start_STATE_STAGE_SELECT() {
 	gbt_stop();
 	if(stage_completion == 7) {
-		SetState(STATE_WIN);
+		SetState(STATE_ENDING);
 	} else {
 		InitScrollTiles(0, 128, pressstarttileset, 3);
 		InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
