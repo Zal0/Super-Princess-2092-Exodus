@@ -33,8 +33,7 @@ void Update_SPRITE_BULLET() {
 		return;
 	}
 
-	for(i = 0u; i != sprite_manager_updatables[0]; ++i) {
-		spr = sprite_manager_sprites[sprite_manager_updatables[i + 1u]];
+	SPRITEMANAGER_ITERATE(i, spr) {
 		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER || spr->type == SPRITE_FLY || 
 			 spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
 			if(CheckCollision(THIS, spr)) {

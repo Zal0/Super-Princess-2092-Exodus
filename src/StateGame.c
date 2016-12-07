@@ -273,8 +273,6 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 
 UINT8 wait_end_time = 0;
 void Update_STATE_GAME() {
-	SpriteManagerUpdate();
-
 	if(sprite_princess == 0) {
 		wait_end_time ++;
 		if(wait_end_time > 80) {
