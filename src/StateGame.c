@@ -56,6 +56,7 @@ const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
 const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
 extern const unsigned char* exo_level1_mod_Data[];
+extern const unsigned char* exo_level2_mod_Data[];
 
 UINT8 current_level;
 UINT8 n_lives;
@@ -169,7 +170,10 @@ void Start_STATE_GAME() {
 	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, coll_list, coll_down_list, levels[current_level].bank);
 	SHOW_BKG;
 
-	PlayMusic(exo_level1_mod_Data, 4, 1);
+	switch(current_stage) {
+		case 1:  PlayMusic(exo_level2_mod_Data, 4, 1); break;
+		default: PlayMusic(exo_level1_mod_Data, 4, 1); break;
+	}
 }
 
 INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
