@@ -29,7 +29,7 @@ void Update_SPRITE_BULLET() {
 	}
 
 	if(scroll_collisions[GetScrollTile((THIS->x + 4)>> 3, (THIS->y + 4) >> 3)]) {
-		SpriteManagerRemove(sprite_manager_current_index);
+		SpriteManagerRemove(THIS_IDX);
 		return;
 	}
 
@@ -41,7 +41,7 @@ void Update_SPRITE_BULLET() {
 					SpriteManagerRemove(i);
 				}
 				spr2 = SpriteManagerAdd(SPRITE_EPARTICLE, spr->x, spr->y);
-				SpriteManagerRemove(sprite_manager_current_index);
+				SpriteManagerRemove(THIS_IDX);
 				break;
 			}
 		}

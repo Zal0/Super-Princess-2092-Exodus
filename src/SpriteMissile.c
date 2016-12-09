@@ -32,7 +32,7 @@ void Update_SPRITE_MISSILE() {
 
 	data->ty.w += data->vy.w;
 	if( TranslateSprite(THIS, 0, (INT16)data->ty.b.h)) {
-		SpriteManagerRemove(sprite_manager_current_index);
+		SpriteManagerRemove(THIS_IDX);
 		SpriteManagerAdd(SPRITE_EPARTICLE, THIS->x, THIS->y);
 	}
 	data->ty.b.h = 0;

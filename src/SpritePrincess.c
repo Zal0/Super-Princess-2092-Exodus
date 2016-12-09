@@ -239,7 +239,7 @@ void Update_SPRITE_PRINCESS() {
 				SHOW_BKG;
 
 			if(THIS->current_frame == 5) {
-				SpriteManagerRemove(sprite_manager_current_index);
+				SpriteManagerRemove(THIS_IDX);
 				scroll_target = 0;
 
 				CreatePParticle(THIS->x, THIS->y,  1,  1);
