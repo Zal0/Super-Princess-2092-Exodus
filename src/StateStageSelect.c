@@ -19,6 +19,8 @@ extern UINT8 current_level;
 extern UINT8 n_lives;
 extern UINT8 stage_completion;
 
+extern const unsigned char* levelselect_mod_Data[];
+
 void SetStage(UINT8 stage) {
 	current_stage = stage;
 
@@ -44,6 +46,8 @@ void Start_STATE_STAGE_SELECT() {
 				break;
 			}
 		}
+
+		PlayMusic(levelselect_mod_Data, 4, 1);
 	}
 }
 
