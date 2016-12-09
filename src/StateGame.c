@@ -197,8 +197,8 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	INT16 offset_x, offset_y;
 	struct LevelInfo* levels = stages[current_stage];
 
-	wait_vbl_done();
 	ScrollFindTileInCorners(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
+	wait_vbl_done();
 	InitPlayerPos(tile_start_x, tile_start_y);
 	ScrollSetMap(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank);
 	
