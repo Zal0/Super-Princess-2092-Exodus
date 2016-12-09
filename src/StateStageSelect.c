@@ -3,7 +3,7 @@
 UINT8 bank_STATE_STAGE_SELECT = 2;
 
 #include "../res/src/pressstarttileset.h"
-#include "../res/src/menuBG.h"
+#include "../res/src/stageSelect.h"
 #include "../res/src/font.h"
 
 #include "GBJAM2016.h"
@@ -34,7 +34,7 @@ void Start_STATE_STAGE_SELECT() {
 		SetState(STATE_ENDING);
 	} else {
 		InitScrollTiles(0, 128, pressstarttileset, 3);
-		InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
+		InitScroll(stageSelectWidth,stageSelectHeight,stageSelect, 0, 0, 3);
 		SHOW_BKG;
 	
 		INIT_FONT(font, 3, PRINT_BKG);
