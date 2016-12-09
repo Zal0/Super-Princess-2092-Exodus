@@ -57,6 +57,7 @@ const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
 extern const unsigned char* exo_level1_mod_Data[];
 extern const unsigned char* exo_level2_mod_Data[];
+extern const unsigned char* exo_level3_mod_Data[];
 
 UINT8 current_level;
 UINT8 n_lives;
@@ -172,6 +173,7 @@ void Start_STATE_GAME() {
 
 	switch(current_stage) {
 		case 1:  PlayMusic(exo_level2_mod_Data, 4, 1); break;
+		case 2:  PlayMusic(exo_level3_mod_Data, 4, 1); break;
 		default: PlayMusic(exo_level1_mod_Data, 4, 1); break;
 	}
 }
