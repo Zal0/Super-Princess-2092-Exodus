@@ -53,6 +53,8 @@ UINT8 enemy_idx;
 UINT16 text_wait;
 INT16 end_enemy_x;
 
+extern const unsigned char* exo_ending_mod_Data[];
+
 void PrepareEnemy() {
 	struct EndSpriteInfo* info;
 
@@ -150,6 +152,8 @@ void Start_STATE_ENDING() {
 	end_sprite_princess->y = scroll_y + 64u;
 	
 	SetEndState(AWAITING_PRINCESS_CENTER);
+
+	PlayMusic(exo_ending_mod_Data, 7, 1);
 }
 
 void Update_STATE_ENDING() {
