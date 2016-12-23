@@ -11,6 +11,7 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 #include "SpriteManager.h"
 #include "SpritePrincessParticle.h"
 #include "Math.h"
+#include "Sound.h"
 
 #include "../res/src/princess.h"
 
@@ -145,6 +146,8 @@ void Shoot() {
 		bullet_sprite->x = THIS->x + 5u; 
 	bullet_sprite->y = THIS->y + 1u;
 	shoot_cooldown = 10;
+
+	PlayFx(CHANNEL_1, 20, 0x1E, 0x10, 0xF3, 0x00, 0x87);
 }
 
 void Jump() {
