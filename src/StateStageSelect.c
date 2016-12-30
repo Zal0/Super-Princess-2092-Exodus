@@ -74,7 +74,7 @@ void Update_STATE_STAGE_SELECT() {
 	}
 
 
-	if(KEY_TICKED(J_START)) {
+	if(KEY_TICKED(J_START) | KEY_TICKED(J_A) | KEY_TICKED(J_B)) {
 		current_level = 0;
 		n_lives = 3;
 

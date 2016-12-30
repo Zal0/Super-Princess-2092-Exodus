@@ -29,7 +29,7 @@ void Start_STATE_LIVELOST() {
 }
 
 void Update_STATE_LIVELOST() {
-	if(KEY_TICKED(J_START)) {
+	if(KEY_TICKED(J_START) | KEY_TICKED(J_A) | KEY_TICKED(J_B)) {
 		SetState(STATE_GAME);
 	}
 }
