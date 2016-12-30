@@ -17,7 +17,7 @@ void Start_SPRITE_BULLET() {
 	THIS->coll_y = 5u;
 	THIS->coll_h = 4u;
 
-	PlayFx(CHANNEL_1, 5, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
+	PlayFx(CHANNEL_1, 10, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
 extern UINT8  scroll_collisions[128];

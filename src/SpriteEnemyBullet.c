@@ -19,7 +19,7 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 	data->vx = vx;
 	data->vy = vy;
 
-	PlayFx(CHANNEL_1, 5, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
+	PlayFx(CHANNEL_1, 10, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
 void Start_SPRITE_ENEMY_BULLET() {
