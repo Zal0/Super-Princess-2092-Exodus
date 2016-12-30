@@ -7,6 +7,7 @@ UINT8 bank_SPRITE_MISSILE = 2;
 #include "Sprite.h"
 #include "GBJAM2016.h"
 #include "Scroll.h"
+#include "Sound.h"
 
 struct MissileCustomData {
 	fixed ty, vy;
@@ -34,6 +35,7 @@ void Update_SPRITE_MISSILE() {
 	if( TranslateSprite(THIS, 0, (INT16)data->ty.b.h)) {
 		SpriteManagerRemove(THIS_IDX);
 		SpriteManagerAdd(SPRITE_EPARTICLE, THIS->x, THIS->y);
+		PlayFx(CHANNEL_4, 20, 0x0d, 0xff, 0x7d, 0xc0);
 	}
 	data->ty.b.h = 0;
 }

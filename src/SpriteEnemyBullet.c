@@ -5,6 +5,7 @@ UINT8 bank_SPRITE_ENEMY_BULLET = 2;
 #include "../res/src/enemybullet.h"
 #include "SpriteManager.h"
 #include "GBJAM2016.h"
+#include "Sound.h"
 
 struct EnemyBulletCustomData {
 	INT8 vx;
@@ -17,6 +18,8 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 
 	data->vx = vx;
 	data->vy = vy;
+
+	PlayFx(CHANNEL_1, 5, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
 void Start_SPRITE_ENEMY_BULLET() {

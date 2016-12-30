@@ -7,6 +7,8 @@ UINT8 bank_SPRITE_BULLET = 2;
 #include "GBJAM2016.h"
 #include "Scroll.h"
 
+#include "Sound.h"
+
 void Start_SPRITE_BULLET() {
 	THIS->current_frame = 0;
 
@@ -14,6 +16,8 @@ void Start_SPRITE_BULLET() {
 	THIS->coll_w = 4u;
 	THIS->coll_y = 5u;
 	THIS->coll_h = 4u;
+
+	PlayFx(CHANNEL_1, 5, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
 extern UINT8  scroll_collisions[128];
@@ -39,6 +43,7 @@ void Update_SPRITE_BULLET() {
 			if(CheckCollision(THIS, spr)) {
 				if(spr->type != SPRITE_MUSHROOM || spr->anim_data[1 + spr->current_frame] == 1u) { //Mushroom can only die on frame 1
 					SpriteManagerRemove(i);
+					PlayFx(CHANNEL_4, 20, 0x0d, 0xff, 0x7d, 0xc0);
 				}
 				spr2 = SpriteManagerAdd(SPRITE_EPARTICLE, spr->x, spr->y);
 				SpriteManagerRemove(THIS_IDX);

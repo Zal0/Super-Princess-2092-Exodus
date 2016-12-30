@@ -12,6 +12,7 @@ UINT8 bank_SPRITE_PRINCESS = 2;
 #include "SpritePrincessParticle.h"
 #include "Math.h"
 #include "Sound.h"
+#include "gbt_player.h"
 
 #include "../res/src/princess.h"
 
@@ -46,6 +47,8 @@ struct Sprite* sprite_princess = 0;
 struct Sprite* princess_parent = 0;
 UINT16 princess_old_x, princess_old_y;
 
+UINT8 bg_hidden = 0;
+
 void Start_SPRITE_PRINCESS() {
 	SetSpriteAnim(THIS, anim_idle, 3u);
 	THIS->coll_x += 4u;
@@ -58,11 +61,23 @@ void Start_SPRITE_PRINCESS() {
 	scroll_target = THIS;
 	sprite_princess = THIS;
 
+	bg_hidden = 0;
+
 	if(GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + THIS->coll_y) >> 3) == 23u) {
 		princes_state = PRINCESS_STATE_LADDER;
 	} else {
 		princes_state = PRINCESS_STATE_NORMAL;
 	}
+}
+
+void Hit() {
+	princes_state = PRINCESS_STATE_HIT;
+	gbt_stop(0);
+
+	NR52_REG = 0x80; //Enables sound, you should always setup this first
+	NR51_REG = 0xFF; //Enables all channels (left and right)
+	NR50_REG = 0x77; //Max volume
+	PlayFx(CHANNEL_1, 10, 0x5b, 0x7f, 0xf7, 0x15, 0x86);
 }
 
 UINT8 tile_collision;
@@ -82,7 +97,7 @@ void CheckCollisionTile() {
 
 		case 33u:
 		case 35u:
-			princes_state = PRINCESS_STATE_HIT;
+			Hit();
 			break;
 
 		case 27u:
@@ -146,8 +161,6 @@ void Shoot() {
 		bullet_sprite->x = THIS->x + 5u; 
 	bullet_sprite->y = THIS->y + 1u;
 	shoot_cooldown = 10;
-
-	PlayFx(CHANNEL_1, 20, 0x1E, 0x10, 0xF3, 0x00, 0x87);
 }
 
 void Jump() {
@@ -155,6 +168,8 @@ void Jump() {
 		princess_accel_y = -50;
 		princes_state = PRINCESS_STATE_JUMPING;
 		princess_parent = 0;
+
+		PlayFx(CHANNEL_1, 5, 0x17, 0x9f, 0xf3, 0xc9, 0xc4);
 	}
 }
 
@@ -236,10 +251,18 @@ void Update_SPRITE_PRINCESS() {
 
 		case PRINCESS_STATE_HIT:
 			SetSpriteAnim(THIS, anim_hit, 15u);
-			if((THIS->current_frame + 1) % 2)
-				HIDE_BKG;
-			else
-				SHOW_BKG;
+			if((THIS->current_frame + 1) % 2){
+				if(!bg_hidden) {
+					HIDE_BKG;
+					bg_hidden = 1;
+				}
+			} else {
+				if(bg_hidden) {
+					SHOW_BKG;
+					bg_hidden = 0;
+					PlayFx(CHANNEL_1, 10, 0x5b, 0x7f, 0xf7, 0x15, 0x86);
+				}
+			}
 
 			if(THIS->current_frame == 5) {
 				SpriteManagerRemove(THIS_IDX);
@@ -282,17 +305,18 @@ void Update_SPRITE_PRINCESS() {
 	}
 #endif
 
-	//Check enemy collision
-	SPRITEMANAGER_ITERATE(i, spr) {
-		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER ||
-			 spr->type == SPRITE_FLY || spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
-			if(CheckCollision(THIS, spr)) {
-				princes_state = PRINCESS_STATE_HIT;
+	if(princes_state != PRINCESS_STATE_HIT) {
+		//Check enemy collision
+		SPRITEMANAGER_ITERATE(i, spr) {
+			if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER ||
+				 spr->type == SPRITE_FLY || spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
+				if(CheckCollision(THIS, spr)) {
+					Hit();
+				}
 			}
 		}
-	}
 
-	if(princes_state != PRINCESS_STATE_HIT) {
+
 		if(shoot_cooldown) {
 			shoot_cooldown -= 1u;
 		} else {

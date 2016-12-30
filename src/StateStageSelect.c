@@ -1,6 +1,6 @@
-#pragma bank=2
+#pragma bank=7
 #include "StateStageSelect.h"
-UINT8 bank_STATE_STAGE_SELECT = 2;
+UINT8 bank_STATE_STAGE_SELECT = 7;
 
 #include "../res/src/pressstarttileset.h"
 #include "../res/src/stageSelect.h"
@@ -12,6 +12,7 @@ UINT8 bank_STATE_STAGE_SELECT = 2;
 #include "Keys.h"
 #include "Math.h"
 #include "gbt_player.h"
+#include "Sound.h"
 
 extern struct LevelInfo* stages[];
 extern UINT8 current_stage;
@@ -26,6 +27,7 @@ void SetStage(UINT8 stage) {
 
 	PRINT_POS(6, 13);
 	Printf("STAGE %d", (UINT16)stage + 1);
+	PlayFx(CHANNEL_1, 10, 0x17, 0x81, 0xF3, 0x62, 0x87);
 }
 
 void Start_STATE_STAGE_SELECT() {
