@@ -22,6 +22,6 @@ void Start_STATE_GAMEOVER() {
 
 void Update_STATE_GAMEOVER() {
 	if(KEY_TICKED(J_START) | KEY_TICKED(J_A) | KEY_TICKED(J_B)) {
-		SetState(STATE_STAGE_SELECT);
+		SetState(STATE_MENU);
 	}
 }
