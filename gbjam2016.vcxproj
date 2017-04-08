@@ -14,6 +14,7 @@
     <None Include="src\Makefile" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GBJAM2016_Init.c" />
     <ClCompile Include="src\GBJAM2016.c" />
     <ClCompile Include="src\SpriteBullet.c" />
     <ClCompile Include="src\SpriteCeilingShooter.c" />
