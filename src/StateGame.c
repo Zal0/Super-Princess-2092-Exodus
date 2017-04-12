@@ -1,6 +1,6 @@
-#pragma bank=2
+#pragma bank=6
 #include "StateGame.h"
-UINT8 bank_STATE_GAME = 2;
+UINT8 bank_STATE_GAME = 6;
 
 #include "Scroll.h"
 #include "Frame.h"
@@ -150,7 +150,9 @@ void Start_STATE_GAME() {
 	INIT_CONSOLE(font, 3, 2);
 
 	ScrollSetMap(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank);
-	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, &tile_start_x, &tile_start_y);
+	ScrollFindTile(levels[current_level].w, levels[current_level].h, levels[current_level].map, levels[current_level].bank, 2, 
+		0, 0, levels[current_level].w, levels[current_level].h,
+		&tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	scroll_target = sprite_princess;
 
@@ -180,6 +182,21 @@ void Start_STATE_GAME() {
 
 INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
 	return a + (b - a) * t / max;
+}
+
+void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, unsigned char* map, UINT8 bank, UINT8 tile, UINT16* x, UINT16* y) {
+	if(ScrollFindTile(map_w, map_h, map, bank, tile, 0, 0, map_w, 1, x, y)) {
+		return;
+	}
+	if(ScrollFindTile(map_w, map_h, map, bank, tile, 0, map_h - 1, map_w, 1, x, y)) {
+		return;
+	}
+	if(ScrollFindTile(map_w, map_h, map, bank, tile, 0, 0, 1, map_h, x, y)) {
+		return;
+	}
+	if(ScrollFindTile(map_w, map_h, map, bank, tile, map_w - 1, 0, 1, map_h, x, y)) {
+		return;
+	}
 }
 
 INT8 load_next = 0;
