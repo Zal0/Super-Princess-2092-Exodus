@@ -8,28 +8,44 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gbjam2016", "gbjam2016.vcxp
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D} = {A820F4AF-3BAD-4781-86FB-C055E213A91D}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "%ZGB_PATH%\common.vcxproj", "{A820F4AF-3BAD-4781-86FB-C055E213A91D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "..\ZGB\common\common.vcxproj", "{A820F4AF-3BAD-4781-86FB-C055E213A91D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		DebugColor|x64 = DebugColor|x64
+		DebugColor|x86 = DebugColor|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+		ReleaseColor|x64 = ReleaseColor|x64
+		ReleaseColor|x86 = ReleaseColor|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3A189EC5-0FCC-42F7-8448-C114413BF868}.Debug|x64.ActiveCfg = Debug|Win32
 		{3A189EC5-0FCC-42F7-8448-C114413BF868}.Debug|x86.ActiveCfg = Debug|Win32
 		{3A189EC5-0FCC-42F7-8448-C114413BF868}.Debug|x86.Build.0 = Debug|Win32
+		{3A189EC5-0FCC-42F7-8448-C114413BF868}.DebugColor|x64.ActiveCfg = DebugColor|Win32
+		{3A189EC5-0FCC-42F7-8448-C114413BF868}.DebugColor|x86.ActiveCfg = DebugColor|Win32
+		{3A189EC5-0FCC-42F7-8448-C114413BF868}.DebugColor|x86.Build.0 = DebugColor|Win32
 		{3A189EC5-0FCC-42F7-8448-C114413BF868}.Release|x64.ActiveCfg = Release|Win32
 		{3A189EC5-0FCC-42F7-8448-C114413BF868}.Release|x86.ActiveCfg = Release|Win32
 		{3A189EC5-0FCC-42F7-8448-C114413BF868}.Release|x86.Build.0 = Release|Win32
+		{3A189EC5-0FCC-42F7-8448-C114413BF868}.ReleaseColor|x64.ActiveCfg = ReleaseColor|Win32
+		{3A189EC5-0FCC-42F7-8448-C114413BF868}.ReleaseColor|x86.ActiveCfg = ReleaseColor|Win32
+		{3A189EC5-0FCC-42F7-8448-C114413BF868}.ReleaseColor|x86.Build.0 = ReleaseColor|Win32
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.Debug|x64.ActiveCfg = Debug|Win32
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.Debug|x86.ActiveCfg = Debug|Win32
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.Debug|x86.Build.0 = Debug|Win32
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.DebugColor|x64.ActiveCfg = DebugColor|Win32
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.DebugColor|x86.ActiveCfg = DebugColor|Win32
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.DebugColor|x86.Build.0 = DebugColor|Win32
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.Release|x64.ActiveCfg = Release|Win32
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.Release|x86.ActiveCfg = Release|Win32
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.Release|x86.Build.0 = Release|Win32
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.ReleaseColor|x64.ActiveCfg = ReleaseColor|Win32
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.ReleaseColor|x86.ActiveCfg = ReleaseColor|Win32
+		{A820F4AF-3BAD-4781-86FB-C055E213A91D}.ReleaseColor|x86.Build.0 = ReleaseColor|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
