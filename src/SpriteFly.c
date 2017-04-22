@@ -1,6 +1,6 @@
-#pragma bank=1
+#pragma bank=2
 #include "SpriteFly.h"
-UINT8 bank_SPRITE_FLY = 1;
+UINT8 bank_SPRITE_FLY = 2;
 
 #include "Scroll.h"
 #include "Math.h"
