@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpriteOvni.h"
 UINT8 bank_SPRITE_OVNI = 2;
 
@@ -28,7 +28,7 @@ void Update_SPRITE_OVNI() {
 			THIS->y ++;
 		} else {
 			if(U_LESS_THAN(scroll_target->x, THIS->x)) {
-				data->vx.w = -255;
+				data->vx.w = (UWORD)-255;
 			} else {
 				data->vx.w = 255;
 			}

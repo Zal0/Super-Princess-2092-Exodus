@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpritePrincessParticle.h"
 UINT8 bank_SPRITE_PPARTICLE = 2;
 

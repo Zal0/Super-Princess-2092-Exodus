@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "GBJAM2016.h"
 UINT8 init_bank = 2;
 

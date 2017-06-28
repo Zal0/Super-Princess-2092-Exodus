@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "StateWin.h"
 UINT8 bank_STATE_WIN = 2;
 

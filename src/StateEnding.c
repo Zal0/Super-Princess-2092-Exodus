@@ -1,4 +1,4 @@
-#pragma bank=6
+#pragma bank 6
 #include "StateEnding.h"
 UINT8 bank_STATE_ENDING = 6;
 
@@ -58,7 +58,7 @@ extern const unsigned char* exo_ending_mod_Data[];
 void PrepareEnemy() {
 	struct EndSpriteInfo* info;
 
-	info = &endSpritesInfo[enemy_idx];
+	info = (struct EndSpriteInfo*)&endSpritesInfo[enemy_idx];
 	InitSprite(end_sprite, FRAME_16x16, spriteIdxs[info->type]);
 	SetSpriteAnim(end_sprite, info->anim_data, 1);
 	end_enemy_x = 160 + 16;
@@ -87,7 +87,7 @@ const char* Credits[] = {
 void PrepareCredits() {
 	text_wait = 300;
 
-	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6);
+	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);
 	PRINT(0, 0, Credits[enemy_idx ++]);
 	PRINT(0, 2, Credits[enemy_idx ++]);
 }
@@ -135,7 +135,7 @@ void Start_STATE_ENDING() {
 	INIT_FONT(font, 3, PRINT_WIN);
 	WX_REG = 7;
   WY_REG = (144 - (6 << 3));
-	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6);
+	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);
 	SHOW_WIN;
 
 	SPRITES_8x16;
@@ -196,7 +196,7 @@ void Update_STATE_ENDING() {
 			} else {
 				text_wait --;
 				if(text_wait == 0) {
-					InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6);
+					InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);
 				}
 			}
 			end_sprite->x = scroll_x + (UINT16)end_enemy_x;

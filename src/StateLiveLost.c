@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "StateLiveLost.h"
 UINT8 bank_STATE_LIVELOST = 2;
 

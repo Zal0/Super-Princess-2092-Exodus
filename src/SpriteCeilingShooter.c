@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpriteCeilingShooter.h"
 UINT8 bank_SPRITE_CSHOOTER = 2;
 

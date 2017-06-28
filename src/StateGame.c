@@ -1,4 +1,4 @@
-#pragma bank=6
+#pragma bank 6
 #include "StateGame.h"
 UINT8 bank_STATE_GAME = 6;
 

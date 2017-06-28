@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpritePrincess.h"
 UINT8 bank_SPRITE_PRINCESS = 2;
 
@@ -72,7 +72,7 @@ void Start_SPRITE_PRINCESS() {
 
 void Hit() {
 	princes_state = PRINCESS_STATE_HIT;
-	gbt_stop(0);
+	gbt_stop();
 
 	NR52_REG = 0x80; //Enables sound, you should always setup this first
 	NR51_REG = 0xFF; //Enables all channels (left and right)

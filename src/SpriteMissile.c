@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpriteMissile.h"
 UINT8 bank_SPRITE_MISSILE = 2;
 
@@ -15,7 +15,7 @@ struct MissileCustomData {
 
 
 void Start_SPRITE_MISSILE() {
-	struct MissileCustomData* data = THIS->custom_data;
+	struct MissileCustomData* data = (struct MissileCustomData*)THIS->custom_data;
 
 	THIS->coll_x += 2;
 	THIS->coll_w -= 4;
@@ -25,7 +25,7 @@ void Start_SPRITE_MISSILE() {
 }
 
 void Update_SPRITE_MISSILE() {
-	struct MissileCustomData* data = THIS->custom_data;
+	struct MissileCustomData* data = (struct MissileCustomData*)THIS->custom_data;
 
 	if(U_LESS_THAN(data->vy.w, 1600)) {
 		data->vy.w += 32 << delta_time;

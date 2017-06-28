@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpriteBullet.h"
 UINT8 bank_SPRITE_BULLET = 2;
 

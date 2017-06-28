@@ -1,4 +1,4 @@
-#pragma bank=2
+#pragma bank 2
 #include "SpriteMushroom.h"
 UINT8 bank_SPRITE_MUSHROOM = 2;
 

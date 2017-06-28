@@ -1,4 +1,4 @@
-#pragma bank=7
+#pragma bank 7
 #include "StateStageSelect.h"
 UINT8 bank_STATE_STAGE_SELECT = 7;
 
