@@ -68,8 +68,8 @@ void Update_SPRITE_FLY() {
 	}
 	
 
-	THIS->x += (INT16)data->vx.b.h;
-	THIS->y += (INT16)data->vy.b.h;
+	THIS->x += (INT8)data->vx.b.h;
+	THIS->y += (INT8)data->vy.b.h;
 	data->vx.b.h = 0;
 	data->vy.b.h = 0;
 }
