@@ -201,6 +201,9 @@ void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, unsigned char* map, UIN
 INT8 load_next = 0;
 extern INT16 old_scroll_x, old_scroll_y;
 void ClampScrollLimits(UINT16* x, UINT16* y);
+extern UINT8* oams;
+extern UINT8* oam;
+extern UINT8* cached_oam;
 void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	struct Sprite* player = scroll_target;
 	INT16 old_scr_x = scroll_x;
@@ -264,6 +267,15 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	}
 	SpriteManagerFlushRemove();
 
+	cached_oam = oam + 2;
+	oam = oams;
+	//Clean the previous oam struct
+	while(oam < cached_oam) {
+		*oam = 200;
+		oam += 4;
+	}
+
+
 	//Because the way I update the scroll there are 2 columns or 1 that need to be updated first
 	//Do this here, after settting scroll_x and scroll_y to avoid an annoying blink (because scroll_x and scroll_y are used on vblank)
 	if(tile_start_x == 0) {
@@ -283,9 +295,10 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 			Interpole(scroll_start_y, scroll_end_y, ix >> 2, SCREENWIDTH >> 2)
 		);
 		
-		DrawFrame(player->oam_idx, player->size, get_sprite_tile(player->oam_idx), 
-			scroll_start_x + Interpole(old_player_x - scroll_start_x, player->x - scroll_start_x, ix >> 2, SCREENWIDTH >> 2),
-			scroll_start_y + Interpole(old_player_y - scroll_start_y, player->y - scroll_start_y, ix >> 2, SCREENWIDTH >> 2),
+		oam = oams;
+		DrawFrame(player->size, get_sprite_tile(player->flags & OAM_VERTICAL_FLAG ? 1 : 0), 
+			scroll_start_x + Interpole(old_player_x - scroll_start_x, player->x - scroll_start_x, ix >> 2, SCREENWIDTH >> 2) - scroll_x,
+			scroll_start_y + Interpole(old_player_y - scroll_start_y, player->y - scroll_start_y, ix >> 2, SCREENWIDTH >> 2) - scroll_y,
 		player->flags);
 
 		wait_vbl_done();
