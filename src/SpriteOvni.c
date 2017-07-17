@@ -35,7 +35,7 @@ void Update_SPRITE_OVNI() {
 		}
 	} else {
 		data->tx.w += data->vx.w << (INT16)delta_time;
-		THIS->x += (INT16)data->tx.b.h;
+		THIS->x += (INT8)data->tx.b.h;
 		data->tx.b.h = 0;
 
 		if(data->missile_launched == 0) {
