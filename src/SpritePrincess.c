@@ -111,11 +111,11 @@ void CheckCollisionTile() {
 void MovePrincess() {
 	if(KEY_PRESSED(J_RIGHT)) {
 		tile_collision = TranslateSprite(THIS, 1 << delta_time, 0);
-		THIS->flags = 0u;
+		SPRITE_UNSET_VMIRROR(THIS);
 		CheckCollisionTile();
 	} else if(KEY_PRESSED(J_LEFT)) {
 		tile_collision = TranslateSprite(THIS, -1 << delta_time, 0);
-		THIS->flags = OAM_VERTICAL_FLAG;
+		SPRITE_SET_VMIRROR(THIS);
 		CheckCollisionTile();
 	}
 
@@ -155,7 +155,7 @@ void Shoot() {
 	struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET, 0, 0);
 
 	bullet_sprite->flags = THIS->flags;
-	if(THIS->flags & OAM_VERTICAL_FLAG) 
+	if(SPRITE_GET_VMIRROR(THIS)) 
 		bullet_sprite->x = THIS->x - 5u;
 	else
 		bullet_sprite->x = THIS->x + 5u; 
@@ -222,9 +222,9 @@ void Update_SPRITE_PRINCESS() {
 				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_idle_cooldown : anim_ladder_idle, 12u);
 			}
 			if(KEY_PRESSED(J_RIGHT)) {
-				THIS->flags = 0u;
+				SPRITE_UNSET_VMIRROR(THIS);
 			} else if(KEY_PRESSED(J_LEFT)) {
-				THIS->flags = OAM_VERTICAL_FLAG;
+				SPRITE_SET_VMIRROR(THIS);
 			}
 
 			//Check the end of the ladder

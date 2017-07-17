@@ -283,7 +283,7 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 			Interpole(scroll_start_y, scroll_end_y, ix >> 2, SCREENWIDTH >> 2)
 		);
 		
-		DrawFrame(player->size, get_sprite_tile(player->flags & OAM_VERTICAL_FLAG ? 1 : 0), 
+		DrawFrame(player->size, get_sprite_tile(SPRITE_GET_VMIRROR(player) ? 1 : 0), 
 			scroll_start_x + Interpole(old_player_x - scroll_start_x, player->x - scroll_start_x, ix >> 2, SCREENWIDTH >> 2) - scroll_x,
 			scroll_start_y + Interpole(old_player_y - scroll_start_y, player->y - scroll_start_y, ix >> 2, SCREENWIDTH >> 2) - scroll_y,
 		player->flags);

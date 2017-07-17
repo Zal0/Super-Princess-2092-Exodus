@@ -26,7 +26,10 @@ void Start_SPRITE_FLY() {
 	data->vx.w = 0;
 	data->vy.w = 0;
 	data->tx = 0;
-	THIS->flags = U_LESS_THAN(scroll_target->x, THIS->x) ? 0 : OAM_VERTICAL_FLAG;
+	if(U_LESS_THAN(scroll_target->x, THIS->x))
+		SPRITE_UNSET_VMIRROR(THIS);
+	else
+		SPRITE_SET_VMIRROR(THIS);
 }
 
 void Update_SPRITE_FLY() {
@@ -60,7 +63,10 @@ void Update_SPRITE_FLY() {
 			} else {
 				//CHARGING 
 				if(U_LESS_THAN(DISTANCE(data->ty, THIS->y), 4)){
-					THIS->flags = U_LESS_THAN(scroll_target->x, THIS->x) ? 0 : OAM_VERTICAL_FLAG;
+					if(U_LESS_THAN(scroll_target->x, THIS->x))
+						SPRITE_UNSET_VMIRROR(THIS);
+					else
+						SPRITE_SET_VMIRROR(THIS);
 					data->tx = 0;
 				}
 			}

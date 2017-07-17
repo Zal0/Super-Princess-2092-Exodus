@@ -26,7 +26,7 @@ void Update_SPRITE_BULLET() {
 	struct Sprite* spr;
 	struct Sprite* spr2;
 	
-	if(THIS->flags & OAM_VERTICAL_FLAG) {
+	if(SPRITE_GET_VMIRROR(THIS)) {
 		THIS->x -= 3 << delta_time;
 	} else {
 		THIS->x += 3 << delta_time;

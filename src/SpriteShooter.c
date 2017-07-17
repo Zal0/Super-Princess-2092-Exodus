@@ -18,7 +18,7 @@ void Start_SPRITE_SHOOTER() {
 	data->cool_down = 70;
 
 	if(scroll_collisions[tile] == 1u) {
-		THIS->flags = OAM_VERTICAL_FLAG;
+		SPRITE_SET_VMIRROR(THIS);
 	}
 }
 
@@ -27,7 +27,7 @@ void Update_SPRITE_SHOOTER() {
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
-		if(THIS->flags == OAM_VERTICAL_FLAG) {
+		if(SPRITE_GET_VMIRROR(THIS)) {
 			CreateEnemyBullet(THIS->x + 8, THIS->y, 1, 0);
 		} else {
 			CreateEnemyBullet(THIS->x, THIS->y, -1, 0);
