@@ -112,7 +112,7 @@ void SetEndState(UINT8 state) {
 	}
 }
 
-UINT8 STRLEN(UINT8* str) {
+UINT8 STRLEN(const UINT8* str) {
 	UINT8 i;
 	for(i = 0; *str != '\0'; ++i, ++str) {
 	}
@@ -157,7 +157,7 @@ void Start_STATE_ENDING() {
 }
 
 void Update_STATE_ENDING() {
-	struct EndSpriteInfo* info;
+	const struct EndSpriteInfo* info;
 
 	scroll_p_x.w += 32;
 	scroll_x += scroll_p_x.b.h;

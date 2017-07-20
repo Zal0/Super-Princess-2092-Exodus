@@ -109,7 +109,7 @@ UINT8 current_stage = 0;
 
 extern struct Sprite* sprite_princess;
 void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
-	struct LevelInfo* levels = stages[current_stage];
+	const struct LevelInfo* levels = stages[current_stage];
 
 	if(tile_start_x == 0) {
 		tile_start_x += 1;
@@ -137,9 +137,9 @@ extern UINT8 n_sprite_types;
 void Start_STATE_GAME() {
 	UINT8 i;
 	UINT16 tile_start_x, tile_start_y;
-	UINT8* coll_list;
-	UINT8* coll_down_list;
-	struct LevelInfo* levels = stages[current_stage];
+	const UINT8* coll_list = 0;
+	const UINT8* coll_down_list = 0;
+	const struct LevelInfo* levels = stages[current_stage];
 
 	SPRITES_8x16;
 	for(i = 0; i != n_sprite_types; ++ i) {
@@ -210,8 +210,9 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	UINT8 ix;
 	UINT16 tile_start_x, tile_start_y;
 	INT16 scroll_start_x, scroll_end_x, scroll_start_y, scroll_end_y;
-	INT16 offset_x, offset_y;
-	struct LevelInfo* levels = stages[current_stage];
+	INT16 offset_x = 0;
+	INT16 offset_y = 0;
+	const struct LevelInfo* levels = stages[current_stage];
 
 	ScrollFindTileInCorners(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	wait_vbl_done();
