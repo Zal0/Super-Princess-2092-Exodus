@@ -267,13 +267,17 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	//Because the way I update the scroll there are 2 columns or 1 that need to be updated first
 	//Do this here, after settting scroll_x and scroll_y to avoid an annoying blink (because scroll_x and scroll_y are used on vblank)
 	if(tile_start_x == 0) {
-		ScrollUpdateColumn(DespRight(scroll_end_x, 3), DespRight(scroll_y, 3));
-		ScrollUpdateColumn(DespRight(scroll_end_x, 3) + 1, DespRight(scroll_y, 3));
+		ScrollUpdateColumn((scroll_end_x >> 3),       (scroll_y >> 3) - 1);
+		ScrollUpdateColumn((scroll_end_x >> 3) + 1,   (scroll_y >> 3) - 1);
 	} else if(tile_start_x == levels[next_level].w - 1) {
-		ScrollUpdateColumn(DespRight(scroll_start_x, 3) - 1, DespRight(scroll_y, 3));
+		ScrollUpdateColumn((scroll_start_x >> 3) - 1, (scroll_y >> 3) - 1);
 	}
+
 	if(tile_start_y == 0) {
-		ScrollUpdateRow(DespRight(scroll_end_x, 3) - 1, DespRight(scroll_end_y, 3));
+		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_end_y >> 3));
+		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_end_y >> 3) + 1);
+	}  else if(tile_start_y == levels[next_level].h - 1) {
+		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_start_y >> 3) - 1);
 	}
 
 	clamp_enabled = 0;
