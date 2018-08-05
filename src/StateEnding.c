@@ -1,12 +1,12 @@
 #pragma bank 6
-#include "StateEnding.h"
+#include "main.h"
 UINT8 bank_STATE_ENDING = 6;
 
 #include "../res/src/stage3_bg.h"
 #include "../res/src/stageEnding.h"
 #include "../res/src/font.h"
 
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
 #include "Math.h"
@@ -139,7 +139,7 @@ void Start_STATE_ENDING() {
 	SHOW_WIN;
 
 	SPRITES_8x16;
-	for(i = 0; i != n_sprite_types; ++ i) {
+	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
 		SpriteManagerLoad(i);
 	}
 	SHOW_SPRITES;

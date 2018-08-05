@@ -1,9 +1,9 @@
 #pragma bank 2
-#include "SpritePrincessParticle.h"
+#include "main.h"
 UINT8 bank_SPRITE_PPARTICLE = 2;
 
 #include "SpriteManager.h"
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 
 const UINT8 pparticle_anim_idle[] = {2, 0, 1};
 

@@ -1,9 +1,9 @@
 #pragma bank 2
-#include "StateWin.h"
+#include "main.h"
 UINT8 bank_STATE_WIN = 2;
 
 #include <gb/gb.h>
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 #include "Scroll.h"
 #include "Keys.h"
 

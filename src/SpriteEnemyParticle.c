@@ -1,5 +1,5 @@
 #pragma bank 2
-#include "SpriteEnemyParticle.h"
+#include "main.h"
 UINT8 bank_SPRITE_EPARTICLE = 2;
 
 #include "../res/src/enemyexplosion.h"

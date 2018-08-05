@@ -1,12 +1,12 @@
 #pragma bank 7
-#include "StateStageSelect.h"
+#include "main.h"
 UINT8 bank_STATE_STAGE_SELECT = 7;
 
 #include "../res/src/pressstarttileset.h"
 #include "../res/src/stageSelect.h"
 #include "../res/src/font.h"
 
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 #include "Print.h"
 #include "Scroll.h"
 #include "Keys.h"

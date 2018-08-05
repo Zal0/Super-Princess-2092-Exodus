@@ -1,11 +1,11 @@
 #pragma bank 2
-#include "SpriteOvni.h"
+#include "main.h"
 UINT8 bank_SPRITE_OVNI = 2;
 
 #include "Math.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 
 struct OvniCustomData {
 	fixed tx, vx;

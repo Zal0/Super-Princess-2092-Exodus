@@ -1,11 +1,11 @@
 #pragma bank 2
-#include "SpriteMissile.h"
+#include "main.h"
 UINT8 bank_SPRITE_MISSILE = 2;
 
 #include "Math.h"
 #include "SpriteManager.h"
 #include "Sprite.h"
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 #include "Scroll.h"
 #include "Sound.h"
 

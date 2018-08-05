@@ -1,5 +1,5 @@
 #pragma bank 2
-#include "SpriteFly.h"
+#include "main.h"
 UINT8 bank_SPRITE_FLY = 2;
 
 #include "Scroll.h"

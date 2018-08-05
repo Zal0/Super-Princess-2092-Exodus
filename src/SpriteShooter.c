@@ -1,12 +1,13 @@
 #pragma bank 2
-#include "SpriteShooter.h"
+#include "main.h"
 UINT8 bank_SPRITE_SHOOTER = 2;
 
 #include "SpriteManager.h"
 #include "../res/src/wallshooter.h"
-#include "SpriteEnemyBullet.h"
 
 #include "Scroll.h"
+
+void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy);
 
 struct WShooterCustomData {
 	UINT8 cool_down;

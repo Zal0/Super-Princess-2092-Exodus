@@ -1,5 +1,5 @@
 #pragma bank 6
-#include "StateGame.h"
+#include "main.h"
 UINT8 bank_STATE_GAME = 6;
 
 #include "Scroll.h"
@@ -10,7 +10,7 @@ UINT8 bank_STATE_GAME = 6;
 #include "Math.h"
 #include "gbt_player.h"
 
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 
 #include "../res/src/stage1_bg.h"
 #include "../res/src/stage1_1.h"
@@ -133,7 +133,6 @@ void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 	}
 }
 
-extern UINT8 n_sprite_types;
 void Start_STATE_GAME() {
 	UINT8 i;
 	UINT16 tile_start_x, tile_start_y;
@@ -142,7 +141,7 @@ void Start_STATE_GAME() {
 	const struct LevelInfo* levels = stages[current_stage];
 
 	SPRITES_8x16;
-	for(i = 0; i != n_sprite_types; ++ i) {
+	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
 		SpriteManagerLoad(i);
 	}
 	SHOW_SPRITES;

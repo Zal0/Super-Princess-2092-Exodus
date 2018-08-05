@@ -1,10 +1,10 @@
 #pragma bank 2
-#include "SpriteEnemyBullet.h"
+#include "main.h"
 UINT8 bank_SPRITE_ENEMY_BULLET = 2;
 
 #include "../res/src/enemybullet.h"
 #include "SpriteManager.h"
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 #include "Sound.h"
 
 struct EnemyBulletCustomData {

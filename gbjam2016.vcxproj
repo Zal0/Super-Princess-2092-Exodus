@@ -22,8 +22,7 @@
     <None Include="src\Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GBJAM2016_Init.c" />
-    <ClCompile Include="src\GBJAM2016.c" />
+    <ClCompile Include="src\ZGBMain.c" />
     <ClCompile Include="src\SpriteBullet.c" />
     <ClCompile Include="src\SpriteCeilingShooter.c" />
     <ClCompile Include="src\SpriteEnemyBullet.c" />
@@ -47,28 +46,7 @@
     <ClCompile Include="src\StateWin.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\GBJAM2016.h" />
-    <ClInclude Include="include\SpriteBullet.h" />
-    <ClInclude Include="include\SpriteCeilingShooter.h" />
-    <ClInclude Include="include\SpriteEnemyBullet.h" />
-    <ClInclude Include="include\SpriteEnemyParticle.h" />
-    <ClInclude Include="include\SpriteFly.h" />
-    <ClInclude Include="include\SpriteMissile.h" />
-    <ClInclude Include="include\SpriteMushroom.h" />
-    <ClInclude Include="include\SpriteOvni.h" />
-    <ClInclude Include="include\SpritePlatform.h" />
-    <ClInclude Include="include\SpritePrincess.h" />
-    <ClInclude Include="include\SpritePrincessParticle.h" />
-    <ClInclude Include="include\SpriteRoller.h" />
-    <ClInclude Include="include\SpriteShooter.h" />
-    <ClInclude Include="include\StateEnding.h" />
-    <ClInclude Include="include\StateGame.h" />
-    <ClInclude Include="include\StateGameOver.h" />
-    <ClInclude Include="include\StateLiveLost.h" />
-    <ClInclude Include="include\StateMenu.h" />
-    <ClInclude Include="include\StateStageIntro.h" />
-    <ClInclude Include="include\StateStageSelect.h" />
-    <ClInclude Include="include\StateWin.h" />
+    <ClInclude Include="include\ZGBMain.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3A189EC5-0FCC-42F7-8448-C114413BF868}</ProjectGuid>

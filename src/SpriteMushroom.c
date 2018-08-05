@@ -1,12 +1,13 @@
 #pragma bank 2
-#include "SpriteMushroom.h"
+#include "main.h"
 UINT8 bank_SPRITE_MUSHROOM = 2;
 
 #include "../res/src/mushroom.h"
 #include "SpriteManager.h"
-#include "SpriteEnemyBullet.h"
 
 #include "Math.h"
+
+void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy);
 
 const UINT8 mushroom_anim_hide[] = {1, 0};
 const UINT8 mushroom_anim_show[] = {1, 1};

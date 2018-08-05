@@ -1,5 +1,5 @@
 #pragma bank 2
-#include "SpriteRoller.h"
+#include "main.h"
 UINT8 bank_SPRITE_ROLLER = 2;
 
 #include "SpriteManager.h"

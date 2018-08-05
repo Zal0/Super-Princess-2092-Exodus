@@ -1,20 +1,21 @@
 #pragma bank 2
-#include "SpritePrincess.h"
+#include "main.h"
 UINT8 bank_SPRITE_PRINCESS = 2;
 
 #include "gb/gb.h"
 
-#include "GBJAM2016.h"
+#include "ZGBMain.h"
 #include "Sprite.h"
 #include "Keys.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
-#include "SpritePrincessParticle.h"
 #include "Math.h"
 #include "Sound.h"
 #include "gbt_player.h"
 
 #include "../res/src/princess.h"
+
+void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy);
 
 //#define DEBUG_CONTROLS
 
