@@ -21,7 +21,7 @@ _SPRITE_DMG(SPRITE_CSHOOTER,     ceilingshooter,   3, FRAME_16x16,  2) \
 _SPRITE_DMG(SPRITE_SHOOTER,      wallshooter,      3, FRAME_16x16,  2) \
 _SPRITE_DMG(SPRITE_EPARTICLE,    enemyexplosion,   3, FRAME_16x16,  4) \
 _SPRITE_DMG(SPRITE_PPARTICLE,    princessParticle, 3, FRAME_16x16,  2) \
-_SPRITE_DMG(SPRITE_PLATFORM,		 mobileplatform,   3, FRAME_16x16,  1) \
+_SPRITE_DMG(SPRITE_PLATFORM,     mobileplatform,   3, FRAME_16x16,  1) \
 _SPRITE_DMG(SPRITE_FLY,          flyingbug,        3, FRAME_16x16,  2) \
 _SPRITE_DMG(SPRITE_ROLLER,       weirdroller,      3, FRAME_16x16,  4) \
 _SPRITE_DMG(SPRITE_OVNI,         ovni,             3, FRAME_16x16,  1) \
