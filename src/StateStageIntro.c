@@ -18,11 +18,11 @@ extern UINT8 current_stage;
 extern UINT8 n_lives;
 
 void Start_STATE_STAGEINTRO() {
-	InitScrollTiles(0, 128, pressstarttileset, 3);
+	InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
 	InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
 	SHOW_BKG;
 
-	INIT_FONT(font, 3, PRINT_BKG);
+	INIT_FONT(font, PRINT_BKG);
 	PRINT_POS(6, 6);
 	Printf("STAGE %d", (UINT16)(current_stage + 1));
 	PRINT(8, 8, "GO!");

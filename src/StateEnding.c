@@ -122,7 +122,7 @@ UINT8 STRLEN(const UINT8* str) {
 void Start_STATE_ENDING() {
 	UINT8 i;
 
-	InitScrollTiles(0, 128, stage3_bg, 6);
+	InitScrollTiles(0, &stage3_bg, bank_stage3_bg);
 	scroll_target = 0;
 	InitScroll(stageEndingWidth, stageEndingHeight, stageEnding, 0, 0, 6);
 	for(i = 21; i < stageEndingWidth; ++i) {
@@ -132,7 +132,7 @@ void Start_STATE_ENDING() {
 	SHOW_BKG;
 
 	PRINT_POS(0, 0);
-	INIT_FONT(font, 3, PRINT_WIN);
+	INIT_FONT(font, PRINT_WIN);
 	WX_REG = 7;
   WY_REG = (144 - (6 << 3));
 	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);

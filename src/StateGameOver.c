@@ -13,7 +13,7 @@ UINT8 bank_STATE_GAMEOVER = 2;
 extern const unsigned char* exo_gameover_mod_Data[];
 
 void Start_STATE_GAMEOVER() {
-	InitScrollTiles(0, 128, pressstarttileset, 3);
+	InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
 	InitScroll(gameovertilemapWidth, gameovertilemapHeight, gameovertilemap, 0, 0, 3);
 	SHOW_BKG;
 

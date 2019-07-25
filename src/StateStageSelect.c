@@ -35,11 +35,11 @@ void Start_STATE_STAGE_SELECT() {
 	if(stage_completion == 7) {
 		SetState(STATE_ENDING);
 	} else {
-		InitScrollTiles(0, 200, pressstarttileset, 3);
+		InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
 		InitScroll(stageSelectWidth,stageSelectHeight,stageSelect, 0, 0, 3);
 		SHOW_BKG;
 	
-		INIT_FONT(font, 3, PRINT_BKG);
+		INIT_FONT(font, PRINT_BKG);
 		PRINT(4, 11, "STAGE SELECT");
 
 		for(current_stage = 0; current_stage != 3; current_stage += 1) {

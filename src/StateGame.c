@@ -153,15 +153,15 @@ void Start_STATE_GAME() {
 	scroll_target = sprite_princess;
 
 	if(levels == levels_1) {
-		InitScrollTiles(0, 128, stage1_bg, 3);
+		InitScrollTiles(0, &stage1_bg, bank_stage1_bg);
 		coll_list = collision_tiles_1;
 		coll_down_list = collision_tiles_down_1;
 	} else if(levels == levels_2) {
-		InitScrollTiles(0, 128, stage2_bg, 3);
+		InitScrollTiles(0, &stage2_bg, bank_stage2_bg);
 		coll_list = collision_tiles_2;
 		coll_down_list = collision_tiles_down_2;
 	} else if(levels == levels_3) {
-		InitScrollTiles(0, 128, stage3_bg, 6);
+		InitScrollTiles(0, &stage3_bg, bank_stage3_bg);
 		coll_list = collision_tiles_3;
 		coll_down_list = collision_tiles_down_3;
 	}
