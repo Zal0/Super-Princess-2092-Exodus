@@ -65,41 +65,40 @@ UINT8 stage_completion;
 typedef struct LevelInfo {
 	UINT16 w;
 	UINT16 h;
-	UINT8* map;
-	UINT8 bank;
+	struct MapInfo* map;
 };
 
 const struct LevelInfo levels_1[] = {
-	{stage1_1Width,   stage1_1Height,  stage1_1,  3},
-	{stage1_2Width,   stage1_2Height,  stage1_2,  3},
-	{stage1_3Width,   stage1_3Height,  stage1_3,  3},
-	{stage1_4Width,   stage1_4Height,  stage1_4,  3},
-	{stage1_5Width,   stage1_5Height,  stage1_5,  3},
-	{stage1_6Width,   stage1_6Height,  stage1_6,  3},
-	{stage1_7Width,   stage1_7Height,  stage1_7,  3},
-	{stage1_8Width,   stage1_8Height,  stage1_8,  3},
+	{stage1_1Width,   stage1_1Height,  &stage1_1},
+	{stage1_2Width,   stage1_2Height,  &stage1_2},
+	{stage1_3Width,   stage1_3Height,  &stage1_3},
+	{stage1_4Width,   stage1_4Height,  &stage1_4},
+	{stage1_5Width,   stage1_5Height,  &stage1_5},
+	{stage1_6Width,   stage1_6Height,  &stage1_6},
+	{stage1_7Width,   stage1_7Height,  &stage1_7},
+	{stage1_8Width,   stage1_8Height,  &stage1_8},
 };
 
 const struct LevelInfo levels_2[] = {
-	{stage2_1Width,   stage2_1Height,  stage2_1,  5},
-	{stage2_2Width,   stage2_2Height,  stage2_2,  5},
-	{stage2_3Width,   stage2_3Height,  stage2_3,  5},
-	{stage2_4Width,   stage2_4Height,  stage2_4,  5},
-	{stage2_5Width,   stage2_5Height,  stage2_5,  5},
-	{stage2_6Width,   stage2_6Height,  stage2_6,  5},
-	{stage2_7Width,   stage2_7Height,  stage2_7,  5},
-	{stage2_8Width,   stage2_8Height,  stage2_8,  5},
+	{stage2_1Width,   stage2_1Height,  &stage2_1},
+	{stage2_2Width,   stage2_2Height,  &stage2_2},
+	{stage2_3Width,   stage2_3Height,  &stage2_3},
+	{stage2_4Width,   stage2_4Height,  &stage2_4},
+	{stage2_5Width,   stage2_5Height,  &stage2_5},
+	{stage2_6Width,   stage2_6Height,  &stage2_6},
+	{stage2_7Width,   stage2_7Height,  &stage2_7},
+	{stage2_8Width,   stage2_8Height,  &stage2_8},
 };
 
 const struct LevelInfo levels_3[] = {
-	{stage3_1Width,   stage3_1Height,  stage3_1,  6},
-	{stage3_2Width,   stage3_2Height,  stage3_2,  6},
-	{stage3_3Width,   stage3_3Height,  stage3_3,  6},
-	{stage3_4Width,   stage3_4Height,  stage3_4,  6},
-	{stage3_5Width,   stage3_5Height,  stage3_5,  6},
-	{stage3_6Width,   stage3_6Height,  stage3_6,  6},
-	{stage3_7Width,   stage3_7Height,  stage3_7,  6},
-	{stage3_8Width,   stage3_8Height,  stage3_8,  6},
+	{stage3_1Width,   stage3_1Height,  &stage3_1},
+	{stage3_2Width,   stage3_2Height,  &stage3_2},
+	{stage3_3Width,   stage3_3Height,  &stage3_3},
+	{stage3_4Width,   stage3_4Height,  &stage3_4},
+	{stage3_5Width,   stage3_5Height,  &stage3_5},
+	{stage3_6Width,   stage3_6Height,  &stage3_6},
+	{stage3_7Width,   stage3_7Height,  &stage3_7},
+	{stage3_8Width,   stage3_8Height,  &stage3_8},
 };
 
 const struct LevelInfo* stages[] = {levels_1, levels_2, levels_3};
@@ -146,27 +145,27 @@ void Start_STATE_GAME() {
 
 	INIT_CONSOLE(font, 3, 2);
 
-	ScrollFindTile(levels[current_level].w, levels[current_level].map, levels[current_level].bank, 2, 
+	ScrollFindTile(levels[current_level].map, 2, 
 		0, 0, levels[current_level].w, levels[current_level].h,
 		&tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	scroll_target = sprite_princess;
 
 	if(levels == levels_1) {
-		InitScrollTiles(0, &stage1_bg, bank_stage1_bg);
+		InitScrollTiles(0, &stage1_bg);
 		coll_list = collision_tiles_1;
 		coll_down_list = collision_tiles_down_1;
 	} else if(levels == levels_2) {
-		InitScrollTiles(0, &stage2_bg, bank_stage2_bg);
+		InitScrollTiles(0, &stage2_bg);
 		coll_list = collision_tiles_2;
 		coll_down_list = collision_tiles_down_2;
 	} else if(levels == levels_3) {
-		InitScrollTiles(0, &stage3_bg, bank_stage3_bg);
+		InitScrollTiles(0, &stage3_bg);
 		coll_list = collision_tiles_3;
 		coll_down_list = collision_tiles_down_3;
 	}
 
-	InitScroll(levels[current_level].w, levels[current_level].h, levels[current_level].map, coll_list, coll_down_list, levels[current_level].bank);
+	InitScroll(levels[current_level].map, coll_list, coll_down_list);
 	SHOW_BKG;
 
 	switch(current_stage) {
@@ -180,17 +179,17 @@ INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
 	return a + (b - a) * t / max;
 }
 
-void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, unsigned char* map, UINT8 bank, UINT8 tile, UINT16* x, UINT16* y) {
-	if(ScrollFindTile(map_w, map, bank, tile, 0, 0, map_w, 1, x, y)) {
+void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, struct MapInfo* map, UINT8 tile, UINT16* x, UINT16* y) {
+	if(ScrollFindTile(map, tile, 0, 0, map_w, 1, x, y)) {
 		return;
 	}
-	if(ScrollFindTile(map_w, map, bank, tile, 0, map_h - 1, map_w, 1, x, y)) {
+	if(ScrollFindTile(map, tile, 0, map_h - 1, map_w, 1, x, y)) {
 		return;
 	}
-	if(ScrollFindTile(map_w, map, bank, tile, 0, 0, 1, map_h, x, y)) {
+	if(ScrollFindTile(map, tile, 0, 0, 1, map_h, x, y)) {
 		return;
 	}
-	if(ScrollFindTile(map_w, map, bank, tile, map_w - 1, 0, 1, map_h, x, y)) {
+	if(ScrollFindTile(map, tile, map_w - 1, 0, 1, map_h, x, y)) {
 		return;
 	}
 }
@@ -211,10 +210,10 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	INT16 offset_y = 0;
 	const struct LevelInfo* levels = stages[current_stage];
 
-	ScrollFindTileInCorners(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
+	ScrollFindTileInCorners(levels[next_level].w, levels[next_level].h, levels[next_level].map, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	wait_vbl_done();
 	InitPlayerPos(tile_start_x, tile_start_y);
-	ScrollSetMap(levels[next_level].w, levels[next_level].h, levels[next_level].map, levels[next_level].bank);
+	ScrollSetMap(levels[next_level].map);
 	
 	if((tile_start_x == 0) || (tile_start_x == levels[next_level].w - 1)) {
 		if(tile_start_x == 0) {

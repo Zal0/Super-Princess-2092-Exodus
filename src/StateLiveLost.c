@@ -17,8 +17,8 @@ extern const unsigned char* exo_stage_mod_Data[];
 extern UINT8 n_lives;
 
 void Start_STATE_LIVELOST() {
-	InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
-	InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
+	InitScrollTiles(0, &pressstarttileset);
+	InitScroll(&menuBG, 0, 0);
 	SHOW_BKG;
 
 	INIT_FONT(font, PRINT_BKG);

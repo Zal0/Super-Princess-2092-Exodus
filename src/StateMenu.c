@@ -13,8 +13,8 @@ UINT8 bank_STATE_MENU = 2;
 extern const unsigned char* exo_start_mod_Data[];
 
 void Start_STATE_MENU() {
-	InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
-	InitScroll(pressstarttilemapWidth, pressstarttilemapHeight, pressstarttilemap, 0, 0, 7);
+	InitScrollTiles(0, &pressstarttileset);
+	InitScroll(&pressstarttilemap, 0, 0);
 	SHOW_BKG;
 
 	PlayMusic(exo_start_mod_Data, 4, 0);

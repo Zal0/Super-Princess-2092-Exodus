@@ -18,8 +18,8 @@ extern UINT8 current_stage;
 extern UINT8 n_lives;
 
 void Start_STATE_STAGEINTRO() {
-	InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
-	InitScroll(menuBGWidth, menuBGHeight, menuBG, 0, 0, 3);
+	InitScrollTiles(0, &pressstarttileset);
+	InitScroll(&menuBG, 0, 0);
 	SHOW_BKG;
 
 	INIT_FONT(font, PRINT_BKG);

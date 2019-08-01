@@ -4,6 +4,7 @@ UINT8 bank_STATE_ENDING = 6;
 
 #include "../res/src/stage3_bg.h"
 #include "../res/src/stageEnding.h"
+#include "../res/src/stageEndingWindow.h"
 #include "../res/src/font.h"
 
 #include "ZGBMain.h"
@@ -84,10 +85,12 @@ const char* Credits[] = {
 	""
 };
 
+
+
 void PrepareCredits() {
 	text_wait = 300;
 
-	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);
+	InitWindow(0, 0, &stageEndingWindow);
 	PRINT(0, 0, Credits[enemy_idx ++]);
 	PRINT(0, 2, Credits[enemy_idx ++]);
 }
@@ -122,9 +125,9 @@ UINT8 STRLEN(const UINT8* str) {
 void Start_STATE_ENDING() {
 	UINT8 i;
 
-	InitScrollTiles(0, &stage3_bg, bank_stage3_bg);
+	InitScrollTiles(0, &stage3_bg);
 	scroll_target = 0;
-	InitScroll(stageEndingWidth, stageEndingHeight, stageEnding, 0, 0, 6);
+	InitScroll(&stageEnding, 0, 0);
 	for(i = 21; i < stageEndingWidth; ++i) {
 		ScrollUpdateColumn(i, 0);
 	}
@@ -134,8 +137,8 @@ void Start_STATE_ENDING() {
 	PRINT_POS(0, 0);
 	INIT_FONT(font, PRINT_WIN);
 	WX_REG = 7;
-  WY_REG = (144 - (6 << 3));
-	InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);
+	WY_REG = (144 - (6 << 3));
+	InitWindow(0, 0, &stageEndingWindow);
 	SHOW_WIN;
 
 	SPRITES_8x16;
@@ -196,7 +199,7 @@ void Update_STATE_ENDING() {
 			} else {
 				text_wait --;
 				if(text_wait == 0) {
-					InitWindow(0, 0, stageEndingWidth, stageEndingHeight, &stageEnding[stageEndingWidth * 12], 6, 0);
+					InitWindow(0, 0, &stageEndingWindow);
 				}
 			}
 			end_sprite->x = scroll_x + (UINT16)end_enemy_x;

@@ -35,8 +35,8 @@ void Start_STATE_STAGE_SELECT() {
 	if(stage_completion == 7) {
 		SetState(STATE_ENDING);
 	} else {
-		InitScrollTiles(0, &pressstarttileset, bank_pressstarttileset);
-		InitScroll(stageSelectWidth,stageSelectHeight,stageSelect, 0, 0, 3);
+		InitScrollTiles(0, &pressstarttileset);
+		InitScroll(&stageSelect, 0, 0);
 		SHOW_BKG;
 	
 		INIT_FONT(font, PRINT_BKG);
