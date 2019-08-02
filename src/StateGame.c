@@ -68,55 +68,55 @@ typedef struct LevelInfo {
 	struct MapInfo* map;
 };
 
-const struct LevelInfo levels_1[] = {
-	{stage1_1Width,   stage1_1Height,  &stage1_1},
-	{stage1_2Width,   stage1_2Height,  &stage1_2},
-	{stage1_3Width,   stage1_3Height,  &stage1_3},
-	{stage1_4Width,   stage1_4Height,  &stage1_4},
-	{stage1_5Width,   stage1_5Height,  &stage1_5},
-	{stage1_6Width,   stage1_6Height,  &stage1_6},
-	{stage1_7Width,   stage1_7Height,  &stage1_7},
-	{stage1_8Width,   stage1_8Height,  &stage1_8},
+const struct MapInfo* levels_1[] = {
+	&stage1_1,
+	&stage1_2,
+	&stage1_3,
+	&stage1_4,
+	&stage1_5,
+	&stage1_6,
+	&stage1_7,
+	&stage1_8,
 };
 
-const struct LevelInfo levels_2[] = {
-	{stage2_1Width,   stage2_1Height,  &stage2_1},
-	{stage2_2Width,   stage2_2Height,  &stage2_2},
-	{stage2_3Width,   stage2_3Height,  &stage2_3},
-	{stage2_4Width,   stage2_4Height,  &stage2_4},
-	{stage2_5Width,   stage2_5Height,  &stage2_5},
-	{stage2_6Width,   stage2_6Height,  &stage2_6},
-	{stage2_7Width,   stage2_7Height,  &stage2_7},
-	{stage2_8Width,   stage2_8Height,  &stage2_8},
+const struct MapInfo* levels_2[] = {
+	&stage2_1,
+	&stage2_2,
+	&stage2_3,
+	&stage2_4,
+	&stage2_5,
+	&stage2_6,
+	&stage2_7,
+	&stage2_8,
 };
 
-const struct LevelInfo levels_3[] = {
-	{stage3_1Width,   stage3_1Height,  &stage3_1},
-	{stage3_2Width,   stage3_2Height,  &stage3_2},
-	{stage3_3Width,   stage3_3Height,  &stage3_3},
-	{stage3_4Width,   stage3_4Height,  &stage3_4},
-	{stage3_5Width,   stage3_5Height,  &stage3_5},
-	{stage3_6Width,   stage3_6Height,  &stage3_6},
-	{stage3_7Width,   stage3_7Height,  &stage3_7},
-	{stage3_8Width,   stage3_8Height,  &stage3_8},
+const struct MapInfo* levels_3[] = {
+	&stage3_1,
+	&stage3_2,
+	&stage3_3,
+	&stage3_4,
+	&stage3_5,
+	&stage3_6,
+	&stage3_7,
+	&stage3_8,
 };
 
-const struct LevelInfo* stages[] = {levels_1, levels_2, levels_3};
+const struct MapInfo** stages[] = {levels_1, levels_2, levels_3};
 UINT8 current_stage = 0;
 
 extern struct Sprite* sprite_princess;
 void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
-	const struct LevelInfo* levels = stages[current_stage];
+	const struct MapInfo** levels = stages[current_stage];
 
 	if(tile_start_x == 0) {
 		tile_start_x += 1;
-	} else if(tile_start_x == levels[current_level].w - 1) {
+	} else if(tile_start_x == levels[current_level]->width - 1) {
 		tile_start_x -= 2;
 	}
 
 	if(tile_start_y == 0) {
 		tile_start_y += 1;
-	} else if(tile_start_y == levels[current_level].h - 1) {
+	} else if(tile_start_y == levels[current_level]->height - 1) {
 		tile_start_y -= 2;
 	} else {
 		tile_start_y -= 1;
@@ -135,7 +135,7 @@ void Start_STATE_GAME() {
 	UINT16 tile_start_x, tile_start_y;
 	const UINT8* coll_list = 0;
 	const UINT8* coll_down_list = 0;
-	const struct LevelInfo* levels = stages[current_stage];
+	const struct MapInfo** levels = stages[current_stage];
 
 	SPRITES_8x16;
 	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
@@ -145,8 +145,8 @@ void Start_STATE_GAME() {
 
 	INIT_CONSOLE(font, 3, 2);
 
-	ScrollFindTile(levels[current_level].map, 2, 
-		0, 0, levels[current_level].w, levels[current_level].h,
+	ScrollFindTile(levels[current_level], 2, 
+		0, 0, levels[current_level]->width, levels[current_level]->height,
 		&tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	scroll_target = sprite_princess;
@@ -165,7 +165,7 @@ void Start_STATE_GAME() {
 		coll_down_list = collision_tiles_down_3;
 	}
 
-	InitScroll(levels[current_level].map, coll_list, coll_down_list);
+	InitScroll(levels[current_level], coll_list, coll_down_list);
 	SHOW_BKG;
 
 	switch(current_stage) {
@@ -208,19 +208,19 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	INT16 scroll_start_x, scroll_end_x, scroll_start_y, scroll_end_y;
 	INT16 offset_x = 0;
 	INT16 offset_y = 0;
-	const struct LevelInfo* levels = stages[current_stage];
+	const struct MapInfo** levels = stages[current_stage];
 
-	ScrollFindTileInCorners(levels[next_level].w, levels[next_level].h, levels[next_level].map, load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
+	ScrollFindTileInCorners(levels[next_level]->width, levels[next_level]->height, levels[next_level], load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	wait_vbl_done();
 	InitPlayerPos(tile_start_x, tile_start_y);
-	ScrollSetMap(levels[next_level].map);
+	ScrollSetMap(levels[next_level]);
 	
-	if((tile_start_x == 0) || (tile_start_x == levels[next_level].w - 1)) {
+	if((tile_start_x == 0) || (tile_start_x == levels[next_level]->width - 1)) {
 		if(tile_start_x == 0) {
-			offset_x = levels[current_level].w << 3;
+			offset_x = levels[current_level]->width << 3;
 			offset_x = -offset_x;
 		} else  { // tile_start_x == levels[next_level].w - 1)
-			offset_x = levels[next_level].w << 3;
+			offset_x = levels[next_level]->width << 3;
 		}
 		offset_y = (tile_start_y << 3) - (INT16)((old_player_y + 15) & 0xFFF8);
 
@@ -230,12 +230,12 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 		//scroll_end_y = scroll_y;
 	}
 	
-	if((tile_start_y == 0) || (tile_start_y == levels[next_level].h - 1)) {
+	if((tile_start_y == 0) || (tile_start_y == levels[next_level]->height - 1)) {
 		if(tile_start_y == 0) {
-			offset_y = levels[current_level].h << 3;
+			offset_y = levels[current_level]->height << 3;
 			offset_y = -offset_y;
 		} else { //(tile_start_y == levels[next_level].h - 1)
-			offset_y = levels[next_level].h << 3;
+			offset_y = levels[next_level]->height << 3;
 		}
 		offset_x = (tile_start_x << 3) - (INT16)((old_player_x + + player->coll_x) & 0xFFF8);
 	}
@@ -266,14 +266,14 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	if(tile_start_x == 0) {
 		ScrollUpdateColumn((scroll_end_x >> 3),       (scroll_y >> 3) - 1);
 		ScrollUpdateColumn((scroll_end_x >> 3) + 1,   (scroll_y >> 3) - 1);
-	} else if(tile_start_x == levels[next_level].w - 1) {
+	} else if(tile_start_x == levels[next_level]->width - 1) {
 		ScrollUpdateColumn((scroll_start_x >> 3) - 1, (scroll_y >> 3) - 1);
 	}
 
 	if(tile_start_y == 0) {
 		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_end_y >> 3));
 		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_end_y >> 3) + 1);
-	}  else if(tile_start_y == levels[next_level].h - 1) {
+	}  else if(tile_start_y == levels[next_level]->height - 1) {
 		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_start_y >> 3) - 1);
 	}
 
