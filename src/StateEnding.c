@@ -166,7 +166,8 @@ void Update_STATE_ENDING() {
 	scroll_x += scroll_p_x.b.h;
 
 	end_sprite_princess->x = scroll_x + end_princess_screen_x;
-	DrawSprite(end_sprite_princess);
+	THIS = end_sprite_princess;
+	DrawSprite();
 
 	switch(end_state) {
 		case AWAITING_PRINCESS_CENTER:
@@ -203,7 +204,8 @@ void Update_STATE_ENDING() {
 				}
 			}
 			end_sprite->x = scroll_x + (UINT16)end_enemy_x;
-			DrawSprite(end_sprite);
+			THIS = end_sprite;
+			DrawSprite();
 			break;
 
 		case CREDITS:

@@ -12,7 +12,7 @@ void Start_SPRITE_EPARTICLE() {
 }
 
 void Update_SPRITE_EPARTICLE() {
-	if(THIS->current_frame == 4) {
+	if(THIS->anim_frame == 4) {
 		SpriteManagerRemove(THIS_IDX);
 	}
 }

@@ -252,7 +252,7 @@ void Update_SPRITE_PRINCESS() {
 
 		case PRINCESS_STATE_HIT:
 			SetSpriteAnim(THIS, anim_hit, 15u);
-			if((THIS->current_frame + 1) % 2){
+			if((THIS->anim_frame + 1) % 2){
 				if(!bg_hidden) {
 					HIDE_BKG;
 					bg_hidden = 1;
@@ -265,7 +265,7 @@ void Update_SPRITE_PRINCESS() {
 				}
 			}
 
-			if(THIS->current_frame == 5) {
+			if(THIS->anim_frame == 5) {
 				SpriteManagerRemove(THIS_IDX);
 				scroll_target = 0;
 

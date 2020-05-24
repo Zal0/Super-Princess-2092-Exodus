@@ -27,9 +27,9 @@ void Update_SPRITE_CSHOOTER() {
 	}
 
 	if(data->cool_down < 10u) {
-		THIS->current_frame = 1;
+		SET_FRAME(THIS, (UINT8)1u);
 	} else {
-		THIS->current_frame = 0;
+		SET_FRAME(THIS, (UINT8)0u);
 	}
 }
 

@@ -37,9 +37,9 @@ void Update_SPRITE_SHOOTER() {
 	}
 
 	if(data->cool_down < 5u) {
-		THIS->current_frame = 1;
+		SET_FRAME(THIS, (UINT8)1u);
 	} else {
-		THIS->current_frame = 0;
+		SET_FRAME(THIS, (UINT8)0u);
 	}
 }
 

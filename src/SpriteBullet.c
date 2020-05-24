@@ -10,8 +10,6 @@ UINT8 bank_SPRITE_BULLET = 2;
 #include "Sound.h"
 
 void Start_SPRITE_BULLET() {
-	THIS->current_frame = 0;
-
 	THIS->coll_x = 0u;
 	THIS->coll_w = 4u;
 	THIS->coll_y = 5u;
@@ -41,7 +39,7 @@ void Update_SPRITE_BULLET() {
 		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER || spr->type == SPRITE_FLY || 
 			 spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
 			if(CheckCollision(THIS, spr)) {
-				if(spr->type != SPRITE_MUSHROOM || spr->anim_data[1 + spr->current_frame] == 1u) { //Mushroom can only die on frame 1
+				if(spr->type != SPRITE_MUSHROOM || spr->anim_data[1 + spr->anim_frame] == 1u) { //Mushroom can only die on frame 1
 					SpriteManagerRemove(i);
 					PlayFx(CHANNEL_4, 20, 0x0d, 0xff, 0x7d, 0xc0);
 				}
