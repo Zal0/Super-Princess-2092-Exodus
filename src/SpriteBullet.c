@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_BULLET = 2;
 
 #include "SpriteManager.h"
 
@@ -9,7 +8,7 @@ UINT8 bank_SPRITE_BULLET = 2;
 
 #include "Sound.h"
 
-void Start_SPRITE_BULLET() {
+void Start_SpriteBullet() {
 	THIS->coll_x = 0u;
 	THIS->coll_w = 4u;
 	THIS->coll_y = 5u;
@@ -19,7 +18,7 @@ void Start_SPRITE_BULLET() {
 }
 
 extern UINT8  scroll_collisions[128];
-void Update_SPRITE_BULLET() {
+void Update_SpriteBullet() {
 	UINT8 i;
 	struct Sprite* spr;
 	struct Sprite* spr2;
@@ -36,14 +35,14 @@ void Update_SPRITE_BULLET() {
 	}
 
 	SPRITEMANAGER_ITERATE(i, spr) {
-		if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER || spr->type == SPRITE_FLY || 
-			 spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
+		if(spr->type == SpriteMushroom || spr->type == SpriteCeilingShooter || spr->type == SpriteShooter || spr->type == SpriteFly || 
+			 spr->type == SpriteRoller || spr->type == SpriteOvni || spr->type == SpriteMissile) {
 			if(CheckCollision(THIS, spr)) {
-				if(spr->type != SPRITE_MUSHROOM || spr->anim_data[1 + spr->anim_frame] == 1u) { //Mushroom can only die on frame 1
+				if(spr->type != SpriteMushroom || spr->anim_data[1 + spr->anim_frame] == 1u) { //Mushroom can only die on frame 1
 					SpriteManagerRemove(i);
 					PlayFx(CHANNEL_4, 20, 0x0d, 0xff, 0x7d, 0xc0);
 				}
-				spr2 = SpriteManagerAdd(SPRITE_EPARTICLE, spr->x, spr->y);
+				spr2 = SpriteManagerAdd(SpriteEnemyParticle, spr->x, spr->y);
 				SpriteManagerRemove(THIS_IDX);
 				break;
 			}
@@ -51,5 +50,5 @@ void Update_SPRITE_BULLET() {
 	}
 }
 
-void Destroy_SPRITE_BULLET() {
+void Destroy_SpriteBullet() {
 }

@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_MUSHROOM = 2;
 
 #include "../res/src/mushroom.h"
 #include "SpriteManager.h"
@@ -16,7 +15,7 @@ struct MushroomCustomData {
 	UINT8 time_out;
 };
 
-void Start_SPRITE_MUSHROOM() {
+void Start_SpriteMushroom() {
 	struct MushroomCustomData* data = (struct MushroomCustomData*)THIS->custom_data;
 	SetSpriteAnim(THIS, mushroom_anim_hide, 3u);
 
@@ -25,7 +24,7 @@ void Start_SPRITE_MUSHROOM() {
 
 extern struct Sprite* sprite_princess;
 
-void Update_SPRITE_MUSHROOM() {
+void Update_SpriteMushroom() {
 	struct MushroomCustomData* data = (struct MushroomCustomData*)THIS->custom_data;
 	UINT8 x;
 	
@@ -50,5 +49,5 @@ void Update_SPRITE_MUSHROOM() {
 	}
 }
 
-void Destroy_SPRITE_MUSHROOM() {
+void Destroy_SpriteMushroom() {
 }

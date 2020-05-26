@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_OVNI = 2;
 
 #include "Math.h"
 #include "Scroll.h"
@@ -12,7 +11,7 @@ struct OvniCustomData {
 	UINT8 missile_launched;
 };
 
-void Start_SPRITE_OVNI() {
+void Start_SpriteOvni() {
 	struct OvniCustomData* data = (struct OvniCustomData*)THIS->custom_data;
 
 	data->vx.w = 0;
@@ -20,7 +19,7 @@ void Start_SPRITE_OVNI() {
 	data->missile_launched = 0;
 }
 
-void Update_SPRITE_OVNI() {
+void Update_SpriteOvni() {
 	struct OvniCustomData* data = (struct OvniCustomData*)THIS->custom_data;
 	
 	if(data->vx.w == 0) {
@@ -42,12 +41,12 @@ void Update_SPRITE_OVNI() {
 			if( (U_LESS_THAN(data->vx.w, 0) && U_LESS_THAN(THIS->x, scroll_target->x)) ||
 					(U_LESS_THAN(0, data->vx.w) && U_LESS_THAN(scroll_target->x, THIS->x)) 
 			) {
-				SpriteManagerAdd(SPRITE_MISSILE, THIS->x, THIS->y + 8);
+				SpriteManagerAdd(SpriteMissile, THIS->x, THIS->y + 8);
 				data->missile_launched = 1;
 			}
 		}
 	}
 }
 
-void Destroy_SPRITE_OVNI() {
+void Destroy_SpriteOvni() {
 }

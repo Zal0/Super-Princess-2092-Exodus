@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_FLY = 2;
 
 #include "Scroll.h"
 #include "Math.h"
@@ -19,7 +18,7 @@ const UINT8 anim_fly[] = {2, 0, 1};
 #define DIST_COUNTER 40
 #define ACCEL_OFFSET 4
 #define HEIGHT 50
-void Start_SPRITE_FLY() {
+void Start_SpriteFly() {
 	struct FlyCustomData* data = (struct FlyCustomData*)THIS->custom_data;
 	
 	SetSpriteAnim(THIS, anim_fly, 33);
@@ -32,7 +31,7 @@ void Start_SPRITE_FLY() {
 		SPRITE_SET_VMIRROR(THIS);
 }
 
-void Update_SPRITE_FLY() {
+void Update_SpriteFly() {
 	struct FlyCustomData* data = (struct FlyCustomData*)THIS->custom_data;
 
 	if(scroll_target) {
@@ -80,5 +79,5 @@ void Update_SPRITE_FLY() {
 	data->vy.b.h = 0;
 }
 
-void Destroy_SPRITE_FLY() {
+void Destroy_SpriteFly() {
 }

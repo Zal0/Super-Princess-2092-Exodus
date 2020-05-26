@@ -1,8 +1,7 @@
-#pragma bank 7
+#include "Banks/SetBank7.h"
 #include "main.h"
-UINT8 bank_STATE_STAGE_SELECT = 7;
 
-#include "../res/src/pressstarttileset.h"
+#include "../res/src/pressstart.h"
 #include "../res/src/stageSelect.h"
 #include "../res/src/font.h"
 
@@ -14,7 +13,6 @@ UINT8 bank_STATE_STAGE_SELECT = 7;
 #include "gbt_player.h"
 #include "Sound.h"
 
-extern struct LevelInfo* stages[];
 extern UINT8 current_stage;
 extern UINT8 current_level;
 extern UINT8 n_lives;
@@ -30,12 +28,12 @@ void SetStage(UINT8 stage) {
 	PlayFx(CHANNEL_1, 10, 0x17, 0x81, 0xF3, 0x62, 0x87);
 }
 
-void Start_STATE_STAGE_SELECT() {
+void Start_StateStageSelect() {
 	gbt_stop();
 	if(stage_completion == 7) {
-		SetState(STATE_ENDING);
+		SetState(StateEnding);
 	} else {
-		InitScrollTiles(0, &pressstarttileset);
+		InitScrollTiles(0, &pressstart);
 		InitScroll(&stageSelect, 0, 0);
 		SHOW_BKG;
 	
@@ -53,7 +51,7 @@ void Start_STATE_STAGE_SELECT() {
 	}
 }
 
-void Update_STATE_STAGE_SELECT() {
+void Update_StateStageSelect() {
 	UINT8 tmp;
 	if(KEY_TICKED(J_LEFT)) {
 		for(tmp = current_stage - 1; tmp != 255; -- tmp) {
@@ -78,6 +76,6 @@ void Update_STATE_STAGE_SELECT() {
 		current_level = 0;
 		n_lives = 3;
 
-		SetState(STATE_STAGEINTRO);
+		SetState(StateStageIntro);
 	}
 }

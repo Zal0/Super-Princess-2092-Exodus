@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_PRINCESS = 2;
 
 #include "gb/gb.h"
 
@@ -50,7 +49,7 @@ UINT16 princess_old_x, princess_old_y;
 
 UINT8 bg_hidden = 0;
 
-void Start_SPRITE_PRINCESS() {
+void Start_SpritePrincess() {
 	SetSpriteAnim(THIS, anim_idle, 3u);
 	THIS->coll_x += 4u;
 	THIS->coll_w -= 7u;
@@ -104,7 +103,7 @@ void CheckCollisionTile() {
 		case 27u:
 		case 28u:
 			SET_BIT(stage_completion, current_stage);
-			SetState(STATE_STAGE_SELECT);
+			SetState(StateStageSelect);
 			break;
 	}
 }
@@ -153,7 +152,7 @@ void MovePrincess() {
 }
 
 void Shoot() {
-	struct Sprite* bullet_sprite = SpriteManagerAdd(SPRITE_BULLET, 0, 0);
+	struct Sprite* bullet_sprite = SpriteManagerAdd(SpriteBullet, 0, 0);
 
 	bullet_sprite->flags = THIS->flags;
 	if(SPRITE_GET_VMIRROR(THIS)) 
@@ -174,7 +173,7 @@ void Jump() {
 	}
 }
 
-void Update_SPRITE_PRINCESS() {
+void Update_SpritePrincess() {
 	UINT8 i;
 	struct Sprite* spr;
 
@@ -309,8 +308,8 @@ void Update_SPRITE_PRINCESS() {
 	if(princes_state != PRINCESS_STATE_HIT) {
 		//Check enemy collision
 		SPRITEMANAGER_ITERATE(i, spr) {
-			if(spr->type == SPRITE_MUSHROOM || spr->type == SPRITE_ENEMY_BULLET || spr->type == SPRITE_CSHOOTER || spr->type == SPRITE_SHOOTER ||
-				 spr->type == SPRITE_FLY || spr->type == SPRITE_ROLLER || spr->type == SPRITE_OVNI || spr->type == SPRITE_MISSILE) {
+			if(spr->type == SpriteMushroom || spr->type == SpriteEnemyBullet || spr->type == SpriteCeilingShooter || spr->type == SpriteShooter ||
+				 spr->type == SpriteFly || spr->type == SpriteRoller || spr->type == SpriteOvni || spr->type == SpriteMissile) {
 				if(CheckCollision(THIS, spr)) {
 					Hit();
 				}
@@ -328,7 +327,7 @@ void Update_SPRITE_PRINCESS() {
 	}
 }
 
-void Destroy_SPRITE_PRINCESS() {
+void Destroy_SpritePrincess() {
 	sprite_princess = 0;
 }
 

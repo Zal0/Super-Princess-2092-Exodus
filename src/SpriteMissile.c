@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_MISSILE = 2;
 
 #include "Math.h"
 #include "SpriteManager.h"
@@ -14,7 +13,7 @@ struct MissileCustomData {
 };
 
 
-void Start_SPRITE_MISSILE() {
+void Start_SpriteMissile() {
 	struct MissileCustomData* data = (struct MissileCustomData*)THIS->custom_data;
 
 	THIS->coll_x += 2;
@@ -24,7 +23,7 @@ void Start_SPRITE_MISSILE() {
 	data->vy.w = 255;
 }
 
-void Update_SPRITE_MISSILE() {
+void Update_SpriteMissile() {
 	struct MissileCustomData* data = (struct MissileCustomData*)THIS->custom_data;
 
 	if(U_LESS_THAN(data->vy.w, 1600)) {
@@ -34,12 +33,12 @@ void Update_SPRITE_MISSILE() {
 	data->ty.w += data->vy.w;
 	if( TranslateSprite(THIS, 0, (INT16)data->ty.b.h)) {
 		SpriteManagerRemove(THIS_IDX);
-		SpriteManagerAdd(SPRITE_EPARTICLE, THIS->x, THIS->y);
+		SpriteManagerAdd(SpriteEnemyParticle, THIS->x, THIS->y);
 		PlayFx(CHANNEL_4, 20, 0x0d, 0xff, 0x7d, 0xc0);
 	}
 	data->ty.b.h = 0;
 }
 
-void Destroy_SPRITE_MISSILE() {
+void Destroy_SpriteMissile() {
 }
 

@@ -1,8 +1,6 @@
-#pragma bank 6
+#include "Banks/SetBank6.h"
 #include "main.h"
-UINT8 bank_STATE_ENDING = 6;
 
-#include "../res/src/stage3_bg.h"
 #include "../res/src/stageEnding.h"
 #include "../res/src/stageEndingWindow.h"
 #include "../res/src/font.h"
@@ -39,15 +37,15 @@ struct EndSpriteInfo {
 };
 
 const struct EndSpriteInfo endSpritesInfo[] = {
-	{ SPRITE_MUSHROOM, "Mushroom",        {1, 1}},
-	{ SPRITE_SHOOTER,  "Shooter",         {1, 1}},
-	{ SPRITE_CSHOOTER, "Ceiling Shooter", {1, 1}},
-	{ SPRITE_FLY,      "Fly",             {1, 1}},
-	{ SPRITE_ROLLER,   "Roller",          {1, 1}},
-	{ SPRITE_OVNI,     "OVNI",            {1, 0}},
-	{ SPRITE_MISSILE,  "Missile",         {1, 0}},
-	{ SPRITE_PLATFORM, "Platform",        {1, 0}},
-	{ SPRITE_PRINCESS, "Super Princess",  {1, 0}},
+	{ SpriteMushroom, "Mushroom",        {1, 1}},
+	{ SpriteShooter,  "Shooter",         {1, 1}},
+	{ SpriteCeilingShooter, "Ceiling Shooter", {1, 1}},
+	{ SpriteFly,      "Fly",             {1, 1}},
+	{ SpriteRoller,   "Roller",          {1, 1}},
+	{ SpriteOvni,     "OVNI",            {1, 0}},
+	{ SpriteMissile,  "Missile",         {1, 0}},
+	{ SpritePlatform, "Platform",        {1, 0}},
+	{ SpritePrincess, "Super Princess",  {1, 0}},
 };
 
 UINT8 enemy_idx;
@@ -122,10 +120,9 @@ UINT8 STRLEN(const UINT8* str) {
 	return i;
 }
 
-void Start_STATE_ENDING() {
+void Start_StateEnding() {
 	UINT8 i;
 
-	InitScrollTiles(0, &stage3_bg);
 	scroll_target = 0;
 	InitScroll(&stageEnding, 0, 0);
 	for(i = 21; i < stageEndingWidth; ++i) {
@@ -148,7 +145,7 @@ void Start_STATE_ENDING() {
 	SHOW_SPRITES;
 
 	end_sprite_princess = sprite_manager_sprites[StackPop(sprite_manager_sprites_pool)];
-	InitSprite(end_sprite_princess, FRAME_16x16, spriteIdxs[SPRITE_PRINCESS]);
+	InitSprite(end_sprite_princess, FRAME_16x16, spriteIdxs[SpritePrincess]);
 	SetSpriteAnim(end_sprite_princess, end_anim_walk, 32);
 	end_princess_screen_x = -16;
 	end_sprite_princess->x = scroll_x + end_princess_screen_x;
@@ -159,7 +156,7 @@ void Start_STATE_ENDING() {
 	PlayMusic(exo_ending_mod_Data, 7, 1);
 }
 
-void Update_STATE_ENDING() {
+void Update_StateEnding() {
 	const struct EndSpriteInfo* info;
 
 	scroll_p_x.w += 32;
@@ -189,7 +186,7 @@ void Update_STATE_ENDING() {
 					end_enemy_x --;
 					if(U_LESS_THAN(end_enemy_x + (UINT16)16, 0)) {
 						info = &endSpritesInfo[enemy_idx];
-						if(info->type == SPRITE_PRINCESS) {
+						if(info->type == SpritePrincess) {
 							SetEndState(CREDITS);
 						} else {
 							enemy_idx ++;

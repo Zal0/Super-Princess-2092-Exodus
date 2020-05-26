@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_CSHOOTER = 2;
 
 #include "../res/src/ceilingshooter.h"
 #include "SpriteManager.h"
@@ -11,13 +10,13 @@ struct CShooterCustomData {
 	UINT8 cool_down;
 };
 
-void Start_SPRITE_CSHOOTER() { 
+void Start_SpriteCeilingShooter() { 
 	struct CShooterCustomData* data = (struct CShooterCustomData*)THIS->custom_data;
 
 	data->cool_down = 70;
 }
 
-void Update_SPRITE_CSHOOTER() {
+void Update_SpriteCeilingShooter() {
 	struct CShooterCustomData* data = (struct CShooterCustomData*)THIS->custom_data;
 	
 	data->cool_down += 1 << delta_time;
@@ -33,5 +32,5 @@ void Update_SPRITE_CSHOOTER() {
 	}
 }
 
-void Destroy_SPRITE_CSHOOTER() { 
+void Destroy_SpriteCeilingShooter() { 
 }

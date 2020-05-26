@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_ROLLER = 2;
 
 #include "SpriteManager.h"
 #include "Scroll.h"
@@ -15,7 +14,7 @@ struct RollerCustomData {
 	fixed vy;
 };
 
-void Start_SPRITE_ROLLER() {
+void Start_SpriteRoller() {
 	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
 
 	THIS->coll_y += 1;
@@ -32,7 +31,7 @@ INT16 DispLeft(INT16 v, INT8 desp) {
 	return v >> desp;
 }
 
-void Update_SPRITE_ROLLER() {
+void Update_SpriteRoller() {
 	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
 	
 	if(THIS->anim_data == 0) {
@@ -65,5 +64,5 @@ void Update_SPRITE_ROLLER() {
 	}
 }
 
-void Destroy_SPRITE_ROLLER() {
+void Destroy_SpriteRoller() {
 }

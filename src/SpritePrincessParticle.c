@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_PPARTICLE = 2;
 
 #include "SpriteManager.h"
 #include "ZGBMain.h"
@@ -13,23 +12,23 @@ struct PParticleCustomData {
 };
 
 void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
-	struct Sprite* spr = SpriteManagerAdd(SPRITE_PPARTICLE, x, y);
+	struct Sprite* spr = SpriteManagerAdd(SpritePrincessParticle, x, y);
 	struct PParticleCustomData* data = (struct PParticleCustomData*)spr->custom_data;
 
 	data->vx = vx;
 	data->vy = vy;
 }
 
-void Start_SPRITE_PPARTICLE() {
+void Start_SpritePrincessParticle() {
 	SetSpriteAnim(THIS, pparticle_anim_idle, 10u);
 }
 
-void Update_SPRITE_PPARTICLE() {
+void Update_SpritePrincessParticle() {
 	struct PParticleCustomData* data = (struct PParticleCustomData*)THIS->custom_data;
 	
 	THIS->x += (INT16)data->vx << delta_time;
 	THIS->y += (INT16)data->vy << delta_time;
 }
 
-void Destroy_SPRITE_PPARTICLE() {
+void Destroy_SpritePrincessParticle() {
 }

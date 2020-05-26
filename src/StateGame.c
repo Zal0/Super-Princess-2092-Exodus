@@ -1,6 +1,5 @@
-#pragma bank 6
+#include "Banks/SetBank6.h"
 #include "main.h"
-UINT8 bank_STATE_GAME = 6;
 
 #include "Scroll.h"
 #include "Frame.h"
@@ -62,12 +61,6 @@ UINT8 current_level;
 UINT8 n_lives;
 UINT8 stage_completion;
 
-typedef struct LevelInfo {
-	UINT16 w;
-	UINT16 h;
-	struct MapInfo* map;
-};
-
 const struct MapInfo* levels_1[] = {
 	&stage1_1,
 	&stage1_2,
@@ -107,16 +100,18 @@ UINT8 current_stage = 0;
 extern struct Sprite* sprite_princess;
 void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 	const struct MapInfo** levels = stages[current_stage];
+	UINT8 map_w, map_h;
+	GetMapSize(levels[current_level], &map_w, &map_h);
 
 	if(tile_start_x == 0) {
 		tile_start_x += 1;
-	} else if(tile_start_x == levels[current_level]->width - 1) {
+	} else if(tile_start_x == map_w - 1) {
 		tile_start_x -= 2;
 	}
 
 	if(tile_start_y == 0) {
 		tile_start_y += 1;
-	} else if(tile_start_y == levels[current_level]->height - 1) {
+	} else if(tile_start_y == map_h - 1) {
 		tile_start_y -= 2;
 	} else {
 		tile_start_y -= 1;
@@ -126,16 +121,17 @@ void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 		sprite_princess->x = tile_start_x << 3;
 		sprite_princess->y = tile_start_y << 3;
 	} else {
-		SpriteManagerAdd(SPRITE_PRINCESS, tile_start_x << 3, tile_start_y << 3);
+		SpriteManagerAdd(SpritePrincess, tile_start_x << 3, tile_start_y << 3);
 	}
 }
 
-void Start_STATE_GAME() {
+void Start_StateGame() {
 	UINT8 i;
 	UINT16 tile_start_x, tile_start_y;
 	const UINT8* coll_list = 0;
 	const UINT8* coll_down_list = 0;
 	const struct MapInfo** levels = stages[current_stage];
+	UINT8 map_w, map_h;
 
 	SPRITES_8x16;
 	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
@@ -145,22 +141,20 @@ void Start_STATE_GAME() {
 
 	INIT_CONSOLE(font, 3, 2);
 
+	GetMapSize(levels[current_level], &map_w, &map_h);
 	ScrollFindTile(levels[current_level], 2, 
-		0, 0, levels[current_level]->width, levels[current_level]->height,
+		0, 0, map_w, map_h,
 		&tile_start_x, &tile_start_y);
 	InitPlayerPos(tile_start_x, tile_start_y);
 	scroll_target = sprite_princess;
 
 	if(levels == levels_1) {
-		InitScrollTiles(0, &stage1_bg);
 		coll_list = collision_tiles_1;
 		coll_down_list = collision_tiles_down_1;
 	} else if(levels == levels_2) {
-		InitScrollTiles(0, &stage2_bg);
 		coll_list = collision_tiles_2;
 		coll_down_list = collision_tiles_down_2;
 	} else if(levels == levels_3) {
-		InitScrollTiles(0, &stage3_bg);
 		coll_list = collision_tiles_3;
 		coll_down_list = collision_tiles_down_3;
 	}
@@ -179,7 +173,7 @@ INT16 Interpole(INT16 a, INT16 b, INT16 t, INT16 max) {
 	return a + (b - a) * t / max;
 }
 
-void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, struct MapInfo* map, UINT8 tile, UINT16* x, UINT16* y) {
+void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, const struct MapInfo* map, UINT8 tile, UINT16* x, UINT16* y) {
 	if(ScrollFindTile(map, tile, 0, 0, map_w, 1, x, y)) {
 		return;
 	}
@@ -209,18 +203,22 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	INT16 offset_x = 0;
 	INT16 offset_y = 0;
 	const struct MapInfo** levels = stages[current_stage];
+	UINT8 next_level_w, next_level_h, current_level_w, current_level_h;
 
-	ScrollFindTileInCorners(levels[next_level]->width, levels[next_level]->height, levels[next_level], load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
+	GetMapSize(levels[next_level], &next_level_w, &next_level_h);
+	GetMapSize(levels[current_level], &current_level_w, &current_level_h);
+
+	ScrollFindTileInCorners(next_level_w, next_level_h, levels[next_level], load_next == -1 ? 1 : 2, &tile_start_x, &tile_start_y);
 	wait_vbl_done();
 	InitPlayerPos(tile_start_x, tile_start_y);
 	ScrollSetMap(levels[next_level]);
 	
-	if((tile_start_x == 0) || (tile_start_x == levels[next_level]->width - 1)) {
+	if((tile_start_x == 0) || (tile_start_x == next_level_w - 1)) {
 		if(tile_start_x == 0) {
-			offset_x = levels[current_level]->width << 3;
+			offset_x = current_level_w << 3;
 			offset_x = -offset_x;
 		} else  { // tile_start_x == levels[next_level].w - 1)
-			offset_x = levels[next_level]->width << 3;
+			offset_x = next_level_w << 3;
 		}
 		offset_y = (tile_start_y << 3) - (INT16)((old_player_y + 15) & 0xFFF8);
 
@@ -230,12 +228,12 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 		//scroll_end_y = scroll_y;
 	}
 	
-	if((tile_start_y == 0) || (tile_start_y == levels[next_level]->height - 1)) {
+	if((tile_start_y == 0) || (tile_start_y == next_level_h - 1)) {
 		if(tile_start_y == 0) {
-			offset_y = levels[current_level]->height << 3;
+			offset_y = current_level_h << 3;
 			offset_y = -offset_y;
 		} else { //(tile_start_y == levels[next_level].h - 1)
-			offset_y = levels[next_level]->height << 3;
+			offset_y = next_level_h << 3;
 		}
 		offset_x = (tile_start_x << 3) - (INT16)((old_player_x + + player->coll_x) & 0xFFF8);
 	}
@@ -266,14 +264,14 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	if(tile_start_x == 0) {
 		ScrollUpdateColumn((scroll_end_x >> 3),       (scroll_y >> 3) - 1);
 		ScrollUpdateColumn((scroll_end_x >> 3) + 1,   (scroll_y >> 3) - 1);
-	} else if(tile_start_x == levels[next_level]->width - 1) {
+	} else if(tile_start_x == next_level_w - 1) {
 		ScrollUpdateColumn((scroll_start_x >> 3) - 1, (scroll_y >> 3) - 1);
 	}
 
 	if(tile_start_y == 0) {
 		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_end_y >> 3));
 		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_end_y >> 3) + 1);
-	}  else if(tile_start_y == levels[next_level]->height - 1) {
+	}  else if(tile_start_y == next_level_h - 1) {
 		ScrollUpdateRow((scroll_x >> 3) - 1, (scroll_start_y >> 3) - 1);
 	}
 
@@ -296,14 +294,14 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 }
 
 UINT8 wait_end_time = 0;
-void Update_STATE_GAME() {
+void Update_StateGame() {
 	if(sprite_princess == 0) {
 		wait_end_time ++;
 		if(wait_end_time > 80) {
 			wait_end_time = 0;
 
 			n_lives --;
-			SetState(n_lives == 0 ? STATE_GAMEOVER : STATE_LIVELOST);
+			SetState(n_lives == 0 ? StateGameOver : StateLiveLost);
 		}
 	}
 

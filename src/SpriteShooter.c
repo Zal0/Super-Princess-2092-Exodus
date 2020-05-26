@@ -1,6 +1,5 @@
-#pragma bank 2
+#include "Banks/SetBank2.h"
 #include "main.h"
-UINT8 bank_SPRITE_SHOOTER = 2;
 
 #include "SpriteManager.h"
 #include "../res/src/wallshooter.h"
@@ -13,7 +12,7 @@ struct WShooterCustomData {
 	UINT8 cool_down;
 };
 
-void Start_SPRITE_SHOOTER() { 
+void Start_SpriteShooter() { 
 	UINT8 tile = GetScrollTile((THIS->x - 8) >> 3, THIS->y >> 3);
 	struct WShooterCustomData* data = (struct WShooterCustomData*)THIS->custom_data;
 	data->cool_down = 70;
@@ -23,7 +22,7 @@ void Start_SPRITE_SHOOTER() {
 	}
 }
 
-void Update_SPRITE_SHOOTER() {
+void Update_SpriteShooter() {
 	struct WShooterCustomData* data = (struct WShooterCustomData*)THIS->custom_data;
 	
 	data->cool_down += 1 << delta_time;
@@ -43,5 +42,5 @@ void Update_SPRITE_SHOOTER() {
 	}
 }
 
-void Destroy_SPRITE_SHOOTER() { 
+void Destroy_SpriteShooter() { 
 }
