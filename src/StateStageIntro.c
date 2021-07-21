@@ -5,6 +5,7 @@
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "Keys.h"
+#include "Music.h"
 
 #include "../res/src/pressstart.h"
 #include "../res/src/menuBG.h"
@@ -12,7 +13,7 @@
 
 #include "Print.h"
 
-extern const unsigned char* exo_stage_mod_Data[];
+DECLARE_MUSIC(exo_stage);
 extern UINT8 current_stage;
 extern UINT8 n_lives;
 
@@ -27,7 +28,7 @@ void Start_StateStageIntro() {
 	PRINT_POS(4, 13);
 	Printf("%d LIFES LEFT", (UINT16)(n_lives));
 
-	PlayMusic(exo_stage_mod_Data, 4, 0);
+	PlayMusic(exo_stage, 0);
 }
 
 void Update_StateStageIntro() {

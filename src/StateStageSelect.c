@@ -10,7 +10,7 @@
 #include "Scroll.h"
 #include "Keys.h"
 #include "Math.h"
-#include "gbt_player.h"
+#include "Music.h"
 #include "Sound.h"
 
 extern UINT8 current_stage;
@@ -18,7 +18,7 @@ extern UINT8 current_level;
 extern UINT8 n_lives;
 extern UINT8 stage_completion;
 
-extern const unsigned char* levelselect_mod_Data[];
+DECLARE_MUSIC(levelselect);
 
 void SetStage(UINT8 stage) {
 	current_stage = stage;
@@ -29,7 +29,7 @@ void SetStage(UINT8 stage) {
 }
 
 void Start_StateStageSelect() {
-	gbt_stop();
+	StopMusic;
 	if(stage_completion == 7) {
 		SetState(StateEnding);
 	} else {
@@ -47,7 +47,7 @@ void Start_StateStageSelect() {
 			}
 		}
 
-		PlayMusic(levelselect_mod_Data, 4, 1);
+		PlayMusic(levelselect, 1);
 	}
 }
 

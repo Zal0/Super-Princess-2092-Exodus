@@ -5,17 +5,18 @@
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "Keys.h"
+#include "Music.h"
 
 #include "../res/src/pressstart.h"
 #include "../res/src/gameovertilemap.h"
 
-extern const unsigned char* exo_gameover_mod_Data[];
+DECLARE_MUSIC(exo_gameover);
 
 void Start_StateGameOver() {
 	InitScroll(&gameovertilemap, 0, 0);
 	SHOW_BKG;
 
-	PlayMusic(exo_gameover_mod_Data, 4, 0);
+	PlayMusic(exo_gameover, 0);
 }
 
 void Update_StateGameOver() {

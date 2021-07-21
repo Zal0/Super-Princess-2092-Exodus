@@ -10,6 +10,7 @@
 #include "SpriteManager.h"
 #include "Math.h"
 #include "Print.h"
+#include "Music.h"
 
 fixed scroll_p_x;
 extern UINT8 n_sprite_types;
@@ -52,7 +53,7 @@ UINT8 enemy_idx;
 UINT16 text_wait;
 INT16 end_enemy_x;
 
-extern const unsigned char* exo_ending_mod_Data[];
+DECLARE_MUSIC(exo_ending);
 
 void PrepareEnemy() {
 	struct EndSpriteInfo* info;
@@ -153,7 +154,7 @@ void Start_StateEnding() {
 	
 	SetEndState(AWAITING_PRINCESS_CENTER);
 
-	PlayMusic(exo_ending_mod_Data, 7, 1);
+	PlayMusic(exo_ending, 1);
 }
 
 void Update_StateEnding() {

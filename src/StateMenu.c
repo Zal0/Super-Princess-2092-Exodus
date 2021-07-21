@@ -5,16 +5,17 @@
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "Keys.h"
+#include "Music.h"
 
 #include "../res/src/pressstarttilemap.h"
 
-extern const unsigned char* exo_start_mod_Data[];
+DECLARE_MUSIC(exo_start);
 
 void Start_StateMenu() {
 	InitScroll(&pressstarttilemap, 0, 0);
 	SHOW_BKG;
 
-	PlayMusic(exo_start_mod_Data, 4, 0);
+	PlayMusic(exo_start, 0);
 }
 
 extern UINT8 stage_completion;

@@ -7,7 +7,7 @@
 #include "Keys.h"
 #include "SpriteManager.h"
 #include "Math.h"
-#include "gbt_player.h"
+#include "Music.h"
 
 #include "ZGBMain.h"
 
@@ -53,9 +53,9 @@ const UINT8 collision_tiles_down_2[] = {23, 24, 0};
 const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 27, 28, 33, 35, 0};
 const UINT8 collision_tiles_down_3[] = {23, 24, 0};
 
-extern const unsigned char* exo_level1_mod_Data[];
-extern const unsigned char* exo_level2_mod_Data[];
-extern const unsigned char* exo_level3_mod_Data[];
+DECLARE_MUSIC(exo_level1);
+DECLARE_MUSIC(exo_level2);
+DECLARE_MUSIC(exo_level3);
 
 UINT8 current_level;
 UINT8 n_lives;
@@ -163,9 +163,9 @@ void Start_StateGame() {
 	SHOW_BKG;
 
 	switch(current_stage) {
-		case 1:  PlayMusic(exo_level2_mod_Data, 4, 1); break;
-		case 2:  PlayMusic(exo_level3_mod_Data, 4, 1); break;
-		default: PlayMusic(exo_level1_mod_Data, 4, 1); break;
+		case 1:  PlayMusic(exo_level2, 1); break;
+		case 2:  PlayMusic(exo_level3, 1); break;
+		default: PlayMusic(exo_level1, 1); break;
 	}
 }
 
