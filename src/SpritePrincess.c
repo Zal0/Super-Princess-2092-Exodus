@@ -10,7 +10,7 @@
 #include "SpriteManager.h"
 #include "Math.h"
 #include "Sound.h"
-#include "gbt_player.h"
+#include "Music.h"
 
 #include "../res/src/princess.h"
 
@@ -72,7 +72,7 @@ void Start_SpritePrincess() {
 
 void Hit() {
 	princes_state = PRINCESS_STATE_HIT;
-	gbt_stop();
+	StopMusic;
 
 	NR52_REG = 0x80; //Enables sound, you should always setup this first
 	NR51_REG = 0xFF; //Enables all channels (left and right)
