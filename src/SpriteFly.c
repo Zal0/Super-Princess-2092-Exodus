@@ -26,9 +26,9 @@ void Start_SpriteFly() {
 	data->vy.w = 0;
 	data->tx = 0;
 	if(U_LESS_THAN(scroll_target->x, THIS->x))
-		SPRITE_UNSET_VMIRROR(THIS);
+		THIS->mirror = NO_MIRROR;
 	else
-		SPRITE_SET_VMIRROR(THIS);
+		THIS->mirror = V_MIRROR;
 }
 
 void Update_SpriteFly() {
@@ -36,7 +36,7 @@ void Update_SpriteFly() {
 
 	if(scroll_target) {
 		if(data->tx == 0) {
-			data->vx.w = (THIS->flags == 0) ? (data->vx.w - (100 << delta_time)) : (data->vx.w + (100 << delta_time));
+			data->vx.w = (THIS->mirror == NO_MIRROR) ? (data->vx.w - (100 << delta_time)) : (data->vx.w + (100 << delta_time));
 			if(U_LESS_THAN(DISTANCE(THIS->x + 8, scroll_target->x + 8), DIST_ACTION)){
 				data->tx = scroll_target->x;
 				data->ty = scroll_target->y + 8;
@@ -47,7 +47,7 @@ void Update_SpriteFly() {
 			if(U_LESS_THAN(THIS->y, data->ty)) {
 				//ATTACKING
 				if(U_LESS_THAN(DISTANCE(data->ty, THIS->y), 8)){
-					if(THIS->flags == 0) {
+					if(THIS->mirror == NO_MIRROR) {
 						if(U_LESS_THAN(THIS->x - 8, scroll_target->x)) {
 							data->tx = (scroll_target->x - DIST_COUNTER);
 						}
@@ -63,9 +63,9 @@ void Update_SpriteFly() {
 				//CHARGING 
 				if(U_LESS_THAN(DISTANCE(data->ty, THIS->y), 4)){
 					if(U_LESS_THAN(scroll_target->x, THIS->x))
-						SPRITE_UNSET_VMIRROR(THIS);
+						THIS->mirror = NO_MIRROR;
 					else
-						SPRITE_SET_VMIRROR(THIS);
+						THIS->mirror = V_MIRROR;
 					data->tx = 0;
 				}
 			}

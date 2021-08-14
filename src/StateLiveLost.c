@@ -7,9 +7,8 @@
 #include "Keys.h"
 #include "Music.h"
 
-#include "../res/src/pressstart.h"
-#include "../res/src/menuBG.h"
-#include "../res/src/font.h"
+IMPORT_MAP(menuBG);
+IMPORT_TILES(font);
 
 #include "Print.h"
 
@@ -17,7 +16,7 @@ DECLARE_MUSIC(exo_stage);
 extern UINT8 n_lives;
 
 void Start_StateLiveLost() {
-	InitScroll(&menuBG, 0, 0);
+	InitScroll(BANK(menuBG), &menuBG, 0, 0);
 	SHOW_BKG;
 
 	INIT_FONT(font, PRINT_BKG);

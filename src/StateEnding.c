@@ -1,16 +1,16 @@
 #include "Banks/SetBank6.h"
 #include "main.h"
 
-#include "../res/src/stageEnding.h"
-#include "../res/src/stageEndingWindow.h"
-#include "../res/src/font.h"
-
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "SpriteManager.h"
 #include "Math.h"
 #include "Print.h"
 #include "Music.h"
+
+IMPORT_MAP(stageEndingWindow);
+IMPORT_MAP(stageEnding);
+IMPORT_TILES(font);
 
 fixed scroll_p_x;
 extern UINT8 n_sprite_types;
@@ -38,15 +38,15 @@ struct EndSpriteInfo {
 };
 
 const struct EndSpriteInfo endSpritesInfo[] = {
-	{ SpriteMushroom, "Mushroom",        {1, 1}},
-	{ SpriteShooter,  "Shooter",         {1, 1}},
+	{ SpriteMushroom, "Mushroom",              {1, 1}},
+	{ SpriteShooter,  "Shooter",               {1, 1}},
 	{ SpriteCeilingShooter, "Ceiling Shooter", {1, 1}},
-	{ SpriteFly,      "Fly",             {1, 1}},
-	{ SpriteRoller,   "Roller",          {1, 1}},
-	{ SpriteOvni,     "OVNI",            {1, 0}},
-	{ SpriteMissile,  "Missile",         {1, 0}},
-	{ SpritePlatform, "Platform",        {1, 0}},
-	{ SpritePrincess, "Super Princess",  {1, 0}},
+	{ SpriteFly,      "Fly",                   {1, 1}},
+	{ SpriteRoller,   "Roller",                {1, 1}},
+	{ SpriteOvni,     "OVNI",                  {1, 0}},
+	{ SpriteMissile,  "Missile",               {1, 0}},
+	{ SpritePlatform, "Platform",              {1, 0}},
+	{ SpritePrincess, "Super Princess",        {1, 0}},
 };
 
 UINT8 enemy_idx;
@@ -59,11 +59,12 @@ void PrepareEnemy() {
 	struct EndSpriteInfo* info;
 
 	info = (struct EndSpriteInfo*)&endSpritesInfo[enemy_idx];
-	InitSprite(end_sprite, FRAME_16x16, spriteIdxs[info->type]);
+	InitSprite(end_sprite, info->type);
 	SetSpriteAnim(end_sprite, info->anim_data, 1);
 	end_enemy_x = 160 + 16;
 	end_sprite->x = scroll_x + end_enemy_x;
 	end_sprite->y = scroll_y + 100u;
+	end_sprite->mirror = NO_MIRROR;
 }
 
 const char* Credits[] = {
@@ -84,12 +85,10 @@ const char* Credits[] = {
 	""
 };
 
-
-
 void PrepareCredits() {
 	text_wait = 300;
 
-	InitWindow(0, 0, &stageEndingWindow);
+	InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
 	PRINT(0, 0, Credits[enemy_idx ++]);
 	PRINT(0, 2, Credits[enemy_idx ++]);
 }
@@ -125,8 +124,8 @@ void Start_StateEnding() {
 	UINT8 i;
 
 	scroll_target = 0;
-	InitScroll(&stageEnding, 0, 0);
-	for(i = 21; i < stageEndingWidth; ++i) {
+	InitScroll(BANK(stageEnding), &stageEnding, 0, 0);
+	for(i = 21; i < stageEnding.width; ++i) {
 		ScrollUpdateColumn(i, 0);
 	}
 	scroll_p_x.w = 0;
@@ -136,7 +135,7 @@ void Start_StateEnding() {
 	INIT_FONT(font, PRINT_WIN);
 	WX_REG = 7;
 	WY_REG = (144 - (6 << 3));
-	InitWindow(0, 0, &stageEndingWindow);
+	InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
 	SHOW_WIN;
 
 	SPRITES_8x16;
@@ -146,17 +145,19 @@ void Start_StateEnding() {
 	SHOW_SPRITES;
 
 	end_sprite_princess = sprite_manager_sprites[StackPop(sprite_manager_sprites_pool)];
-	InitSprite(end_sprite_princess, FRAME_16x16, spriteIdxs[SpritePrincess]);
+	InitSprite(end_sprite_princess, SpritePrincess);
 	SetSpriteAnim(end_sprite_princess, end_anim_walk, 32);
 	end_princess_screen_x = -16;
 	end_sprite_princess->x = scroll_x + end_princess_screen_x;
-	end_sprite_princess->y = scroll_y + 64u;
+	end_sprite_princess->y = scroll_y + 66u;
+	end_sprite_princess->mirror = NO_MIRROR;
 	
 	SetEndState(AWAITING_PRINCESS_CENTER);
 
 	PlayMusic(exo_ending, 1);
 }
 
+extern UINT8 next_oam_idx;
 void Update_StateEnding() {
 	const struct EndSpriteInfo* info;
 
@@ -198,7 +199,7 @@ void Update_StateEnding() {
 			} else {
 				text_wait --;
 				if(text_wait == 0) {
-					InitWindow(0, 0, &stageEndingWindow);
+					InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
 				}
 			}
 			end_sprite->x = scroll_x + (UINT16)end_enemy_x;

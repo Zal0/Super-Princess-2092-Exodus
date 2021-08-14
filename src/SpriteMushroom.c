@@ -1,7 +1,6 @@
 #include "Banks/SetBank2.h"
 #include "main.h"
 
-#include "../res/src/mushroom.h"
 #include "SpriteManager.h"
 
 #include "Math.h"
@@ -33,8 +32,8 @@ void Update_SpriteMushroom() {
 			data->time_out = 0;
 			x = ((sprite_princess->x - THIS->x) & 0xF000) ? -1 : 1;
 
-			CreateEnemyBullet(THIS->x + 8, THIS->y, 0, -1);
-			CreateEnemyBullet(THIS->x + 8, THIS->y + 2, x,  0);
+			CreateEnemyBullet(THIS->x + 6, THIS->y + 6, 0, -1);
+			CreateEnemyBullet(THIS->x + 6, THIS->y + 8, x,  0);
 			
 			//CreateEnemyBullet(THIS->x + 8, THIS->y, x, -1);
 		}

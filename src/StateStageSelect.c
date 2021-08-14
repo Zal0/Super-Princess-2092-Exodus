@@ -1,9 +1,8 @@
 #include "Banks/SetBank7.h"
 #include "main.h"
 
-#include "../res/src/pressstart.h"
-#include "../res/src/stageSelect.h"
-#include "../res/src/font.h"
+IMPORT_MAP(stageSelect);
+IMPORT_TILES(font);
 
 #include "ZGBMain.h"
 #include "Print.h"
@@ -33,8 +32,7 @@ void Start_StateStageSelect() {
 	if(stage_completion == 7) {
 		SetState(StateEnding);
 	} else {
-		InitScrollTiles(0, &pressstart);
-		InitScroll(&stageSelect, 0, 0);
+		InitScroll(BANK(stageSelect), &stageSelect, 0, 0);
 		SHOW_BKG;
 	
 		INIT_FONT(font, PRINT_BKG);

@@ -17,10 +17,6 @@ struct RollerCustomData {
 void Start_SpriteRoller() {
 	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
 
-	THIS->coll_y += 1;
-	THIS->coll_h -= 1;
-	
-
 	data->vx.w = 0;
 	data->vy.w = 0;
 	data->tx.w = 0;

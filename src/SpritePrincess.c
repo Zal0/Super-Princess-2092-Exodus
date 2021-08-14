@@ -12,8 +12,6 @@
 #include "Sound.h"
 #include "gbt_player.h"
 
-#include "../res/src/princess.h"
-
 void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy);
 
 //#define DEBUG_CONTROLS
@@ -51,10 +49,6 @@ UINT8 bg_hidden = 0;
 
 void Start_SpritePrincess() {
 	SetSpriteAnim(THIS, anim_idle, 3u);
-	THIS->coll_x += 4u;
-	THIS->coll_w -= 7u;
-	THIS->coll_y += 2u;
-	THIS->coll_h -= 2u;
 
 	princess_accel_y = 0;
 
@@ -63,7 +57,7 @@ void Start_SpritePrincess() {
 
 	bg_hidden = 0;
 
-	if(GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + THIS->coll_y) >> 3) == 23u) {
+	if(GetScrollTile((THIS->x) >> 3, (THIS->y) >> 3) == 23u) {
 		princes_state = PRINCESS_STATE_LADDER;
 	} else {
 		princes_state = PRINCESS_STATE_NORMAL;
@@ -111,29 +105,29 @@ void CheckCollisionTile() {
 void MovePrincess() {
 	if(KEY_PRESSED(J_RIGHT)) {
 		tile_collision = TranslateSprite(THIS, 1 << delta_time, 0);
-		SPRITE_UNSET_VMIRROR(THIS);
+		THIS->mirror = NO_MIRROR;
 		CheckCollisionTile();
 	} else if(KEY_PRESSED(J_LEFT)) {
 		tile_collision = TranslateSprite(THIS, -1 << delta_time, 0);
-		SPRITE_SET_VMIRROR(THIS);
+		THIS->mirror = V_MIRROR;
 		CheckCollisionTile();
 	}
 
 #ifndef DEBUG_CONTROLS
 	if(KEY_PRESSED(J_UP)) {
-		UINT8 tile = GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS ->y + 15u) >> 3);
+		UINT8 tile = GetScrollTile((THIS->x) >> 3, (THIS ->y + 13u) >> 3);
 		if(tile == 23u )
 		{
-			THIS->x = ((THIS->x + THIS->coll_x)>> 3) << 3;
+			THIS->x = (((THIS->x)>> 3) << 3) + 4;
 			princess_accel_y = 0;
 			princes_state = PRINCESS_STATE_LADDER;
 		}
 	}
 	if(KEY_PRESSED(J_DOWN)) {
-		UINT8 tile = GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS ->y + 16u) >> 3);
+		UINT8 tile = GetScrollTile((THIS->x) >> 3, (THIS ->y + 14u) >> 3);
 		if(tile == 23u )
 		{
-			THIS->x = ((THIS->x + THIS->coll_x)>> 3) << 3;
+			THIS->x = (((THIS->x)>> 3) << 3) + 4;
 			THIS->y = THIS->y + 1u;
 			princess_accel_y = 0;
 			princes_state = PRINCESS_STATE_LADDER;
@@ -154,12 +148,12 @@ void MovePrincess() {
 void Shoot() {
 	struct Sprite* bullet_sprite = SpriteManagerAdd(SpriteBullet, 0, 0);
 
-	bullet_sprite->flags = THIS->flags;
-	if(SPRITE_GET_VMIRROR(THIS)) 
-		bullet_sprite->x = THIS->x - 5u;
+	bullet_sprite->mirror = THIS->mirror;
+	if(THIS->mirror) 
+		bullet_sprite->x = THIS->x - 2u;
 	else
-		bullet_sprite->x = THIS->x + 5u; 
-	bullet_sprite->y = THIS->y + 1u;
+		bullet_sprite->x = THIS->x + 7u; 
+	bullet_sprite->y = THIS->y + 3u;
 	shoot_cooldown = 10;
 }
 
@@ -212,19 +206,19 @@ void Update_SpritePrincess() {
 				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
 				tile_collision = TranslateSprite(THIS, 0, -1 << delta_time);
 				CheckCollisionTile();
-				i = GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + 15u) >> 3);
+				i = GetScrollTile((THIS->x) >> 3, (THIS->y + 13u) >> 3);
 			} else if(KEY_PRESSED(J_DOWN)) {
 				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_moving_cooldown : anim_ladder_moving, 12u);
 				tile_collision = TranslateSprite(THIS, 0, 1 << delta_time);
 				CheckCollisionTile();
-				i = GetScrollTile((THIS->x + THIS->coll_x) >> 3, (THIS->y + 16u) >> 3);
+				i = GetScrollTile((THIS->x) >> 3, (THIS->y + 14u) >> 3);
 			} else {
 				SetSpriteAnim(THIS, shoot_cooldown ? anim_ladder_idle_cooldown : anim_ladder_idle, 12u);
 			}
 			if(KEY_PRESSED(J_RIGHT)) {
-				SPRITE_UNSET_VMIRROR(THIS);
+				THIS->mirror = NO_MIRROR;
 			} else if(KEY_PRESSED(J_LEFT)) {
-				SPRITE_SET_VMIRROR(THIS);
+				THIS->mirror = V_MIRROR;
 			}
 
 			//Check the end of the ladder

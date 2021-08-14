@@ -1,7 +1,6 @@
 #include "Banks/SetBank2.h"
 #include "main.h"
 
-#include "../res/src/enemyexplosion.h"
 #include "SpriteManager.h"
 
 const UINT8 eparticle_anim[] = {5, 0, 1, 2, 3, 3};

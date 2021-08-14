@@ -1,7 +1,6 @@
 #include "Banks/SetBank2.h"
 #include "main.h"
 
-#include "../res/src/enemybullet.h"
 #include "SpriteManager.h"
 #include "ZGBMain.h"
 #include "Sound.h"
@@ -22,10 +21,6 @@ void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
 }
 
 void Start_SpriteEnemyBullet() {
-	THIS->coll_x = 2u;
-	THIS->coll_w = 4u;
-	THIS->coll_y = 6u;
-	THIS->coll_h = 4u;
 }
 
 void Update_SpriteEnemyBullet() {

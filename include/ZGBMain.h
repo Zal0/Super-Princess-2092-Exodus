@@ -13,10 +13,10 @@ _STATE(StateEnding)       \
 STATE_DEF_END
 
 #define SPRITES \
-_SPRITE_DMG(SpritePrincess,         spriteprincess  ) \
-_SPRITE_DMG(SpriteBullet,           princessBullet  ) \
+_SPRITE_DMG(SpritePrincess,         princess  )       \
+_SPRITE_DMG(SpriteBullet,           princessbullet8x16) \
 _SPRITE_DMG(SpriteMushroom,         mushroom        ) \
-_SPRITE_DMG(SpriteEnemyBullet,      enemyBullet     ) \
+_SPRITE_DMG(SpriteEnemyBullet,      enemybullet8x16 ) \
 _SPRITE_DMG(SpriteCeilingShooter,   ceilingshooter  ) \
 _SPRITE_DMG(SpriteShooter,          wallshooter     ) \
 _SPRITE_DMG(SpriteEnemyParticle,    enemyexplosion  ) \
