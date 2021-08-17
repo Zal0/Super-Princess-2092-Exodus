@@ -21,29 +21,29 @@ void Start_SpritePlatform() {
 	struct PlatformCustomData* data = (struct PlatformCustomData*)THIS->custom_data;
 	data->frame_accum = 0;
 
-	tile = GetScrollTile(tile_x + 1, tile_y + 1);
+	tile = GetScrollTile(tile_x + 1, tile_y);
 	if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 		data->vy = -1;
 		data->vx =  0;
 		THIS->x += 4;
 	} else {
-		tile = GetScrollTile(tile_x - 1, tile_y + 1);
+		tile = GetScrollTile(tile_x - 1, tile_y);
 		if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 			data->vy = 1;
 			data->vx = 0;
 			THIS->x -= 12;
 		} else {
-			tile = GetScrollTile(tile_x, tile_y + 2);
+			tile = GetScrollTile(tile_x, tile_y + 1);
 			if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 				data->vy =  0;
 				data->vx = -1;
-				THIS->y += 12;
+				THIS->y += 7;
 			} else {
-				tile = GetScrollTile(tile_x, tile_y);
+				tile = GetScrollTile(tile_x, tile_y - 1);
 				if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 					data->vy = 0;
 					data->vx = 1;
-					THIS->y -= 4;
+					THIS->y -= 9;
 				}
 			}
 		}
