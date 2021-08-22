@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include "gb/gb.h"
@@ -12,7 +12,7 @@
 #include "Sound.h"
 #include "gbt_player.h"
 
-void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy);
+void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy) BANKED;
 
 //#define DEBUG_CONTROLS
 

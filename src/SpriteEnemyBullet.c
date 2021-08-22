@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include "SpriteManager.h"
@@ -10,7 +10,7 @@ struct EnemyBulletCustomData {
 	INT8 vy;
 };
 
-void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy){
+void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy) BANKED {
 	struct Sprite* spr = SpriteManagerAdd(SpriteEnemyBullet, x, y);
 	struct EnemyBulletCustomData* data = (struct EnemyBulletCustomData*)spr->custom_data;
 

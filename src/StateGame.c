@@ -1,4 +1,4 @@
-#include "Banks/SetBank6.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include "Scroll.h"

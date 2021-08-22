@@ -1,4 +1,4 @@
-#include "Banks/SetBank6.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include "ZGBMain.h"
@@ -125,7 +125,7 @@ void Start_StateEnding() {
 
 	scroll_target = 0;
 	InitScroll(BANK(stageEnding), &stageEnding, 0, 0);
-	for(i = 21; i < stageEnding.width; ++i) {
+	for(i = 21; i < 32; ++i) {
 		ScrollUpdateColumn(i, 0);
 	}
 	scroll_p_x.w = 0;

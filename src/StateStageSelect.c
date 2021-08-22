@@ -1,4 +1,4 @@
-#include "Banks/SetBank7.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 IMPORT_MAP(stageSelect);
