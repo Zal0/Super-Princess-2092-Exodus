@@ -12,7 +12,6 @@ void Start_SpriteBullet() {
 	PlayFx(CHANNEL_1, 10, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
-extern UINT8  scroll_collisions[128];
 void Update_SpriteBullet() {
 	UINT8 i;
 	struct Sprite* spr;
