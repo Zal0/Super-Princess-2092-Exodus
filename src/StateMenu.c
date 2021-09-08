@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include <gb/gb.h>
@@ -7,12 +7,12 @@
 #include "Keys.h"
 #include "Music.h"
 
-#include "../res/src/pressstarttilemap.h"
+IMPORT_MAP(pressstarttilemap);
 
 DECLARE_MUSIC(exo_start);
 
 void Start_StateMenu() {
-	InitScroll(&pressstarttilemap, 0, 0);
+	InitScroll(BANK(pressstarttilemap), &pressstarttilemap, 0, 0);
 	SHOW_BKG;
 
 	PlayMusic(exo_start, 0);

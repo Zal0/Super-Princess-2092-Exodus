@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include "SpriteManager.h"
@@ -21,36 +21,34 @@ void Start_SpritePlatform() {
 	struct PlatformCustomData* data = (struct PlatformCustomData*)THIS->custom_data;
 	data->frame_accum = 0;
 
-	tile = GetScrollTile(tile_x + 1, tile_y + 1);
+	tile = GetScrollTile(tile_x + 1, tile_y);
 	if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 		data->vy = -1;
 		data->vx =  0;
 		THIS->x += 4;
 	} else {
-		tile = GetScrollTile(tile_x - 1, tile_y + 1);
+		tile = GetScrollTile(tile_x - 1, tile_y);
 		if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 			data->vy = 1;
 			data->vx = 0;
 			THIS->x -= 12;
 		} else {
-			tile = GetScrollTile(tile_x, tile_y + 2);
+			tile = GetScrollTile(tile_x, tile_y + 1);
 			if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 				data->vy =  0;
 				data->vx = -1;
-				THIS->y += 12;
+				THIS->y += 7;
 			} else {
-				tile = GetScrollTile(tile_x, tile_y);
+				tile = GetScrollTile(tile_x, tile_y - 1);
 				if(U_LESS_THAN(48u, tile) && U_LESS_THAN(tile, 55u)) {
 					data->vy = 0;
 					data->vx = 1;
-					THIS->y -= 4;
+					THIS->y -= 9;
 				}
 			}
 		}
 	}
 
-	THIS->coll_y = 5;
-	THIS->coll_h = 6;
 	THIS->lim_x = 100u;
 	THIS->lim_y = 100u;
 }
@@ -105,7 +103,7 @@ void Update_SpritePlatform() {
 	struct PlatformCustomData* data = (struct PlatformCustomData*)THIS->custom_data;
 	struct Sprite* sprite = THIS;
 	UINT8 offset_x = 8;
-	UINT8 offset_y = 8;
+	UINT8 offset_y = 3;
 	UINT8 tile;
 	struct Rect r1, r2;
 	UINT16 old_x, old_y;
@@ -153,29 +151,29 @@ void Update_SpritePlatform() {
 	}
 
 	if(princess_parent == 0) {
-		CreateRect( sprite_princess->x + sprite_princess->coll_x, 
-				        princess_old_y + sprite_princess->coll_y + sprite_princess->coll_h, //Old sprite bottom
-				        sprite_princess->x + sprite_princess->coll_x + sprite_princess->coll_w, 
-				        sprite_princess->y + sprite_princess->coll_y + sprite_princess->coll_h, //Current sprite bottom
+		CreateRect( sprite_princess->x, 
+				        princess_old_y + sprite_princess->coll_h, //Old sprite bottom
+				        sprite_princess->x + sprite_princess->coll_w, 
+				        sprite_princess->y + sprite_princess->coll_h, //Current sprite bottom
 				        &r1);
 
-		CreateRect( old_x + sprite->coll_x,          
-			          old_y + sprite->coll_y,
-			          sprite->x + sprite->coll_x + sprite->coll_w,
-			          sprite->y + sprite->coll_y,
+		CreateRect( old_x,
+			          old_y,
+			          sprite->x + sprite->coll_w,
+			          sprite->y,
 			          &r2);
 		
 
 		if(U_LESS_THAN(0, sprite_princess->y - princess_old_y)) { //Only check collision when the sprite is falling
 			if(CheckColl(r1.x, r1.y, r1.w, r1.h, r2.x, r2.y, r2.w, r2.h)) {
 				princess_parent = THIS;
-				sprite_princess->y = sprite->y + sprite->coll_y - sprite_princess->coll_y - sprite_princess->coll_h;
+				sprite_princess->y = sprite->y - sprite_princess->coll_h;
 			}
 		}
 	} else if(princess_parent == THIS) {
 		//If it goes beyond left or right  limits, detach (the sprite will detach itself when jumping)
-		if( U_LESS_THAN((sprite->x + sprite->coll_x + sprite->coll_w), (sprite_princess->x + sprite_princess->coll_x)) ||
-				U_LESS_THAN((sprite_princess->x + sprite_princess->coll_x + sprite_princess->coll_w), sprite->x)
+		if( U_LESS_THAN((sprite->x + sprite->coll_w), (sprite_princess->x)) ||
+				U_LESS_THAN((sprite_princess->x + sprite_princess->coll_w), sprite->x)
 		) {
 			princess_parent = 0;
 		} else {

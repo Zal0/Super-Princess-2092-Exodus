@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include <gb/gb.h>
@@ -7,13 +7,12 @@
 #include "Keys.h"
 #include "Music.h"
 
-#include "../res/src/pressstart.h"
-#include "../res/src/gameovertilemap.h"
+IMPORT_MAP(gameovertilemap);
 
 DECLARE_MUSIC(exo_gameover);
 
 void Start_StateGameOver() {
-	InitScroll(&gameovertilemap, 0, 0);
+	InitScroll(BANK(gameovertilemap), &gameovertilemap, 0, 0);
 	SHOW_BKG;
 
 	PlayMusic(exo_gameover, 0);

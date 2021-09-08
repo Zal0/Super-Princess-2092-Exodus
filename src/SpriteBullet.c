@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include "SpriteManager.h"
@@ -9,21 +9,15 @@
 #include "Sound.h"
 
 void Start_SpriteBullet() {
-	THIS->coll_x = 0u;
-	THIS->coll_w = 4u;
-	THIS->coll_y = 5u;
-	THIS->coll_h = 4u;
-
 	PlayFx(CHANNEL_1, 10, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
-extern UINT8  scroll_collisions[128];
 void Update_SpriteBullet() {
 	UINT8 i;
 	struct Sprite* spr;
 	struct Sprite* spr2;
 	
-	if(SPRITE_GET_VMIRROR(THIS)) {
+	if(THIS->mirror ==  V_MIRROR) {
 		THIS->x -= 3 << delta_time;
 	} else {
 		THIS->x += 3 << delta_time;

@@ -1,4 +1,4 @@
-#include "Banks/SetBank2.h"
+#include "Banks/SetAutoBank.h"
 #include "main.h"
 
 #include <gb/gb.h>
@@ -6,19 +6,17 @@
 #include "Scroll.h"
 #include "Keys.h"
 #include "Music.h"
-
-#include "../res/src/pressstart.h"
-#include "../res/src/menuBG.h"
-#include "../res/src/font.h"
-
 #include "Print.h"
+
+IMPORT_MAP(menuBG);
+IMPORT_TILES(font);
 
 DECLARE_MUSIC(exo_stage);
 extern UINT8 current_stage;
 extern UINT8 n_lives;
 
 void Start_StateStageIntro() {
-	InitScroll(&menuBG, 0, 0);
+	InitScroll(BANK(menuBG), &menuBG, 0, 0);
 	SHOW_BKG;
 
 	INIT_FONT(font, PRINT_BKG);
