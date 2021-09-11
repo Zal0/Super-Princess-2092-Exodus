@@ -12,7 +12,7 @@ struct PParticleCustomData {
 };
 
 void CreatePParticle(UINT16 x, UINT16 y, INT8 vx, INT8 vy) BANKED{
-	struct Sprite* spr = SpriteManagerAdd(SpritePrincessParticle, x, y);
+	Sprite* spr = SpriteManagerAdd(SpritePrincessParticle, x, y);
 	struct PParticleCustomData* data = (struct PParticleCustomData*)spr->custom_data;
 
 	data->vx = vx;

@@ -16,8 +16,8 @@ fixed scroll_p_x;
 extern UINT8 n_sprite_types;
 extern UINT8 spriteIdxs[];
 
-struct Sprite* end_sprite_princess;
-struct Sprite* end_sprite;
+Sprite* end_sprite_princess;
+Sprite* end_sprite;
 
 const UINT8 end_anim_walk[] = {4, 3, 4, 5, 4};
 

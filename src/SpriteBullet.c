@@ -14,8 +14,8 @@ void Start_SpriteBullet() {
 
 void Update_SpriteBullet() {
 	UINT8 i;
-	struct Sprite* spr;
-	struct Sprite* spr2;
+	Sprite* spr;
+	Sprite* spr2;
 	
 	if(THIS->mirror ==  V_MIRROR) {
 		THIS->x -= 3 << delta_time;

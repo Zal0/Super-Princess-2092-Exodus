@@ -21,7 +21,7 @@ void Start_SpriteMushroom() {
 	data->time_out = 200u;
 }
 
-extern struct Sprite* sprite_princess;
+extern Sprite* sprite_princess;
 
 void Update_SpriteMushroom() {
 	struct MushroomCustomData* data = (struct MushroomCustomData*)THIS->custom_data;

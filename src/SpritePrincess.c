@@ -40,9 +40,9 @@ extern UINT8 current_level;
 
 INT8 shoot_cooldown = 0;
 
-struct Sprite* sprite_princess = 0;
+Sprite* sprite_princess = 0;
 
-struct Sprite* princess_parent = 0;
+Sprite* princess_parent = 0;
 UINT16 princess_old_x, princess_old_y;
 
 UINT8 bg_hidden = 0;
@@ -146,7 +146,7 @@ void MovePrincess() {
 }
 
 void Shoot() {
-	struct Sprite* bullet_sprite = SpriteManagerAdd(SpriteBullet, 0, 0);
+	Sprite* bullet_sprite = SpriteManagerAdd(SpriteBullet, 0, 0);
 
 	bullet_sprite->mirror = THIS->mirror;
 	if(THIS->mirror) 
@@ -169,7 +169,7 @@ void Jump() {
 
 void Update_SpritePrincess() {
 	UINT8 i;
-	struct Sprite* spr;
+	Sprite* spr;
 
 	princess_old_x = THIS->x;
 	princess_old_y = THIS->y;

@@ -53,10 +53,10 @@ void Start_SpritePlatform() {
 	THIS->lim_y = 100u;
 }
 
-extern struct Sprite* princess_parent;
+extern Sprite* princess_parent;
 extern UINT16 princess_old_x;
 extern UINT16 princess_old_y;
-extern struct Sprite* sprite_princess;
+extern Sprite* sprite_princess;
 
 struct Rect {
 	UINT16 x, y;
@@ -101,7 +101,7 @@ UINT8 CheckColl(UINT16 x1, UINT16 y1, UINT16 w1, UINT16 h1,
 
 void Update_SpritePlatform() {
 	struct PlatformCustomData* data = (struct PlatformCustomData*)THIS->custom_data;
-	struct Sprite* sprite = THIS;
+	Sprite* sprite = THIS;
 	UINT8 offset_x = 8;
 	UINT8 offset_y = 3;
 	UINT8 tile;

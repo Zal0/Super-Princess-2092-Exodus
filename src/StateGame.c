@@ -102,7 +102,7 @@ const struct MapInfoBanked levels_3[] = {
 const struct MapInfoBanked* stages[] = {levels_1, levels_2, levels_3};
 UINT8 current_stage = 0;
 
-extern struct Sprite* sprite_princess;
+extern Sprite* sprite_princess;
 void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 	const struct MapInfoBanked* levels = stages[current_stage];
 	const struct MapInfoBanked* map = &levels[current_level];
@@ -199,7 +199,7 @@ INT8 load_next = 0;
 extern INT16 old_scroll_x, old_scroll_y;
 void ClampScrollLimits(UINT16* x, UINT16* y);
 void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
-	struct Sprite* player = scroll_target;
+	Sprite* player = scroll_target;
 	INT16 scroll_start_x = scroll_x;
 	INT16 scroll_start_y = scroll_y;
 	INT16 player_start_x = player->x;
