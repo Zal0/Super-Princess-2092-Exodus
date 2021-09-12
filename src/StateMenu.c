@@ -13,7 +13,6 @@ DECLARE_MUSIC(exo_start);
 
 void Start_StateMenu() {
 	InitScroll(BANK(pressstarttilemap), &pressstarttilemap, 0, 0);
-	SHOW_BKG;
 
 	PlayMusic(exo_start, 0);
 }

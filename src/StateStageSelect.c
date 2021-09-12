@@ -33,7 +33,6 @@ void Start_StateStageSelect() {
 		SetState(StateEnding);
 	} else {
 		InitScroll(BANK(stageSelect), &stageSelect, 0, 0);
-		SHOW_BKG;
 	
 		INIT_FONT(font, PRINT_BKG);
 		PRINT(4, 11, "STAGE SELECT");

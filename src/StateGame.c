@@ -132,19 +132,12 @@ void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 }
 
 void Start_StateGame() {
-	UINT8 i;
 	UINT16 tile_start_x, tile_start_y;
 	const UINT8* coll_list = 0;
 	const UINT8* coll_down_list = 0;
 	const struct MapInfoBanked* levels = stages[current_stage];
 	const struct MapInfoBanked* level = &levels[current_level];
 	UINT8 map_w, map_h;
-
-	SPRITES_8x16;
-	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
-		SpriteManagerLoad(i);
-	}
-	SHOW_SPRITES;
 
 	INIT_CONSOLE(font, 3, 2);
 
@@ -167,7 +160,6 @@ void Start_StateGame() {
 	}
 
 	InitScroll(level->bank, level->map, coll_list, coll_down_list);
-	SHOW_BKG;
 
 	switch(current_stage) {
 		case 1:  PlayMusic(exo_level2, 1); break;

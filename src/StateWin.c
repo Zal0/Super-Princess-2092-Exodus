@@ -11,9 +11,7 @@ IMPORT_MAP(endingtilemap);
 DECLARE_MUSIC(exo_gameover);
 
 void Start_StateWin() {
-	InitScrollTiles(0, &pressstart);
 	InitScroll(BANK(endingtilemap), &endingtilemap, 0, 0);
-	SHOW_BKG;
 
 	PlayMusic(exo_gameover, 0);
 }

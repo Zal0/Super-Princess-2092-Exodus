@@ -17,7 +17,6 @@ extern UINT8 n_lives;
 
 void Start_StateLiveLost() {
 	InitScroll(BANK(menuBG), &menuBG, 0, 0);
-	SHOW_BKG;
 
 	INIT_FONT(font, PRINT_BKG);
 	PRINT_POS(4, 8);

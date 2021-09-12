@@ -122,14 +122,12 @@ UINT8 STRLEN(const UINT8* str) {
 
 void Start_StateEnding() {
 	UINT8 i;
-
 	scroll_target = 0;
 	InitScroll(BANK(stageEnding), &stageEnding, 0, 0);
 	for(i = 21; i < 32; ++i) {
 		ScrollUpdateColumn(i, 0);
 	}
 	scroll_p_x.w = 0;
-	SHOW_BKG;
 
 	PRINT_POS(0, 0);
 	INIT_FONT(font, PRINT_WIN);
@@ -138,11 +136,9 @@ void Start_StateEnding() {
 	InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
 	SHOW_WIN;
 
-	SPRITES_8x16;
 	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
 		SpriteManagerLoad(i);
 	}
-	SHOW_SPRITES;
 
 	end_sprite_princess = sprite_manager_sprites[StackPop(sprite_manager_sprites_pool)];
 	InitSprite(end_sprite_princess, SpritePrincess);

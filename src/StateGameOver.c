@@ -13,7 +13,6 @@ DECLARE_MUSIC(exo_gameover);
 
 void Start_StateGameOver() {
 	InitScroll(BANK(gameovertilemap), &gameovertilemap, 0, 0);
-	SHOW_BKG;
 
 	PlayMusic(exo_gameover, 0);
 }
