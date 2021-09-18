@@ -15,7 +15,7 @@ DECLARE_MUSIC(exo_stage);
 extern UINT8 current_stage;
 extern UINT8 n_lives;
 
-void Start_StateStageIntro() {
+void START() {
 	InitScroll(BANK(menuBG), &menuBG, 0, 0);
 
 	INIT_FONT(font, PRINT_BKG);
@@ -28,7 +28,7 @@ void Start_StateStageIntro() {
 	PlayMusic(exo_stage, 0);
 }
 
-void Update_StateStageIntro() {
+void UPDATE() {
 	if(KEY_TICKED(J_START) | KEY_TICKED(J_A) | KEY_TICKED(J_B)) {
 		SetState(StateGame);
 	}

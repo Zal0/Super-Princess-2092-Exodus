@@ -5,15 +5,15 @@
 
 const UINT8 eparticle_anim[] = {5, 0, 1, 2, 3, 3};
 
-void Start_SpriteEnemyParticle() {
+void START() {
 	SetSpriteAnim(THIS, eparticle_anim, 33);
 }
 
-void Update_SpriteEnemyParticle() {
+void UPDATE() {
 	if(THIS->anim_frame == 4) {
 		SpriteManagerRemove(THIS_IDX);
 	}
 }
 
-void Destroy_SpriteEnemyParticle () {
+void DESTROY () {
 }

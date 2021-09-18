@@ -120,7 +120,7 @@ UINT8 STRLEN(const UINT8* str) {
 	return i;
 }
 
-void Start_StateEnding() {
+void START() {
 	UINT8 i;
 	scroll_target = 0;
 	InitScroll(BANK(stageEnding), &stageEnding, 0, 0);
@@ -154,7 +154,7 @@ void Start_StateEnding() {
 }
 
 extern UINT8 next_oam_idx;
-void Update_StateEnding() {
+void UPDATE() {
 	const struct EndSpriteInfo* info;
 
 	scroll_p_x.w += 32;

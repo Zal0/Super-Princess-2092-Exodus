@@ -11,14 +11,14 @@ IMPORT_MAP(pressstarttilemap);
 
 DECLARE_MUSIC(exo_start);
 
-void Start_StateMenu() {
+void START() {
 	InitScroll(BANK(pressstarttilemap), &pressstarttilemap, 0, 0);
 
 	PlayMusic(exo_start, 0);
 }
 
 extern UINT8 stage_completion;
-void Update_StateMenu() {
+void UPDATE() {
 	if(KEY_TICKED(J_START)) {
 		stage_completion = 0;
 		SetState(StateStageSelect);

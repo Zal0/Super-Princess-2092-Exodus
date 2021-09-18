@@ -6,21 +6,21 @@
 #include "SpriteManager.h"
 #include "ZGBMain.h"
 
-struct OvniCustomData {
+typedef struct {
 	fixed tx, vx;
 	UINT8 missile_launched;
-};
+} CUSTOM_DATA;
 
-void Start_SpriteOvni() {
-	struct OvniCustomData* data = (struct OvniCustomData*)THIS->custom_data;
+void START() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 
 	data->vx.w = 0;
 	data->tx.w = 0;
 	data->missile_launched = 0;
 }
 
-void Update_SpriteOvni() {
-	struct OvniCustomData* data = (struct OvniCustomData*)THIS->custom_data;
+void UPDATE() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	
 	if(data->vx.w == 0) {
 		if(U_LESS_THAN(THIS->y, scroll_y)) {
@@ -48,5 +48,5 @@ void Update_SpriteOvni() {
 	}
 }
 
-void Destroy_SpriteOvni() {
+void DESTROY() {
 }

@@ -47,7 +47,7 @@ UINT16 princess_old_x, princess_old_y;
 
 UINT8 bg_hidden = 0;
 
-void Start_SpritePrincess() {
+void START() {
 	SetSpriteAnim(THIS, anim_idle, 3u);
 
 	princess_accel_y = 0;
@@ -65,13 +65,13 @@ void Start_SpritePrincess() {
 }
 
 void Hit() {
-	princes_state = PRINCESS_STATE_HIT;
+	/*princes_state = PRINCESS_STATE_HIT;
 	gbt_stop();
 
 	NR52_REG = 0x80; //Enables sound, you should always setup this first
 	NR51_REG = 0xFF; //Enables all channels (left and right)
 	NR50_REG = 0x77; //Max volume
-	PlayFx(CHANNEL_1, 10, 0x5b, 0x7f, 0xf7, 0x15, 0x86);
+	PlayFx(CHANNEL_1, 10, 0x5b, 0x7f, 0xf7, 0x15, 0x86);*/
 }
 
 UINT8 tile_collision;
@@ -167,7 +167,7 @@ void Jump() {
 	}
 }
 
-void Update_SpritePrincess() {
+void UPDATE() {
 	UINT8 i;
 	Sprite* spr;
 
@@ -321,7 +321,7 @@ void Update_SpritePrincess() {
 	}
 }
 
-void Destroy_SpritePrincess() {
+void DESTROY() {
 	sprite_princess = 0;
 }
 

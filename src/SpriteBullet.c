@@ -8,11 +8,11 @@
 
 #include "Sound.h"
 
-void Start_SpriteBullet() {
+void START() {
 	PlayFx(CHANNEL_1, 10, 0x2C, 0xD8, 0xF3, 0x62, 0xC7);
 }
 
-void Update_SpriteBullet() {
+void UPDATE() {
 	UINT8 i;
 	Sprite* spr;
 	Sprite* spr2;
@@ -44,5 +44,5 @@ void Update_SpriteBullet() {
 	}
 }
 
-void Destroy_SpriteBullet() {
+void DESTROY() {
 }

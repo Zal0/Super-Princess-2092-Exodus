@@ -15,7 +15,7 @@ IMPORT_TILES(font);
 DECLARE_MUSIC(exo_stage);
 extern UINT8 n_lives;
 
-void Start_StateLiveLost() {
+void START() {
 	InitScroll(BANK(menuBG), &menuBG, 0, 0);
 
 	INIT_FONT(font, PRINT_BKG);
@@ -25,7 +25,7 @@ void Start_StateLiveLost() {
 	PlayMusic(exo_stage, 0);
 }
 
-void Update_StateLiveLost() {
+void UPDATE() {
 	if(KEY_TICKED(J_START) | KEY_TICKED(J_A) | KEY_TICKED(J_B)) {
 		SetState(StateGame);
 	}

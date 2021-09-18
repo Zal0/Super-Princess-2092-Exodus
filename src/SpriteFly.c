@@ -6,10 +6,10 @@
 #include "SpriteManager.h"
 
 
-struct FlyCustomData {
+typedef struct {
 	fixed vx, vy;
 	UINT16 tx, ty;
-};
+} CUSTOM_DATA;
 
 
 const UINT8 anim_fly[] = {2, 0, 1};
@@ -18,8 +18,8 @@ const UINT8 anim_fly[] = {2, 0, 1};
 #define DIST_COUNTER 40
 #define ACCEL_OFFSET 4
 #define HEIGHT 50
-void Start_SpriteFly() {
-	struct FlyCustomData* data = (struct FlyCustomData*)THIS->custom_data;
+void START() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	
 	SetSpriteAnim(THIS, anim_fly, 33);
 	data->vx.w = 0;
@@ -31,8 +31,8 @@ void Start_SpriteFly() {
 		THIS->mirror = V_MIRROR;
 }
 
-void Update_SpriteFly() {
-	struct FlyCustomData* data = (struct FlyCustomData*)THIS->custom_data;
+void UPDATE() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 
 	if(scroll_target) {
 		if(data->tx == 0) {
@@ -79,5 +79,5 @@ void Update_SpriteFly() {
 	data->vy.b.h = 0;
 }
 
-void Destroy_SpriteFly() {
+void DESTROY() {
 }

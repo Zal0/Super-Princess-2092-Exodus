@@ -8,20 +8,20 @@
 #include "Scroll.h"
 #include "Sound.h"
 
-struct MissileCustomData {
+typedef struct {
 	fixed ty, vy;
-};
+} CUSTOM_DATA;
 
 
-void Start_SpriteMissile() {
-	struct MissileCustomData* data = (struct MissileCustomData*)THIS->custom_data;
+void START() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 
 	data->ty.w = 0;
 	data->vy.w = 255;
 }
 
-void Update_SpriteMissile() {
-	struct MissileCustomData* data = (struct MissileCustomData*)THIS->custom_data;
+void UPDATE() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 
 	if(U_LESS_THAN(data->vy.w, 1600)) {
 		data->vy.w += 32 << delta_time;
@@ -36,6 +36,6 @@ void Update_SpriteMissile() {
 	data->ty.b.h = 0;
 }
 
-void Destroy_SpriteMissile() {
+void DESTROY() {
 }
 

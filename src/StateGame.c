@@ -131,7 +131,7 @@ void InitPlayerPos(UINT16 tile_start_x, UINT16 tile_start_y) {
 	}
 }
 
-void Start_StateGame() {
+void START() {
 	UINT16 tile_start_x, tile_start_y;
 	const UINT8* coll_list = 0;
 	const UINT8* coll_down_list = 0;
@@ -299,7 +299,7 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 }
 
 UINT8 wait_end_time = 0;
-void Update_StateGame() {
+void UPDATE() {
 	if(sprite_princess == 0) {
 		wait_end_time ++;
 		if(wait_end_time > 80) {

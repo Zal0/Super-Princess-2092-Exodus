@@ -7,13 +7,13 @@
 
 void CreateEnemyBullet(UINT16 x, UINT16 y, INT8 vx, INT8 vy) BANKED;
 
-struct WShooterCustomData {
+typedef struct {
 	UINT8 cool_down;
-};
+} CUSTOM_DATA;
 
-void Start_SpriteShooter() { 
+void START() { 
 	UINT8 tile = GetScrollTile((THIS->x - 8) >> 3, THIS->y >> 3);
-	struct WShooterCustomData* data = (struct WShooterCustomData*)THIS->custom_data;
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	data->cool_down = 70;
 
 	if(scroll_collisions[tile] == 1u) {
@@ -21,8 +21,8 @@ void Start_SpriteShooter() {
 	}
 }
 
-void Update_SpriteShooter() {
-	struct WShooterCustomData* data = (struct WShooterCustomData*)THIS->custom_data;
+void UPDATE() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	
 	data->cool_down += 1 << delta_time;
 	if(data->cool_down > 70) {
@@ -41,5 +41,5 @@ void Update_SpriteShooter() {
 	}
 }
 
-void Destroy_SpriteShooter() { 
+void DESTROY() { 
 }

@@ -8,14 +8,14 @@
 
 const UINT8 roller_anim_roll[] = {4, 0, 1, 2, 3};
 
-struct RollerCustomData {
+typedef struct {
 	fixed tx, ty;
 	fixed vx;
 	fixed vy;
-};
+} CUSTOM_DATA;
 
-void Start_SpriteRoller() {
-	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
+void START() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 
 	data->vx.w = 0;
 	data->vy.w = 0;
@@ -27,8 +27,8 @@ INT16 DispLeft(INT16 v, INT8 desp) {
 	return v >> desp;
 }
 
-void Update_SpriteRoller() {
-	struct RollerCustomData* data = (struct RollerCustomData*)THIS->custom_data;
+void UPDATE() {
+	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	
 	if(THIS->anim_data == 0) {
 		if(U_LESS_THAN(DISTANCE(scroll_target->x + 8, THIS->x), 60)) {
@@ -60,5 +60,5 @@ void Update_SpriteRoller() {
 	}
 }
 
-void Destroy_SpriteRoller() {
+void DESTROY() {
 }

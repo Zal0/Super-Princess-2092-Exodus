@@ -10,13 +10,13 @@
 IMPORT_MAP(endingtilemap);
 DECLARE_MUSIC(exo_gameover);
 
-void Start_StateWin() {
+void START() {
 	InitScroll(BANK(endingtilemap), &endingtilemap, 0, 0);
 
 	PlayMusic(exo_gameover, 0);
 }
 
-void Update_StateWin() {
+void UPDATE() {
 	if(KEY_TICKED(J_START)) {
 		SetState(StateMenu);
 	}
