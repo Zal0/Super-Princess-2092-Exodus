@@ -8,7 +8,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gbjam2016", "gbjam2016.vcxp
 		{A820F4AF-3BAD-4781-86FB-C055E213A91D} = {A820F4AF-3BAD-4781-86FB-C055E213A91D}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "..\ZGB\common\common.vcxproj", "{A820F4AF-3BAD-4781-86FB-C055E213A91D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "%ZGB_PATH%\common.vcxproj", "{A820F4AF-3BAD-4781-86FB-C055E213A91D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
