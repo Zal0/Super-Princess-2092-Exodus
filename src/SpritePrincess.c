@@ -116,7 +116,7 @@ void MovePrincess() {
 #ifndef DEBUG_CONTROLS
 	if(KEY_PRESSED(J_UP)) {
 		UINT8 tile = GetScrollTile((THIS->x) >> 3, (THIS ->y + 13u) >> 3);
-		if(tile == 23u )
+		if(tile == 23u || tile == 59u)
 		{
 			THIS->x = (((THIS->x)>> 3) << 3) + 4;
 			princess_accel_y = 0;
@@ -125,7 +125,7 @@ void MovePrincess() {
 	}
 	if(KEY_PRESSED(J_DOWN)) {
 		UINT8 tile = GetScrollTile((THIS->x) >> 3, (THIS ->y + 14u) >> 3);
-		if(tile == 23u )
+		if(tile == 23u || tile == 59u)
 		{
 			THIS->x = (((THIS->x)>> 3) << 3) + 4;
 			THIS->y = THIS->y + 1u;
@@ -222,7 +222,7 @@ void UPDATE() {
 			}
 
 			//Check the end of the ladder
-			if(i != 23u && i != 1u && i != 2u)
+			if(i != 23u && i != 59 && i != 1u && i != 2u)
 			{
 				//TranslateSprite(THIS, 0, 1 << delta_time);
 				princes_state = PRINCESS_STATE_NORMAL;

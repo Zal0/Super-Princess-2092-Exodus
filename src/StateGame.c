@@ -44,13 +44,13 @@ IMPORT_MAP(stage3_8);
 IMPORT_TILES(font);
 
 const UINT8 collision_tiles_1[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 0};
-const UINT8 collision_tiles_down_1[] = {23, 24, 0};
+const UINT8 collision_tiles_down_1[] = {59, 60, 0};
 
 const UINT8 collision_tiles_2[] = {1, 2, 27, 28, 33, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 55, 56, 57, 58, 0};
-const UINT8 collision_tiles_down_2[] = {23, 24, 0};
+const UINT8 collision_tiles_down_2[] = {59, 60, 0};
 
 const UINT8 collision_tiles_3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 27, 28, 33, 35, 0};
-const UINT8 collision_tiles_down_3[] = {23, 24, 0};
+const UINT8 collision_tiles_down_3[] = {59, 60, 0};
 
 DECLARE_MUSIC(exo_level1);
 DECLARE_MUSIC(exo_level2);
