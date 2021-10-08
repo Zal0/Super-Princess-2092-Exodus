@@ -284,10 +284,10 @@ void UPDATE() {
 		}
 		if(tile_collision) {
 			if(tile_collision != 1u && tile_collision != 2u) {
-				princess_accel_y = 0;
-				if(princes_state == PRINCESS_STATE_JUMPING) {
+				if(princes_state == PRINCESS_STATE_JUMPING && princess_accel_y > 0) {
 					princes_state = PRINCESS_STATE_NORMAL;
 				}
+				princess_accel_y = 0;
 			}
 
 			CheckCollisionTile();
