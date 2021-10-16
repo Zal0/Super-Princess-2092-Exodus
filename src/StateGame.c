@@ -188,8 +188,7 @@ void ScrollFindTileInCorners(UINT16 map_w, UINT16 map_h, const struct MapInfoBan
 }
 
 INT8 load_next = 0;
-extern INT16 old_scroll_x, old_scroll_y;
-void ClampScrollLimits(UINT16* x, UINT16* y);
+void ClampScrollLimits();
 void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 	Sprite* player = scroll_target;
 	INT16 scroll_start_x = scroll_x;
@@ -225,7 +224,7 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 
 		//This keeps the scroll y in the same position it was on the previous screen
 		//scroll_y = player->y + (old_scr_y - player_start_y);
-		//ClampScrollLimits(&scroll_x, &scroll_y);	
+		//ClampScrollLimits();	
 		//scroll_end_y = scroll_y;
 	}
 	
