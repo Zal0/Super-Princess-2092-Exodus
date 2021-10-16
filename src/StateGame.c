@@ -247,8 +247,8 @@ void LoadNextScreen(UINT8 current_level, UINT8 next_level) {
 
 	scroll_end_x = scroll_x;
 	scroll_end_y = scroll_y;
-	old_scroll_x = scroll_x = scroll_start_x;
-	old_scroll_y = scroll_y = scroll_start_y;
+	scroll_x_vblank = scroll_x = scroll_start_x;
+	scroll_y_vblank = scroll_y = scroll_start_y;
 	
 	player_start_x += offset_x;
 	player_start_y += offset_y;
