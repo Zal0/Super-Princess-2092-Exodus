@@ -7,6 +7,7 @@
 #include "Math.h"
 #include "Print.h"
 #include "Music.h"
+#include "main.h"
 
 IMPORT_MAP(stageEndingWindow);
 IMPORT_MAP(stageEnding);
@@ -88,7 +89,6 @@ const char* Credits[] = {
 void PrepareCredits() {
 	text_wait = 300;
 
-	InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
 	PRINT(0, 0, Credits[enemy_idx ++]);
 	PRINT(0, 2, Credits[enemy_idx ++]);
 }
@@ -122,6 +122,11 @@ UINT8 STRLEN(const UINT8* str) {
 
 void START() {
 	UINT8 i;
+
+	CRITICAL {
+		remove_LCD(LCD_isr);
+	}
+
 	scroll_target = 0;
 	InitScroll(BANK(stageEnding), &stageEnding, 0, 0);
 	for(i = 21; i < 32; ++i) {
@@ -131,10 +136,8 @@ void START() {
 
 	PRINT_POS(0, 0);
 	INIT_FONT(font, PRINT_WIN);
-	WX_REG = 7;
+	INIT_HUD(stageEndingWindow);
 	WY_REG = (144 - (6 << 3));
-	InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
-	SHOW_WIN;
 
 	for(i = 0; i != N_SPRITE_TYPES; ++ i) {
 		SpriteManagerLoad(i);
@@ -195,7 +198,7 @@ void UPDATE() {
 			} else {
 				text_wait --;
 				if(text_wait == 0) {
-					InitWindow(0, 0, BANK(stageEndingWindow), &stageEndingWindow);
+					PRINT(0, 4, "                    ");
 				}
 			}
 			end_sprite->x = scroll_x + (UINT16)end_enemy_x;
