@@ -126,6 +126,7 @@ void START() {
 	CRITICAL {
 		remove_LCD(LCD_isr);
 	}
+	SHOW_SPRITES;
 
 	scroll_target = 0;
 	InitScroll(BANK(stageEnding), &stageEnding, 0, 0);
